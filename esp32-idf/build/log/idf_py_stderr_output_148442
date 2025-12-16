@@ -1,0 +1,26 @@
+[0;33m--- esp-idf-monitor 1.6.2 on /dev/ttyACM0 115200[0m
+[0;33m--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H[0m
+[0;33m--- 0x4200ddf2: task_wdt_timeout_handling at /home/mikkel/esp/esp-idf/components/esp_system/task_wdt/task_wdt.c:434
+--- 0x4200e208: task_wdt_isr at /home/mikkel/esp/esp-idf/components/esp_system/task_wdt/task_wdt.c:507
+--- 0x403772e9: _xt_lowint1 at /home/mikkel/esp/esp-idf/components/xtensa/xtensa_vectors.S:1240
+--- 0x42006ae1: uart_tx_char at /home/mikkel/esp/esp-idf/components/esp_driver_uart/src/uart_vfs.c:188
+--- 0x420079fb: uart_write at /home/mikkel/esp/esp-idf/components/esp_driver_uart/src/uart_vfs.c:243
+--- 0x4200a7f6: esp_vfs_write at /home/mikkel/esp/esp-idf/components/vfs/vfs.c:945 (discriminator 4)
+--- 0x4201144e: write at /builds/idf/crosstool-NG/.build/xtensa-esp-elf/src/newlib/newlib/libc/syscalls/syswrite.c:11 (discriminator 1)
+--- 0x4200a205: console_write at /home/mikkel/esp/esp-idf/components/esp_vfs_console/vfs_console.c:71
+--- 0x4200a7f6: esp_vfs_write at /home/mikkel/esp/esp-idf/components/vfs/vfs.c:945 (discriminator 4)
+--- 0x42010e96: __swrite at /builds/idf/crosstool-NG/.build/xtensa-esp-elf/src/newlib/newlib/libc/stdio/stdio.c:94
+--- 0x4201066d: __sflush_r at /builds/idf/crosstool-NG/.build/xtensa-esp-elf/src/newlib/newlib/libc/stdio/fflush.c:224
+--- 0x420106be: _fflush_r at /builds/idf/crosstool-NG/.build/xtensa-esp-elf/src/newlib/newlib/libc/stdio/fflush.c:278
+--- 0x42010cbd: __sfvwrite_r at /builds/idf/crosstool-NG/.build/xtensa-esp-elf/src/newlib/newlib/libc/stdio/fvwrite.c:251
+--- 0x42017b33: __sprint_r at /builds/idf/crosstool-NG/.build/xtensa-esp-elf/src/newlib/newlib/libc/stdio/vfprintf.c:429
+---  (inlined by) __sprint_r at /builds/idf/crosstool-NG/.build/xtensa-esp-elf/src/newlib/newlib/libc/stdio/vfprintf.c:399
+--- 0x4201753a: _vfprintf_r at /builds/idf/crosstool-NG/.build/xtensa-esp-elf/src/newlib/newlib/libc/stdio/vfprintf.c:1774 (discriminator 1)
+--- 0x42010f0d: vprintf at /builds/idf/crosstool-NG/.build/xtensa-esp-elf/src/newlib/newlib/libc/stdio/vprintf.c:34
+--- 0x4201f57a: esp_log_writev at /home/mikkel/esp/esp-idf/components/log/src/os/log_write.c:34
+--- 0x4038180d: esp_log_write at /home/mikkel/esp/esp-idf/components/log/src/os/log_write.c:44
+--- 0x4200b825: process_command at /home/mikkel/git/espRMT/esp32-idf/main/main.c:332 (discriminator 1)
+--- 0x4200bcef: motion_control_task at /home/mikkel/git/espRMT/esp32-idf/main/main.c:461
+--- 0x4037ba91: vPortTaskWrapper at /home/mikkel/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0m

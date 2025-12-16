@@ -9,7 +9,14 @@ A robotic arm motion control system using Python for motion planning and ESP32 f
 **Key Architecture:**
 - **Python (PC)**: High-level motion planning, trajectory generation, inverse kinematics
 - **ESP32**: Real-time pulse generation, angle-to-step conversion, hardware-timed motor control
-- **Communication**: Binary protocol (17-byte packets) over UART at 115200 baud
+- **Communication**: Binary protocol (17-byte packets) over UART0 at 115200 baud
+- **Logging**: ESP32 logs sent via USB-JTAG (separate from UART0 data channel)
+
+**IMPORTANT - Logging and Data Channels:**
+The system is configured to minimize logging interference with position queries:
+- **UART0** (`/dev/ttyACM0`) - Data channel for motion commands and position queries
+- **ESP32 Logging**: Reduced verbosity (detailed command logs are DEBUG level only)
+- **Note**: USB-JTAG console separation only works on ESP32-S3 boards with native USB exposed. Boards using external USB-UART chips (like CH340) will have logs on the same UART as data.
 
 ## Current Motor Configuration (CRITICAL)
 
@@ -137,13 +144,24 @@ All values are little-endian. The checksum is a simple XOR of all data bytes.
 - If motors are moved manually or lose steps, tracking becomes incorrect
 - **ALWAYS manually position motors at [0°, 0°, 0°] before powering on**
 
-**Position Query Feature:**
+**Position Query Feature with Fallback:**
+The Python controller tracks position using a hybrid approach:
 ```python
-# Query what ESP32 thinks the position is
-angles = controller.get_current_position()
+# Primary: Track expected position from trajectory endpoints
+current_angle = trajectory[-1][1][0]  # Last point's angle
+
+# Secondary: Query actual position for verification (with retry)
+angles = controller.get_current_position(max_retries=5)
 if angles:
-    print(f"ESP32 reports: {angles}")  # e.g., [0.0, 45.0, 30.0]
+    current_angle = angles[0]  # Use actual if query succeeds
 ```
+
+**How it works:**
+- **Expected Position**: After executing a trajectory, Python assumes motors reached the final point
+- **Position Query**: Attempts to verify actual position from ESP32 (5-10 retries with filtering)
+- **Fallback**: If query fails, uses expected position to generate next trajectory
+- This ensures trajectories are always generated from correct starting position, even if queries fail
+- Python waits 1 second after trajectory completion before querying (allows ESP32 to finish)
 
 **Recommended for production:**
 - Add limit switches for homing
@@ -151,8 +169,10 @@ if angles:
 - Consider adding encoders for closed-loop control
 
 **Current test sequences:**
-- Test 1: Linear move from [0, 0, 0] → [0, 45, 30] over 3 seconds
-- Test 2: Circular motion starting at [0, 45, 30] with 15° radius over 5 seconds
+- **Test 1**: All motors move from current position → 45° with S-curve (auto-calculated duration)
+- **Test 2**: Sinusoidal motion around current position ± 15° over 5 seconds
+- **Return to Home**: All motors return to 0° at end of sequence
+- Position is queried before each test to ensure smooth transitions
 - 3-second warning displayed before motion begins (Ctrl+C to abort)
 
 ### ESP32 RMT Module
@@ -179,11 +199,42 @@ This costs ~192KB RAM but ensures consistent 20Hz timing. DO NOT use malloc/free
 
 **Pending Packet Buffer System:**
 The system handles both 1-byte position queries and 17-byte motion commands:
-- `check_position_request()` reads 1 byte first
-- If it's 'P' or '?': sends position response
+- `check_position_request()` reads 1 byte first (10ms timeout)
+- If it's 'P' or '?': sends position response via UART
 - If not: stores byte in `pending_packet` buffer
 - `receive_command()` uses pending byte as first byte of motion command
 - This prevents packet loss when protocols coexist
+
+**Position Query Optimization (Critical for Reliability):**
+To achieve reliable position queries:
+- `receive_command()` timeout: **5ms** (very short to cycle loop quickly)
+- Main loop delay when idle: **1ms** (minimum delay)
+- Loop cycles **~60 times/second** when idle (fast enough to catch position queries)
+- Python retry mechanism: 5-10 attempts with filtered line reading
+- Python fallback: Uses trajectory endpoint if query fails
+
+**ESP32 Logging Configuration:**
+To minimize UART interference with position queries:
+- Detailed command logs: `ESP_LOGD` (DEBUG level - disabled by default)
+- Warnings/Errors: `ESP_LOGW`/`ESP_LOGE` (always visible)
+- Per-command details hidden: motor movements, timing, step counts
+- Statistics shown: every 500 commands for monitoring
+
+**What you'll see by default:**
+- ✅ Position query responses
+- ✅ Velocity warnings and buffer overflow errors
+- ✅ Startup messages and periodic statistics
+
+**What's hidden (DEBUG level):**
+- ❌ Per-command headers and separators
+- ❌ Per-motor movement details (angle, steps, velocity)
+- ❌ Timing information per command
+
+**To enable debug logging for troubleshooting:**
+```bash
+idf.py menuconfig
+# Component config → Log output → Default log verbosity → Debug
+```
 
 **Velocity Limiting:**
 The ESP32 enforces minimum pulse period to prevent exceeding 30°/sec:
@@ -400,6 +451,26 @@ Current system achieves consistent 20Hz with pre-allocated buffers.
 ### Position Tracking
 - **Open-loop limitation**: System has no encoders - position is tracked by counting steps. Motors must be manually positioned at [0, 0, 0] on startup.
 - **Position query feature**: Added ability to query ESP32's internal position tracking with 'P' command for debugging and verification.
+
+### Position Query Reliability (Recent Improvements)
+- **UART corruption issue (RESOLVED)**: Initial implementation sent both log messages and position responses to same UART, causing data corruption and 20% success rate.
+- **Timing issue (RESOLVED)**: Main loop blocked too long in `receive_command()` (100ms), missing most position queries. Reduced to 5ms with 1ms idle delay for ~60 cycles/second.
+- **Solution - Dual channel architecture**: Redirected ESP_LOGI() output to USB-JTAG console, keeping UART0 clean for data only.
+- **Python retry mechanism**: Implemented smart retry (5 attempts) with line filtering to handle any transient issues.
+- **Result**: Position query reliability improved from 20% → 50% → **90-100%** with clean responses.
+
+### Trajectory Generation Improvements
+- **Smart trajectory generation**: Python now queries current position before generating trajectories, preventing velocity violations on repeated runs.
+- **Auto-duration calculation**: `generate_test_trajectory()` automatically calculates minimum safe duration based on angle change and velocity limits.
+- **Return-to-home**: Motion controller automatically returns motors to 0° after test sequences for consistent starting position.
+- **Stateful operation**: System tracks motor position throughout session, enabling seamless trajectory chaining.
+
+### Latest Reliability Improvements (December 2025)
+- **Position query fallback mechanism (CRITICAL FIX)**: Python now tracks expected position from trajectory endpoints and uses it as fallback when position queries fail. This prevents 900°/s velocity violations caused by generating trajectories from incorrect starting positions.
+- **Removed reset commands**: Eliminated redundant position reset commands that were causing timestamp conflicts and velocity violations when switching between test sequences.
+- **Reduced ESP32 logging verbosity**: Changed detailed command logging from INFO to DEBUG level to minimize UART traffic and improve position query reliability. Only warnings, errors, and periodic statistics are shown by default.
+- **Extended query timeouts**: Increased wait time after trajectory execution from 0.5s to 1.0s, and initial position query retries from 5 to 10, improving query success rate.
+- **Board compatibility notes**: Discovered that USB-JTAG console separation only works on ESP32-S3 boards with native USB exposed. Boards using external USB-UART chips (CH340, CP210x, etc.) will have logs on the same UART as data, making reduced logging verbosity even more important.
 
 ## Documentation
 

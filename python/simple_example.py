@@ -57,14 +57,14 @@ def main():
     except (serial.SerialException, FileNotFoundError):
         ser = SimulatedSerial()
 
-    # Send a simple command
-    send_position(ser, timestamp_ms=0, angles=[0.0, 45.0, 30.0])
+    # Send a simple command - all motors move to same angle
+    send_position(ser, timestamp_ms=0, angles=[0.0, 0.0, 0.0])
     time.sleep(1)
 
-    send_position(ser, timestamp_ms=1000, angles=[0.0, 60.0, 20.0])
+    send_position(ser, timestamp_ms=1000, angles=[45.0, 45.0, 45.0])
     time.sleep(1)
 
-    send_position(ser, timestamp_ms=2000, angles=[0.0, 75.0, 10.0])
+    send_position(ser, timestamp_ms=2000, angles=[90.0, 90.0, 90.0])
 
     ser.close()
     print("Done!")

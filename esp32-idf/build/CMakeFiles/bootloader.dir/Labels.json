@@ -2,34 +2,34 @@
 	"sources" : 
 	[
 		{
-			"file" : "/home/mikkel/ai-projects/RMTArm/esp32-idf/build/CMakeFiles/bootloader"
+			"file" : "/home/mikkel/git/espRMT/esp32-idf/build/CMakeFiles/bootloader"
 		},
 		{
-			"file" : "/home/mikkel/ai-projects/RMTArm/esp32-idf/build/CMakeFiles/bootloader.rule"
+			"file" : "/home/mikkel/git/espRMT/esp32-idf/build/CMakeFiles/bootloader.rule"
 		},
 		{
-			"file" : "/home/mikkel/ai-projects/RMTArm/esp32-idf/build/CMakeFiles/bootloader-complete.rule"
+			"file" : "/home/mikkel/git/espRMT/esp32-idf/build/CMakeFiles/bootloader-complete.rule"
 		},
 		{
-			"file" : "/home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule"
+			"file" : "/home/mikkel/git/espRMT/esp32-idf/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule"
 		},
 		{
-			"file" : "/home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule"
+			"file" : "/home/mikkel/git/espRMT/esp32-idf/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule"
 		},
 		{
-			"file" : "/home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule"
+			"file" : "/home/mikkel/git/espRMT/esp32-idf/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule"
 		},
 		{
-			"file" : "/home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule"
+			"file" : "/home/mikkel/git/espRMT/esp32-idf/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule"
 		},
 		{
-			"file" : "/home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule"
+			"file" : "/home/mikkel/git/espRMT/esp32-idf/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule"
 		},
 		{
-			"file" : "/home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule"
+			"file" : "/home/mikkel/git/espRMT/esp32-idf/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule"
 		},
 		{
-			"file" : "/home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule"
+			"file" : "/home/mikkel/git/espRMT/esp32-idf/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule"
 		}
 	],
 	"target" : 

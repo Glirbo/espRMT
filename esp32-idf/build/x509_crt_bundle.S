@@ -1,4 +1,4 @@
-/* * Data converted from /home/mikkel/ai-projects/RMTArm/esp32-idf/build/esp-idf/mbedtls/x509_crt_bundle
+/* * Data converted from /home/mikkel/git/espRMT/esp32-idf/build/esp-idf/mbedtls/x509_crt_bundle
  */
 .data
 #if !defined (__APPLE__) && !defined (__linux__)

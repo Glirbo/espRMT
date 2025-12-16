@@ -1,4 +1,4 @@
-# Install script for directory: /home/mikkel/ai-projects/RMTArm/esp32-idf/main
+# Install script for directory: /home/mikkel/git/espRMT/esp32-idf/main
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

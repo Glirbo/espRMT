@@ -17,4 +17,4 @@ set confirm off
 set confirm on
 
 # Load application symbols
-file /home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader/bootloader.elf
+file /home/mikkel/git/espRMT/esp32-idf/build/bootloader/bootloader.elf

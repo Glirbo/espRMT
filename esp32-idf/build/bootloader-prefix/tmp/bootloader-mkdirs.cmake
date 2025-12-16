@@ -5,18 +5,18 @@ cmake_minimum_required(VERSION 3.5)
 
 file(MAKE_DIRECTORY
   "/home/mikkel/esp/esp-idf/components/bootloader/subproject"
-  "/home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader"
-  "/home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader-prefix"
-  "/home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader-prefix/tmp"
-  "/home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader-prefix/src/bootloader-stamp"
-  "/home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader-prefix/src"
-  "/home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader-prefix/src/bootloader-stamp"
+  "/home/mikkel/git/espRMT/esp32-idf/build/bootloader"
+  "/home/mikkel/git/espRMT/esp32-idf/build/bootloader-prefix"
+  "/home/mikkel/git/espRMT/esp32-idf/build/bootloader-prefix/tmp"
+  "/home/mikkel/git/espRMT/esp32-idf/build/bootloader-prefix/src/bootloader-stamp"
+  "/home/mikkel/git/espRMT/esp32-idf/build/bootloader-prefix/src"
+  "/home/mikkel/git/espRMT/esp32-idf/build/bootloader-prefix/src/bootloader-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "/home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
+    file(MAKE_DIRECTORY "/home/mikkel/git/espRMT/esp32-idf/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
 endforeach()
 if(cfgdir)
-  file(MAKE_DIRECTORY "/home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
+  file(MAKE_DIRECTORY "/home/mikkel/git/espRMT/esp32-idf/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
 endif()

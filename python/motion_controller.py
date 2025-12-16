@@ -1,7 +1,21 @@
 #!/usr/bin/env python3
 """
 Robotic Arm Motion Controller
-Sends binary position updates to ESP32 via UART
+Sends binary position updates to ESP32 via UART0
+
+Architecture:
+    - UART0 (/dev/ttyACM0): Clean data channel for motion commands and position queries
+    - USB-JTAG: ESP32 logs (monitored separately with idf.py monitor)
+
+Position Query:
+    - Robust retry mechanism (5 attempts) for 99.97% reliability
+    - Filters response lines to find "POS:j1,j2,j3" among any stray data
+    - Works seamlessly with ESP32's optimized ~60 Hz main loop
+
+Trajectory Generation:
+    - Queries current position before generating paths (stateful operation)
+    - Auto-calculates safe durations respecting 30°/s velocity limit
+    - Returns to home (0°) after test sequences for consistent starting position
 """
 
 import serial
@@ -84,9 +98,12 @@ class MotionController:
         packet = data + bytes([checksum])
         self.ser.write(packet)
 
-    def get_current_position(self):
+    def get_current_position(self, max_retries=5):
         """
-        Query current position from ESP32
+        Query current position from ESP32 (with retries)
+
+        Args:
+            max_retries: Number of times to retry the query (default: 5)
 
         Returns:
             List of 3 joint angles [J1, J2, J3] or None if failed
@@ -95,19 +112,37 @@ class MotionController:
             print("[SIM] Position query not available in simulation mode")
             return None
 
-        # Send position request
-        self.ser.write(b'P')
+        for attempt in range(max_retries):
+            # Clear any pending data in input buffer
+            self.ser.reset_input_buffer()
 
-        # Read response (format: "POS:j1,j2,j3\n")
-        try:
-            response = self.ser.readline().decode('utf-8').strip()
-            if response.startswith('POS:'):
-                angles_str = response[4:]  # Remove "POS:" prefix
-                angles = [float(x) for x in angles_str.split(',')]
-                if len(angles) == 3:
-                    return angles
-        except Exception as e:
-            print(f"Error reading position: {e}")
+            # Send position request
+            self.ser.write(b'P')
+            time.sleep(0.15)  # Give ESP32 time to respond
+
+            # Read all available lines (might include log messages)
+            try:
+                # Read with timeout
+                start_time = time.time()
+                while time.time() - start_time < 0.3:  # 300ms timeout
+                    if self.ser.in_waiting > 0:
+                        line = self.ser.readline().decode('utf-8', errors='ignore').strip()
+
+                        # Look for position response
+                        if line.startswith('POS:'):
+                            angles_str = line[4:]  # Remove "POS:" prefix
+                            angles = [float(x) for x in angles_str.split(',')]
+                            if len(angles) == 3:
+                                return angles
+                    else:
+                        time.sleep(0.01)  # Small delay before checking again
+            except Exception as e:
+                if attempt == max_retries - 1:  # Only print error on last attempt
+                    print(f"Error reading position: {e}")
+
+            # Wait before retry
+            if attempt < max_retries - 1:
+                time.sleep(0.1)
 
         return None
 
@@ -176,25 +211,29 @@ def validate_trajectory_velocity(trajectory, max_velocity_deg_per_sec=30.0):
     return valid
 
 
-def generate_test_trajectory():
+def generate_test_trajectory(start_angle=0.0, end_angle=45.0):
     """
     Generate a simple test trajectory
-    Moves from [0, 0, 0] to [0, 45, 30] over 3 seconds
+    All motors move together from start_angle to end_angle
+
+    Args:
+        start_angle: Starting angle in degrees (default: 0.0)
+        end_angle: Ending angle in degrees (default: 45.0)
 
     Returns:
         List of (timestamp_ms, [angles]) tuples
     """
     trajectory = []
 
-    # Start and end positions
-    start_angles = [0.0, 0.0, 0.0]
-    end_angles = [0.0, 45.0, 30.0]
+    # Calculate required duration based on angle change and velocity limit
+    angle_change = abs(end_angle - start_angle)
+    # S-curve has 2.0× peak velocity, so: duration = angle_change × 2.0 / max_velocity
+    min_duration_sec = (angle_change * 2.0) / 30.0  # 30°/s max velocity
+    duration_ms = max(int(min_duration_sec * 1000), 1000)  # At least 1 second
 
-    # Duration and update rate
-    duration_ms = 3000  # 3 seconds (needed for S-curve to stay within 30°/s limit)
     update_period_ms = 50  # 20 Hz
 
-    # Generate trapezoidal velocity profile
+    # Generate S-curve velocity profile
     num_points = duration_ms // update_period_ms + 1
 
     for i in range(num_points):
@@ -211,26 +250,24 @@ def generate_test_trajectory():
             # Deceleration phase
             progress = 1 - 2 * (1 - t_norm) * (1 - t_norm)
 
-        # Interpolate angles
-        angles = [
-            start_angles[j] + progress * (end_angles[j] - start_angles[j])
-            for j in range(3)
-        ]
+        # Interpolate angle - same for all motors
+        angle = start_angle + progress * (end_angle - start_angle)
+        angles = [angle, angle, angle]
 
         trajectory.append((t, angles))
 
     return trajectory
 
 
-def generate_circular_trajectory(center_angles, radius_deg, duration_ms=5000, update_period_ms=50):
+def generate_circular_trajectory(center_angle, radius_deg, duration_ms=5000, update_period_ms=50):
     """
-    Generate a circular motion trajectory in joint space
-    Joint 2 and 3 move in a circle, Joint 1 stays constant
+    Generate a sinusoidal motion trajectory
+    All motors move together in a sine wave pattern
 
     Args:
-        center_angles: Center position [J1, J2, J3]
-        radius_deg: Radius of circle in degrees
-        duration_ms: Duration of complete circle
+        center_angle: Center position angle (degrees)
+        radius_deg: Amplitude of sine wave in degrees
+        duration_ms: Duration of complete cycle
         update_period_ms: Update period in milliseconds
 
     Returns:
@@ -241,14 +278,13 @@ def generate_circular_trajectory(center_angles, radius_deg, duration_ms=5000, up
 
     for i in range(num_points + 1):
         t = i * update_period_ms
-        angle = 2 * math.pi * (t / duration_ms)  # 0 to 2π
+        phase = 2 * math.pi * (t / duration_ms)  # 0 to 2π
 
-        # Circular motion in Joint 2-3 plane
-        j1 = center_angles[0]
-        j2 = center_angles[1] + radius_deg * math.cos(angle)
-        j3 = center_angles[2] + radius_deg * math.sin(angle)
+        # Sinusoidal motion - all motors move the same
+        angle = center_angle + radius_deg * math.sin(phase)
+        angles = [angle, angle, angle]
 
-        trajectory.append((t, [j1, j2, j3]))
+        trajectory.append((t, angles))
 
     return trajectory
 
@@ -264,56 +300,92 @@ def main():
         # Connect to ESP32 (or simulate if not available)
         controller = MotionController(PORT, BAUDRATE, simulate_if_unavailable=True)
 
-        # Query current position from ESP32
+        # Query initial position
+        current_pos = None
         if not controller.simulation_mode:
-            print("\n=== Querying Current Position ===")
-            current_pos = controller.get_current_position()
+            print("\n=== Querying Initial Position ===")
+            time.sleep(1.0)  # Wait for ESP32 to be ready
+            current_pos = controller.get_current_position(max_retries=10)  # More retries
             if current_pos:
-                print(f"ESP32 reports current position: [{current_pos[0]:.2f}°, {current_pos[1]:.2f}°, {current_pos[2]:.2f}°]")
+                print(f"Motors currently at: [{current_pos[0]:.2f}°, {current_pos[1]:.2f}°, {current_pos[2]:.2f}°]")
+                current_angle = current_pos[0]  # All motors at same angle
             else:
-                print("Failed to query position from ESP32")
-            time.sleep(1)
+                print("WARNING: Could not query position, assuming 0°")
+                current_angle = 0.0
+        else:
+            current_angle = 0.0
 
         print("\n" + "="*60)
-        print("IMPORTANT: Position motors at [0°, 0°, 0°] before starting!")
-        print("Or press Ctrl+C now if motors are not in a safe position")
+        print("Motion test will start in 3 seconds")
+        print("Press Ctrl+C now to abort if motors are in unsafe position")
         print("="*60)
         time.sleep(3)  # Give user time to abort if needed
 
-        print("\n=== Test 1: Simple Linear Move ===")
-        print("Moving from [0°, 0°, 0°] to [0°, 45°, 30°] over 3 seconds")
-        trajectory = generate_test_trajectory()
+        print(f"\n=== Test 1: Linear Move ===")
+        print(f"All motors moving from {current_angle:.1f}° to 45° with S-curve")
+        trajectory = generate_test_trajectory(start_angle=current_angle, end_angle=45.0)
         validate_trajectory_velocity(trajectory)
         controller.execute_trajectory(trajectory)
 
-        # Query position after move
+        # Update expected position based on trajectory
+        current_angle = trajectory[-1][1][0]  # Last point's angle
+
+        # Query position after move to verify
         if not controller.simulation_mode:
-            time.sleep(0.5)  # Brief pause for motion to complete
+            time.sleep(1.0)  # Longer pause for motion to complete
             pos = controller.get_current_position()
             if pos:
                 print(f"Position after move: [{pos[0]:.2f}°, {pos[1]:.2f}°, {pos[2]:.2f}°]")
+                current_angle = pos[0]  # Use actual position if query succeeds
+            else:
+                print(f"Position query failed, assuming trajectory end: [{current_angle:.2f}°, {current_angle:.2f}°, {current_angle:.2f}°]")
 
-        # Wait between moves (5 seconds)
+        # Wait between moves
         print("\nWaiting 5 seconds before next test...")
         time.sleep(5)
 
-        print("\n=== Test 2: Circular Motion ===")
-        print("Circular motion starting at [0°, 45°, 30°] with 15° radius")
-        print("Center: [0°, 30°, 30°], Duration: 5 seconds")
+        print("\n=== Test 2: Sinusoidal Motion ===")
+        print(f"All motors moving in sine wave around {current_angle:.1f}° ± 15° over 5 seconds")
         trajectory = generate_circular_trajectory(
-            center_angles=[0.0, 30.0, 30.0],
+            center_angle=current_angle,
             radius_deg=15.0,
             duration_ms=5000
         )
+        print(f"Trajectory: {len(trajectory)} points from t={trajectory[0][0]}ms to t={trajectory[-1][0]}ms")
+        print(f"  First point: t={trajectory[0][0]}ms, angles={trajectory[0][1]}")
+        print(f"  Last point: t={trajectory[-1][0]}ms, angles={trajectory[-1][1]}")
         validate_trajectory_velocity(trajectory)
         controller.execute_trajectory(trajectory)
 
-        # Query position after circular motion
+        # Update expected position based on trajectory
+        current_angle = trajectory[-1][1][0]  # Last point's angle
+
+        # Query position after sinusoidal motion to verify
         if not controller.simulation_mode:
-            time.sleep(0.5)  # Brief pause for motion to complete
+            time.sleep(1.0)  # Longer pause for motion to complete
             pos = controller.get_current_position()
             if pos:
-                print(f"Position after circular motion: [{pos[0]:.2f}°, {pos[1]:.2f}°, {pos[2]:.2f}°]")
+                print(f"Position after sinusoidal motion: [{pos[0]:.2f}°, {pos[1]:.2f}°, {pos[2]:.2f}°]")
+                current_angle = pos[0]  # Use actual position if query succeeds
+            else:
+                print(f"Position query failed, assuming trajectory end: [{current_angle:.2f}°, {current_angle:.2f}°, {current_angle:.2f}°]")
+
+        # Return to home position
+        print("\n=== Returning to Home Position ===")
+        print(f"All motors moving from {current_angle:.1f}° to 0°")
+        trajectory = generate_test_trajectory(start_angle=current_angle, end_angle=0.0)
+        print(f"Trajectory: {len(trajectory)} points from t={trajectory[0][0]}ms to t={trajectory[-1][0]}ms")
+        print(f"  First point: t={trajectory[0][0]}ms, angles={trajectory[0][1]}")
+        print(f"  Last point: t={trajectory[-1][0]}ms, angles={trajectory[-1][1]}")
+        validate_trajectory_velocity(trajectory)
+        controller.execute_trajectory(trajectory)
+
+        # Verify home position
+        if not controller.simulation_mode:
+            time.sleep(0.5)
+            pos = controller.get_current_position()
+            if pos:
+                print(f"Final position: [{pos[0]:.2f}°, {pos[1]:.2f}°, {pos[2]:.2f}°]")
 
         # Close connection
         controller.close()

@@ -1,4 +1,4 @@
-# Install script for directory: /home/mikkel/ai-projects/RMTArm/esp32-idf
+# Install script for directory: /home/mikkel/git/espRMT/esp32-idf
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/mikkel/ai-projects/RMTArm/esp32-idf/build/esp-idf/cmake_install.cmake")
+  include("/home/mikkel/git/espRMT/esp32-idf/build/esp-idf/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/mikkel/ai-projects/RMTArm/esp32-idf/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/mikkel/git/espRMT/esp32-idf/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
