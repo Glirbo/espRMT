@@ -1,0 +1,7 @@
+[1/4] cd /home/mikkel/ai-projects/RMTArm/esp32-idf/build/esp-idf/esptool_py && /home/mikkel/.espressif/python_env/idf5.4_py3.8_env/bin/python /home/mikkel/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/mikkel/ai-projects/RMTArm/esp32-idf/build/partition_table/partition-table.bin /home/mikkel/ai-projects/RMTArm/esp32-idf/build/rmtarm.bin
+rmtarm.bin binary size 0x3b920 bytes. Smallest app partition is 0x100000 bytes. 0xc46e0 bytes (77%) free.
+[2/4] Performing build step for 'bootloader'
+[1/1] cd /home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader/esp-idf/esptool_py && /home/mikkel/.espressif/python_env/idf5.4_py3.8_env/bin/python /home/mikkel/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 /home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader/bootloader.bin
+Bootloader binary size 0x5220 bytes. 0x2de0 bytes (36%) free.
+[3/4] No install step for 'bootloader'
+[4/4] Completed 'bootloader'

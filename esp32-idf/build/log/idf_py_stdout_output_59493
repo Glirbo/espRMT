@@ -1,0 +1,21 @@
+[1/9] Performing build step for 'bootloader'
+[1/1] cd /home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader/esp-idf/esptool_py && /home/mikkel/.espressif/python_env/idf5.4_py3.8_env/bin/python /home/mikkel/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 /home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader/bootloader.bin
+Bootloader binary size 0x5220 bytes. 0x2de0 bytes (36%) free.
+[2/9] No install step for 'bootloader'
+[3/9] Completed 'bootloader'
+[4/9] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj
+In file included from /home/mikkel/ai-projects/RMTArm/esp32-idf/main/main.c:14:
+/home/mikkel/esp/esp-idf/components/driver/deprecated/driver/rmt.h:18:2: warning: #warning "The legacy RMT driver is deprecated, please use driver/rmt_tx.h and/or driver/rmt_rx.h" [-Wcpp]
+   18 | #warning "The legacy RMT driver is deprecated, please use driver/rmt_tx.h and/or driver/rmt_rx.h"
+      |  ^~~~~~~
+[5/9] Linking C static library esp-idf/main/libmain.a
+[6/9] Generating ld/sections.ld
+[7/9] Linking CXX executable rmtarm.elf
+[8/9] Generating binary image from built executable
+esptool.py v4.8.1
+Creating esp32s3 image...
+Merged 2 ELF sections
+Successfully created esp32s3 image.
+Generated /home/mikkel/ai-projects/RMTArm/esp32-idf/build/rmtarm.bin
+[9/9] cd /home/mikkel/ai-projects/RMTArm/esp32-idf/build/esp-idf/esptool_py && /home/mikkel/.espressif/python_env/idf5.4_py3.8_env/bin/python /home/mikkel/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/mikkel/ai-projects/RMTArm/esp32-idf/build/partition_table/partition-table.bin /home/mikkel/ai-projects/RMTArm/esp32-idf/build/rmtarm.bin
+rmtarm.bin binary size 0x3ba70 bytes. Smallest app partition is 0x100000 bytes. 0xc4590 bytes (77%) free.

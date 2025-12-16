@@ -1,0 +1,2 @@
+source /home/mikkel/ai-projects/RMTArm/esp32-idf/build/gdbinit/symbols
+source /home/mikkel/ai-projects/RMTArm/esp32-idf/build/gdbinit/connect

@@ -1,0 +1,2 @@
+source /home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader/gdbinit/symbols
+source /home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader/gdbinit/connect

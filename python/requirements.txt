@@ -1,0 +1,4 @@
+pyserial>=3.5
+
+# Note: Scripts will automatically fall back to simulation mode
+# if pyserial is not installed or no serial port is available

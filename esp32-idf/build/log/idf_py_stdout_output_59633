@@ -1,0 +1,871 @@
+ʚJ�ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x8 (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2810,len:0x15a0
+load:0x403c8700,len:0x4
+load:0x403c8704,len:0xd20
+load:0x403cb700,len:0x2f00
+entry 0x403c8928
+[0;32mI (27) boot: ESP-IDF v5.4.1 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time Dec 15 2025 20:41:56[0m
+[0;32mI (27) boot: Multicore bootloader[0m
+[0;32mI (27) boot: chip revision: v0.2[0m
+[0;32mI (30) boot: efuse block revision: v1.3[0m
+[0;32mI (33) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (37) boot.esp32s3: SPI Mode       : DIO[0m
+[0;32mI (41) boot.esp32s3: SPI Flash Size : 2MB[0m
+[0;32mI (45) boot: Enabling RNG early entropy source...[0m
+[0;32mI (49) boot: Partition Table:[0m
+[0;32mI (52) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (58) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (65) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (71) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (78) boot: End of partition table[0m
+[0;32mI (81) esp_image: segment 0: paddr=00010020 vaddr=3c020020 size=0cc14h ( 52244) map[0m
+[0;32mI (98) esp_image: segment 1: paddr=0001cc3c vaddr=3fc93b00 size=02b30h ( 11056) load[0m
+[0;32mI (100) esp_image: segment 2: paddr=0001f774 vaddr=40374000 size=008a4h (  2212) load[0m
+[0;32mI (104) esp_image: segment 3: paddr=00020020 vaddr=42000020 size=1c830h (116784) map[0m
+[0;32mI (131) esp_image: segment 4: paddr=0003c858 vaddr=403748a4 size=0f1c8h ( 61896) load[0m
+[0;32mI (145) esp_image: segment 5: paddr=0004ba28 vaddr=600fe100 size=0001ch (    28) load[0m
+[0;32mI (151) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (152) boot: Disabling RNG early entropy source...[0m
+[0;32mI (163) cpu_start: Multicore app[0m
+[0;32mI (172) cpu_start: Pro cpu start user code[0m
+[0;32mI (172) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (172) app_init: Application information:[0m
+[0;32mI (172) app_init: Project name:     rmtarm[0m
+[0;32mI (176) app_init: App version:      1[0m
+[0;32mI (179) app_init: Compile time:     Dec 15 2025 20:41:48[0m
+[0;32mI (184) app_init: ELF file SHA256:  81197e875...[0m
+[0;32mI (189) app_init: ESP-IDF:          v5.4.1[0m
+[0;32mI (193) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (196) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (200) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (204) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (211) heap_init: At 3FC98738 len 00050FD8 (323 KiB): RAM[0m
+[0;32mI (216) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (221) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (226) heap_init: At 600FE11C len 00001ECC (7 KiB): RTCRAM[0m
+[0;32mI (232) spi_flash: detected chip: boya[0m
+[0;32mI (235) spi_flash: flash io: dio[0m
+[0;33mW (238) spi_flash: Detected size(16384k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;33mW (250) rmt(legacy): legacy driver is deprecated, please migrate to `driver/rmt_tx.h` and/or `driver/rmt_rx.h`[0m
+[0;32mI (260) sleep_gpio: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (266) sleep_gpio: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (273) main_task: Started on CPU0[0m
+[0;32mI (282) main_task: Calling app_main()[0m
+[0;32mI (283) RMTArm: [0m
+[0;32mI (283) RMTArm: ╔════════════════════════════════════════════════════════╗[0m
+[0;32mI (297) RMTArm: ║                                                        ║[0m
+[0;32mI (304) RMTArm: ║       ESP32 ROBOTIC ARM CONTROLLER v1.0                ║[0m
+[0;32mI (311) RMTArm: ║                                                        ║[0m
+[0;32mI (318) RMTArm: ╚════════════════════════════════════════════════════════╝[0m
+[0;32mI (335) RMTArm: [0m
+[0;32mI (336) RMTArm: Motor Configuration:[0m
+[0;32mI (340) RMTArm:   Steps per revolution: 200[0m
+[0;32mI (344) RMTArm:   Microstepping: ��I (358) RMTArm: UART setup complete (baud: 115200)[0m
+[0;32mI (358) RMTArm: ╔════════════════════════════════════════════════════════╗[0m
+[0;32mI (368) RMTArm: ║           RMT CONFIGURATION                            ║[0m
+[0;32mI (375) RMTArm: ╚════════════════════════════════════════════════════════╝[0m
+[0;32mI (392) RMTArm: Number of motors: 3[0m
+[0;32mI (395) RMTArm: RMT clock divider: 80 (tick = 1μs)[0m
+[0;32mI (399) RMTArm: Pulse width: 5μs[0m
+[0;32mI (402) RMTArm: [0m
+[0;32mI (404) RMTArm: ✓ Motor 0 configured:[0m
+[0;32mI (408) RMTArm:   STEP pin: GPIO1  │  DIR pin: GPIO4  │  RMT: CH0[0m
+[0;32mI (414) RMTArm: ✓ Motor 1 configured:[0m
+[0;32mI (417) RMTArm:   STEP pin: GPIO2  │  DIR pin: GPIO5  │  RMT: CH1[0m
+[0;32mI (424) RMTArm: ✓ Motor 2 configured:[0m
+[0;32mI (427) RMTArm:   STEP pin: GPIO3  │  DIR pin: GPIO6  │  RMT: CH2[0m
+[0;32mI (433) RMTArm: [0m
+[0;32mI (435) RMTArm: RMT setup complete - ready for motion control[0m
+[0;32mI (440) RMTArm: [0m
+[0;32mI (442) RMTArm: ╔════════════════════════════════════════════════════════╗[0m
+[0;32mI (458) RMTArm: ║      MOTION CONTROL TASK STARTED                       ║[0m
+[0;32mI (465) RMTArm: ╚════════════════════════════════════════════════════════╝[0m
+[0;32mI (482) RMTArm: RMT buffer size: 512 items per motor[0m
+[0;32mI (487) RMTArm: Max steps per command: 512[0m
+[0;32mI (491) RMTArm: Waiting for position commands...[0m
+[0;32mI (495) RMTArm: [0m
+[0;32mI (496) RMTArm: ╔════════════════════════════════════════════════════════╗[0m
+[0;32mI (513) RMTArm: ║           SYSTEM READY                                 ║[0m
+[0;32mI (520) RMTArm: ╚════════════════════════════════════════════════════════╝[0m
+[0;32mI (537) RMTArm: [0m
+[0;32mI (538) main_task: Returned from app_main()[0m
+[0;32mI (6580) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (6586) RMTArm: CMD #1 @ 0ms │ Target: [0.00°, 45.00°, 30.00°][0m
+[0;32mI (6592) RMTArm: Motor 1: 0.00° → 45.00° (Δ+45.00° = +4000 steps)[0m
+[0;33mW (6598) RMTArm: Motor 1: 4000 steps exceeds buffer, clamping to 512[0m
+[0;32mI (6605) RMTArm: Motor 2: 0.00° → 30.00° (Δ+30.00° = +2667 steps)[0m
+[0;33mW (6611) RMTArm: Motor 2: 2667 steps exceeds buffer, clamping to 512[0m
+[0;32mI (6617) RMTArm: Total: 6667 steps across all motors[0m
+[0;32mI (6622) RMTArm: Timing: Δt=41.2ms (24.3Hz) │ Expected: 0ms (0.0Hz)[0m
+[0;32mI (6628) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (6644) RMTArm: CMD #2 @ 50ms │ Target: [0.00°, 45.15°, 29.90°][0m
+[0;32mI (6650) RMTArm: Motor 1: 45.00° → 45.15° (Δ+0.15° = +13 steps)[0m
+[0;32mI (6657) RMTArm: Motor 2: 30.00° → 29.90° (Δ-0.10° = -9 steps)[0m
+[0;32mI (6667) RMTArm: Total: 22 steps across all motors[0m
+[0;32mI (6667) RMTArm: Timing: Δt=45.6ms (21.9Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (6674) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (6690) RMTArm: CMD #3 @ 100ms │ Target: [0.00°, 45.60°, 29.60°][0m
+[0;32mI (6696) RMTArm: Motor 1: 45.15° → 45.60° (Δ+0.45° = +40 steps)[0m
+[0;32mI (6707) RMTArm: Motor 2: 29.90° → 29.60° (Δ-0.30° = -27 steps)[0m
+[0;32mI (6717) RMTArm: Total: 67 steps across all motors[0m
+[0;32mI (6717) RMTArm: Timing: Δt=49.7ms (20.1Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (6720) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (6736) RMTArm: CMD #4 @ 150ms │ Target: [0.00°, 46.35°, 29.10°][0m
+[0;32mI (6742) RMTArm: Motor 1: 45.60° → 46.35° (Δ+0.75° = +67 steps)[0m
+[0;32mI (6757) RMTArm: Motor 2: 29.60° → 29.10° (Δ-0.50° = -44 steps)[0m
+[0;32mI (6767) RMTArm: Total: 111 steps across all motors[0m
+[0;32mI (6767) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (6767) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (6783) RMTArm: CMD #5 @ 200ms │ Target: [0.00°, 47.40°, 28.40°][0m
+[0;32mI (6789) RMTArm: Motor 1: 46.35° → 47.40° (Δ+1.05° = +93 steps)[0m
+[0;32mI (6807) RMTArm: Motor 2: 29.10° → 28.40° (Δ-0.70° = -62 steps)[0m
+[0;32mI (6817) RMTArm: Total: 155 steps across all motors[0m
+[0;32mI (6817) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (6817) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (6833) RMTArm: CMD #6 @ 250ms │ Target: [0.00°, 48.75°, 27.50°][0m
+[0;32mI (6840) RMTArm: Motor 1: 47.40° → 48.75° (Δ+1.35° = +120 steps)[0m
+[0;32mI (6857) RMTArm: Motor 2: 28.40° → 27.50° (Δ-0.90° = -80 steps)[0m
+[0;32mI (6867) RMTArm: Total: 200 steps across all motors[0m
+[0;32mI (6867) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (6867) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (6883) RMTArm: CMD #7 @ 300ms │ Target: [0.00°, 50.40°, 26.40°][0m
+[0;32mI (6890) RMTArm: Motor 1: 48.75° → 50.40° (Δ+1.65° = +147 steps)[0m
+[0;32mI (6907) RMTArm: Motor 2: 27.50° → 26.40° (Δ-1.10° = -98 steps)[0m
+[0;32mI (6917) RMTArm: Total: 245 steps across all motors[0m
+[0;32mI (6917) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (6917) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (6933) RMTArm: CMD #8 @ 350ms │ Target: [0.00°, 52.35°, 25.10°][0m
+[0;32mI (6940) RMTArm: Motor 1: 50.40° → 52.35° (Δ+1.95° = +173 steps)[0m
+[0;32mI (6957) RMTArm: Motor 2: 26.40° → 25.10° (Δ-1.30° = -116 steps)[0m
+[0;32mI (6967) RMTArm: Total: 289 steps across all motors[0m
+[0;32mI (6967) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (6967) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (6983) RMTArm: CMD #9 @ 400ms │ Target: [0.00°, 54.60°, 23.60°][0m
+[0;32mI (6990) RMTArm: Motor 1: 52.35° → 54.60° (Δ+2.25° = +200 steps)[0m
+[0;32mI (7007) RMTArm: Motor 2: 25.10° → 23.60° (Δ-1.50° = -133 steps)[0m
+[0;32mI (7017) RMTArm: Total: 333 steps across all motors[0m
+[0;32mI (7017) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (7017) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (7033) RMTArm: CMD #10 @ 450ms │ Target: [0.00°, 57.15°, 21.90°][0m
+[0;32mI (7040) RMTArm: Motor 1: 54.60° → 57.15° (Δ+2.55° = +227 steps)[0m
+[0;32mI (7056) RMTArm: Motor 2: 23.60° → 21.90° (Δ-1.70° = -151 steps)[0m
+[0;32mI (7067) RMTArm: Total: 378 steps across all motors[0m
+[0;32mI (7067) RMTArm: Timing: Δt=49.9ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (7067) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (7083) RMTArm: CMD #11 @ 500ms │ Target: [0.00°, 60.00°, 20.00°][0m
+[0;32mI (7090) RMTArm: Motor 1: 57.15° → 60.00° (Δ+2.85° = +253 steps)[0m
+[0;32mI (7106) RMTArm: Motor 2: 21.90° → 20.00° (Δ-1.90° = -169 steps)[0m
+[0;32mI (7117) RMTArm: Total: 422 steps across all motors[0m
+[0;32mI (7117) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (7117) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (7133) RMTArm: CMD #12 @ 550ms │ Target: [0.00°, 62.85°, 18.10°][0m
+[0;32mI (7140) RMTArm: Motor 1: 60.00° → 62.85° (Δ+2.85° = +253 steps)[0m
+[0;32mI (7156) RMTArm: Motor 2: 20.00° → 18.10° (Δ-1.90° = -169 steps)[0m
+[0;32mI (7167) RMTArm: Total: 422 steps across all motors[0m
+[0;32mI (7167) RMTArm: Timing: Δt=49.9ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (7167) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (7183) RMTArm: CMD #13 @ 600ms │ Target: [0.00°, 65.40°, 16.40°][0m
+[0;32mI (7189) RMTArm: Motor 1: 62.85° → 65.40° (Δ+2.55° = +227 steps)[0m
+[0;32mI (7206) RMTArm: Motor 2: 18.10° → 16.40° (Δ-1.70° = -151 steps)[0m
+[0;32mI (7216) RMTArm: Total: 378 steps across all motors[0m
+[0;32mI (7217) RMTArm: Timing: Δt=49.9ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (7217) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (7233) RMTArm: CMD #14 @ 650ms │ Target: [0.00°, 67.65°, 14.90°][0m
+[0;32mI (7239) RMTArm: Motor 1: 65.40° → 67.65° (Δ+2.25° = +200 steps)[0m
+[0;32mI (7256) RMTArm: Motor 2: 16.40° → 14.90° (Δ-1.50° = -133 steps)[0m
+[0;32mI (7266) RMTArm: Total: 333 steps across all motors[0m
+[0;32mI (7267) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (7267) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (7283) RMTArm: CMD #15 @ 700ms │ Target: [0.00°, 69.60°, 13.60°][0m
+[0;32mI (7289) RMTArm: Motor 1: 67.65° → 69.60° (Δ+1.95° = +173 steps)[0m
+[0;32mI (7306) RMTArm: Motor 2: 14.90° → 13.60° (Δ-1.30° = -116 steps)[0m
+[0;32mI (7316) RMTArm: Total: 289 steps across all motors[0m
+[0;32mI (7317) RMTArm: Timing: Δt=49.9ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (7317) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (7333) RMTArm: CMD #16 @ 750ms │ Target: [0.00°, 71.25°, 12.50°][0m
+[0;32mI (7339) RMTArm: Motor 1: 69.60° → 71.25° (Δ+1.65° = +147 steps)[0m
+[0;32mI (7356) RMTArm: Motor 2: 13.60° → 12.50° (Δ-1.10° = -98 steps)[0m
+[0;32mI (7366) RMTArm: Total: 245 steps across all motors[0m
+[0;32mI (7367) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (7367) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (7383) RMTArm: CMD #17 @ 800ms │ Target: [0.00°, 72.60°, 11.60°][0m
+[0;32mI (7389) RMTArm: Motor 1: 71.25° → 72.60° (Δ+1.35° = +120 steps)[0m
+[0;32mI (7406) RMTArm: Motor 2: 12.50° → 11.60° (Δ-0.90° = -80 steps)[0m
+[0;32mI (7416) RMTArm: Total: 200 steps across all motors[0m
+[0;32mI (7417) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (7417) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (7433) RMTArm: CMD #18 @ 850ms │ Target: [0.00°, 73.65°, 10.90°][0m
+[0;32mI (7439) RMTArm: Motor 1: 72.60° → 73.65° (Δ+1.05° = +93 steps)[0m
+[0;32mI (7456) RMTArm: Motor 2: 11.60° → 10.90° (Δ-0.70° = -62 steps)[0m
+[0;32mI (7466) RMTArm: Total: 155 steps across all motors[0m
+[0;32mI (7467) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (7467) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (7483) RMTArm: CMD #19 @ 900ms │ Target: [0.00°, 74.40°, 10.40°][0m
+[0;32mI (7489) RMTArm: Motor 1: 73.65° → 74.40° (Δ+0.75° = +67 steps)[0m
+[0;32mI (7506) RMTArm: Motor 2: 10.90° → 10.40° (Δ-0.50° = -44 steps)[0m
+[0;32mI (7516) RMTArm: Total: 111 steps across all motors[0m
+[0;32mI (7517) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (7517) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (7533) RMTArm: CMD #20 @ 950ms │ Target: [0.00°, 74.85°, 10.10°][0m
+[0;32mI (7539) RMTArm: Motor 1: 74.40° → 74.85° (Δ+0.45° = +40 steps)[0m
+[0;32mI (7556) RMTArm: Motor 2: 10.40° → 10.10° (Δ-0.30° = -27 steps)[0m
+[0;32mI (7566) RMTArm: Total: 67 steps across all motors[0m
+[0;32mI (7567) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (7567) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (7583) RMTArm: CMD #21 @ 1000ms │ Target: [0.00°, 75.00°, 10.00°][0m
+[0;32mI (7589) RMTArm: Motor 1: 74.85° → 75.00° (Δ+0.15° = +13 steps)[0m
+[0;32mI (7606) RMTArm: Motor 2: 10.10° → 10.00° (Δ-0.10° = -9 steps)[0m
+[0;32mI (7616) RMTArm: Total: 22 steps across all motors[0m
+[0;32mI (9582) RMTArm: Timing: Δt=2014.9ms (0.5Hz) │ Expected: 4294966296ms (0.0Hz)[0m
+[0;32mI (9582) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (9595) RMTArm: CMD #22 @ 0ms │ Target: [0.00°, 75.00°, 20.00°][0m
+[0;32mI (9601) RMTArm: Motor 2: 10.00° → 20.00° (Δ+10.00° = +889 steps)[0m
+[0;33mW (9607) RMTArm: Motor 2: 889 steps exceeds buffer, clamping to 512[0m
+[0;32mI (9613) RMTArm: Total: 889 steps across all motors[0m
+[0;32mI (9618) RMTArm: Timing: Δt=36.1ms (27.7Hz) │ Expected: 0ms (0.0Hz)[0m
+[0;32mI (9624) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (9640) RMTArm: CMD #23 @ 50ms │ Target: [0.00°, 74.97°, 20.94°][0m
+[0;32mI (9647) RMTArm: Motor 1: 75.00° → 74.97° (Δ-0.03° = -3 steps)[0m
+[0;32mI (9653) RMTArm: Motor 2: 20.00° → 20.94° (Δ+0.94° = +84 steps)[0m
+[0;32mI (9663) RMTArm: Total: 87 steps across all motors[0m
+[0;32mI (9663) RMTArm: Timing: Δt=45.7ms (21.9Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (9670) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (9686) RMTArm: CMD #24 @ 100ms │ Target: [0.00°, 74.88°, 21.88°][0m
+[0;32mI (9693) RMTArm: Motor 1: 74.97° → 74.88° (Δ-0.09° = -8 steps)[0m
+[0;32mI (9703) RMTArm: Motor 2: 20.94° → 21.88° (Δ+0.94° = +83 steps)[0m
+[0;32mI (9713) RMTArm: Total: 91 steps across all motors[0m
+[0;32mI (9713) RMTArm: Timing: Δt=49.8ms (20.1Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (9716) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (9732) RMTArm: CMD #25 @ 150ms │ Target: [0.00°, 74.73°, 22.81°][0m
+[0;32mI (9739) RMTArm: Motor 1: 74.88° → 74.73° (Δ-0.15° = -13 steps)[0m
+[0;32mI (9753) RMTArm: Motor 2: 21.88° → 22.81° (Δ+0.93° = +83 steps)[0m
+[0;32mI (9763) RMTArm: Total: 96 steps across all motors[0m
+[0;32mI (9763) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (9764) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (9779) RMTArm: CMD #26 @ 200ms │ Target: [0.00°, 74.53°, 23.73°][0m
+[0;32mI (9786) RMTArm: Motor 1: 74.73° → 74.53° (Δ-0.21° = -18 steps)[0m
+[0;32mI (9803) RMTArm: Motor 2: 22.81° → 23.73° (Δ+0.92° = +82 steps)[0m
+[0;32mI (9813) RMTArm: Total: 100 steps across all motors[0m
+[0;32mI (9813) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (9814) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (9830) RMTArm: CMD #27 @ 250ms │ Target: [0.00°, 74.27°, 24.64°][0m
+[0;32mI (9836) RMTArm: Motor 1: 74.53° → 74.27° (Δ-0.26° = -23 steps)[0m
+[0;32mI (9853) RMTArm: Motor 2: 23.73° → 24.64° (Δ+0.90° = +80 steps)[0m
+[0;32mI (9863) RMTArm: Total: 103 steps across all motors[0m
+[0;32mI (9863) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (9864) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (9880) RMTArm: CMD #28 @ 300ms │ Target: [0.00°, 73.95°, 25.52°][0m
+[0;32mI (9886) RMTArm: Motor 1: 74.27° → 73.95° (Δ-0.32° = -28 steps)[0m
+[0;32mI (9903) RMTArm: Motor 2: 24.64° → 25.52° (Δ+0.89° = +79 steps)[0m
+[0;32mI (9913) RMTArm: Total: 107 steps across all motors[0m
+[0;32mI (9913) RMTArm: Timing: Δt=50.1ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (9914) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (9930) RMTArm: CMD #29 @ 350ms │ Target: [0.00°, 73.57°, 26.39°][0m
+[0;32mI (9936) RMTArm: Motor 1: 73.95° → 73.57° (Δ-0.37° = -33 steps)[0m
+[0;32mI (9953) RMTArm: Motor 2: 25.52° → 26.39° (Δ+0.86° = +77 steps)[0m
+[0;32mI (9963) RMTArm: Total: 110 steps across all motors[0m
+[0;32mI (9963) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (9964) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (9980) RMTArm: CMD #30 @ 400ms │ Target: [0.00°, 73.14°, 27.23°][0m
+[0;32mI (9986) RMTArm: Motor 1: 73.57° → 73.14° (Δ-0.43° = -38 steps)[0m
+[0;32mI (10003) RMTArm: Motor 2: 26.39° → 27.23° (Δ+0.84° = +75 steps)[0m
+[0;32mI (10013) RMTArm: Total: 113 steps across all motors[0m
+[0;32mI (10013) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (10014) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (10030) RMTArm: CMD #31 @ 450ms │ Target: [0.00°, 72.66°, 28.04°][0m
+[0;32mI (10036) RMTArm: Motor 1: 73.14° → 72.66° (Δ-0.48° = -43 steps)[0m
+[0;32mI (10053) RMTArm: Motor 2: 27.23° → 28.04° (Δ+0.81° = +72 steps)[0m
+[0;32mI (10063) RMTArm: Total: 115 steps across all motors[0m
+[0;32mI (10063) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (10064) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (10080) RMTArm: CMD #32 @ 500ms │ Target: [0.00°, 72.14°, 28.82°][0m
+[0;32mI (10086) RMTArm: Motor 1: 72.66° → 72.14° (Δ-0.53° = -47 steps)[0m
+[0;32mI (10103) RMTArm: Motor 2: 28.04° → 28.82° (Δ+0.78° = +69 steps)[0m
+[0;32mI (10113) RMTArm: Total: 116 steps across all motors[0m
+[0;32mI (10113) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (10114) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (10130) RMTArm: CMD #33 @ 550ms │ Target: [0.00°, 71.56°, 29.56°][0m
+[0;32mI (10136) RMTArm: Motor 1: 72.14° → 71.56° (Δ-0.58° = -51 steps)[0m
+[0;32mI (10153) RMTArm: Motor 2: 28.82° → 29.56° (Δ+0.74° = +66 steps)[0m
+[0;32mI (10163) RMTArm: Total: 117 steps across all motors[0m
+[0;32mI (10163) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (10164) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (10180) RMTArm: CMD #34 @ 600ms │ Target: [0.00°, 70.93°, 30.27°][0m
+[0;32mI (10186) RMTArm: Motor 1: 71.56° → 70.93° (Δ-0.62° = -55 steps)[0m
+[0;32mI (10203) RMTArm: Motor 2: 29.56° → 30.27° (Δ+0.71° = +63 steps)[0m
+[0;32mI (10213) RMTArm: Total: 118 steps across all motors[0m
+[0;32mI (10213) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (10214) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (10230) RMTArm: CMD #35 @ 650ms │ Target: [0.00°, 70.27°, 30.93°][0m
+[0;32mI (10236) RMTArm: Motor 1: 70.93° → 70.27° (Δ-0.67° = -59 steps)[0m
+[0;32mI (10253) RMTArm: Motor 2: 30.27° → 30.93° (Δ+0.67° = +59 steps)[0m
+[0;32mI (10263) RMTArm: Total: 118 steps across all motors[0m
+[0;32mI (10263) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (10264) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (10280) RMTArm: CMD #36 @ 700ms │ Target: [0.00°, 69.56°, 31.56°][0m
+[0;32mI (10286) RMTArm: Motor 1: 70.27° → 69.56° (Δ-0.71° = -63 steps)[0m
+[0;32mI (10303) RMTArm: Motor 2: 30.93° → 31.56° (Δ+0.62° = +55 steps)[0m
+[0;32mI (10313) RMTArm: Total: 118 steps across all motors[0m
+[0;32mI (10313) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (10314) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (10330) RMTArm: CMD #37 @ 750ms │ Target: [0.00°, 68.82°, 32.14°][0m
+[0;32mI (10336) RMTArm: Motor 1: 69.56° → 68.82° (Δ-0.74° = -66 steps)[0m
+[0;32mI (10353) RMTArm: Motor 2: 31.56° → 32.14° (Δ+0.58° = +51 steps)[0m
+[0;32mI (10363) RMTArm: Total: 117 steps across all motors[0m
+[0;32mI (10363) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (10364) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (10380) RMTArm: CMD #38 @ 800ms │ Target: [0.00°, 68.04°, 32.66°][0m
+[0;32mI (10386) RMTArm: Motor 1: 68.82° → 68.04° (Δ-0.78° = -69 steps)[0m
+[0;32mI (10403) RMTArm: Motor 2: 32.14° → 32.66° (Δ+0.53° = +47 steps)[0m
+[0;32mI (10413) RMTArm: Total: 116 steps across all motors[0m
+[0;32mI (10413) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (10414) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (10430) RMTArm: CMD #39 @ 850ms │ Target: [0.00°, 67.23°, 33.14°][0m
+[0;32mI (10436) RMTArm: Motor 1: 68.04° → 67.23° (Δ-0.81° = -72 steps)[0m
+[0;32mI (10453) RMTArm: Motor 2: 32.66° → 33.14° (Δ+0.48° = +43 steps)[0m
+[0;32mI (10463) RMTArm: Total: 115 steps across all motors[0m
+[0;32mI (10463) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (10464) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (10480) RMTArm: CMD #40 @ 900ms │ Target: [0.00°, 66.39°, 33.57°][0m
+[0;32mI (10486) RMTArm: Motor 1: 67.23° → 66.39° (Δ-0.84° = -75 steps)[0m
+[0;32mI (10503) RMTArm: Motor 2: 33.14° → 33.57° (Δ+0.43° = +38 steps)[0m
+[0;32mI (10513) RMTArm: Total: 113 steps across all motors[0m
+[0;32mI (10513) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (10514) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (10530) RMTArm: CMD #41 @ 950ms │ Target: [0.00°, 65.52°, 33.95°][0m
+[0;32mI (10536) RMTArm: Motor 1: 66.39° → 65.52° (Δ-0.86° = -77 steps)[0m
+[0;32mI (10553) RMTArm: Motor 2: 33.57° → 33.95° (Δ+0.37° = +33 steps)[0m
+[0;32mI (10563) RMTArm: Total: 110 steps across all motors[0m
+[0;32mI (10563) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (10564) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (10580) RMTArm: CMD #42 @ 1000ms │ Target: [0.00°, 64.64°, 34.27°][0m
+[0;32mI (10586) RMTArm: Motor 1: 65.52° → 64.64° (Δ-0.89° = -79 steps)[0m
+[0;32mI (10603) RMTArm: Motor 2: 33.95° → 34.27° (Δ+0.32° = +28 steps)[0m
+[0;32mI (10613) RMTArm: Total: 107 steps across all motors[0m
+[0;32mI (10613) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (10614) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (10630) RMTArm: CMD #43 @ 1050ms │ Target: [0.00°, 63.73°, 34.53°][0m
+[0;32mI (10636) RMTArm: Motor 1: 64.64° → 63.73° (Δ-0.90° = -80 steps)[0m
+[0;32mI (10653) RMTArm: Motor 2: 34.27° → 34.53° (Δ+0.26° = +23 steps)[0m
+[0;32mI (10663) RMTArm: Total: 103 steps across all motors[0m
+[0;32mI (10663) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (10664) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (10680) RMTArm: CMD #44 @ 1100ms │ Target: [0.00°, 62.81°, 34.73°][0m
+[0;32mI (10687) RMTArm: Motor 1: 63.73° → 62.81° (Δ-0.92° = -82 steps)[0m
+[0;32mI (10703) RMTArm: Motor 2: 34.53° → 34.73° (Δ+0.21° = +18 steps)[0m
+[0;32mI (10713) RMTArm: Total: 100 steps across all motors[0m
+[0;32mI (10713) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (10714) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (10730) RMTArm: CMD #45 @ 1150ms │ Target: [0.00°, 61.88°, 34.88°][0m
+[0;32mI (10737) RMTArm: Motor 1: 62.81° → 61.88° (Δ-0.93° = -83 steps)[0m
+[0;32mI (10753) RMTArm: Motor 2: 34.73° → 34.88° (Δ+0.15° = +13 steps)[0m
+[0;32mI (10763) RMTArm: Total: 96 steps across all motors[0m
+[0;32mI (10763) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (10764) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (10780) RMTArm: CMD #46 @ 1200ms │ Target: [0.00°, 60.94°, 34.97°][0m
+[0;32mI (10786) RMTArm: Motor 1: 61.88° → 60.94° (Δ-0.94° = -83 steps)[0m
+[0;32mI (10803) RMTArm: Motor 2: 34.88° → 34.97° (Δ+0.09° = +8 steps)[0m
+[0;32mI (10813) RMTArm: Total: 91 steps across all motors[0m
+[0;32mI (10813) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (10814) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (10830) RMTArm: CMD #47 @ 1250ms │ Target: [0.00°, 60.00°, 35.00°][0m
+[0;32mI (10836) RMTArm: Motor 1: 60.94° → 60.00° (Δ-0.94° = -84 steps)[0m
+[0;32mI (10853) RMTArm: Motor 2: 34.97° → 35.00° (Δ+0.03° = +3 steps)[0m
+[0;32mI (10863) RMTArm: Total: 87 steps across all motors[0m
+[0;32mI (10863) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (10864) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (10880) RMTArm: CMD #48 @ 1300ms │ Target: [0.00°, 59.06°, 34.97°][0m
+[0;32mI (10886) RMTArm: Motor 1: 60.00° → 59.06° (Δ-0.94° = -84 steps)[0m
+[0;32mI (10903) RMTArm: Motor 2: 35.00° → 34.97° (Δ-0.03° = -3 steps)[0m
+[0;32mI (10913) RMTArm: Total: 87 steps across all motors[0m
+[0;32mI (10913) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (10914) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (10930) RMTArm: CMD #49 @ 1350ms │ Target: [0.00°, 58.12°, 34.88°][0m
+[0;32mI (10936) RMTArm: Motor 1: 59.06° → 58.12° (Δ-0.94° = -83 steps)[0m
+[0;32mI (10953) RMTArm: Motor 2: 34.97° → 34.88° (Δ-0.09° = -8 steps)[0m
+[0;32mI (10963) RMTArm: Total: 91 steps across all motors[0m
+[0;32mI (10963) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (10964) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (10980) RMTArm: CMD #50 @ 1400ms │ Target: [0.00°, 57.19°, 34.73°][0m
+[0;32mI (10987) RMTArm: Motor 1: 58.12° → 57.19° (Δ-0.93° = -83 steps)[0m
+[0;32mI (11004) RMTArm: Motor 2: 34.88° → 34.73° (Δ-0.15° = -13 steps)[0m
+[0;32mI (11013) RMTArm: Total: 96 steps across all motors[0m
+[0;32mI (11014) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (11014) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (11030) RMTArm: CMD #51 @ 1450ms │ Target: [0.00°, 56.27°, 34.53°][0m
+[0;32mI (11037) RMTArm: Motor 1: 57.19° → 56.27° (Δ-0.92° = -82 steps)[0m
+[0;32mI (11054) RMTArm: Motor 2: 34.73° → 34.53° (Δ-0.21° = -18 steps)[0m
+[0;32mI (11063) RMTArm: Total: 100 steps across all motors[0m
+[0;32mI (11064) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (11064) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (11080) RMTArm: CMD #52 @ 1500ms │ Target: [0.00°, 55.36°, 34.27°][0m
+[0;32mI (11087) RMTArm: Motor 1: 56.27° → 55.36° (Δ-0.90° = -80 steps)[0m
+[0;32mI (11104) RMTArm: Motor 2: 34.53° → 34.27° (Δ-0.26° = -23 steps)[0m
+[0;32mI (11113) RMTArm: Total: 103 steps across all motors[0m
+[0;32mI (11114) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (11114) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (11130) RMTArm: CMD #53 @ 1550ms │ Target: [0.00°, 54.48°, 33.95°][0m
+[0;32mI (11137) RMTArm: Motor 1: 55.36° → 54.48° (Δ-0.89° = -79 steps)[0m
+[0;32mI (11154) RMTArm: Motor 2: 34.27° → 33.95° (Δ-0.32° = -28 steps)[0m
+[0;32mI (11163) RMTArm: Total: 107 steps across all motors[0m
+[0;32mI (11164) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (11164) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (11180) RMTArm: CMD #54 @ 1600ms │ Target: [0.00°, 53.61°, 33.57°][0m
+[0;32mI (11187) RMTArm: Motor 1: 54.48° → 53.61° (Δ-0.86° = -77 steps)[0m
+[0;32mI (11204) RMTArm: Motor 2: 33.95° → 33.57° (Δ-0.37° = -33 steps)[0m
+[0;32mI (11213) RMTArm: Total: 110 steps across all motors[0m
+[0;32mI (11214) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (11214) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (11230) RMTArm: CMD #55 @ 1650ms │ Target: [0.00°, 52.77°, 33.14°][0m
+[0;32mI (11237) RMTArm: Motor 1: 53.61° → 52.77° (Δ-0.84° = -75 steps)[0m
+[0;32mI (11254) RMTArm: Motor 2: 33.57° → 33.14° (Δ-0.43° = -38 steps)[0m
+[0;32mI (11263) RMTArm: Total: 113 steps across all motors[0m
+[0;32mI (11264) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (11264) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (11280) RMTArm: CMD #56 @ 1700ms │ Target: [0.00°, 51.96°, 32.66°][0m
+[0;32mI (11287) RMTArm: Motor 1: 52.77° → 51.96° (Δ-0.81° = -72 steps)[0m
+[0;32mI (11304) RMTArm: Motor 2: 33.14° → 32.66° (Δ-0.48° = -43 steps)[0m
+[0;32mI (11313) RMTArm: Total: 115 steps across all motors[0m
+[0;32mI (11314) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (11314) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (11330) RMTArm: CMD #57 @ 1750ms │ Target: [0.00°, 51.18°, 32.14°][0m
+[0;32mI (11337) RMTArm: Motor 1: 51.96° → 51.18° (Δ-0.78° = -69 steps)[0m
+[0;32mI (11354) RMTArm: Motor 2: 32.66° → 32.14° (Δ-0.53° = -47 steps)[0m
+[0;32mI (11363) RMTArm: Total: 116 steps across all motors[0m
+[0;32mI (11364) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (11364) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (11380) RMTArm: CMD #58 @ 1800ms │ Target: [0.00°, 50.44°, 31.56°][0m
+[0;32mI (11387) RMTArm: Motor 1: 51.18° → 50.44° (Δ-0.74° = -66 steps)[0m
+[0;32mI (11404) RMTArm: Motor 2: 32.14° → 31.56° (Δ-0.58° = -51 steps)[0m
+[0;32mI (11413) RMTArm: Total: 117 steps across all motors[0m
+[0;32mI (11414) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (11414) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (11430) RMTArm: CMD #59 @ 1850ms │ Target: [0.00°, 49.73°, 30.93°][0m
+[0;32mI (11437) RMTArm: Motor 1: 50.44° → 49.73° (Δ-0.71° = -63 steps)[0m
+[0;32mI (11454) RMTArm: Motor 2: 31.56° → 30.93° (Δ-0.62° = -55 steps)[0m
+[0;32mI (11463) RMTArm: Total: 118 steps across all motors[0m
+[0;32mI (11464) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (11464) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (11480) RMTArm: CMD #60 @ 1900ms │ Target: [0.00°, 49.07°, 30.27°][0m
+[0;32mI (11487) RMTArm: Motor 1: 49.73° → 49.07° (Δ-0.67° = -59 steps)[0m
+[0;32mI (11504) RMTArm: Motor 2: 30.93° → 30.27° (Δ-0.67° = -59 steps)[0m
+[0;32mI (11513) RMTArm: Total: 118 steps across all motors[0m
+[0;32mI (11514) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (11514) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (11530) RMTArm: CMD #61 @ 1950ms │ Target: [0.00°, 48.44°, 29.56°][0m
+[0;32mI (11537) RMTArm: Motor 1: 49.07° → 48.44° (Δ-0.62° = -55 steps)[0m
+[0;32mI (11554) RMTArm: Motor 2: 30.27° → 29.56° (Δ-0.71° = -63 steps)[0m
+[0;32mI (11563) RMTArm: Total: 118 steps across all motors[0m
+[0;32mI (11564) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (11564) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (11580) RMTArm: CMD #62 @ 2000ms │ Target: [0.00°, 47.86°, 28.82°][0m
+[0;32mI (11587) RMTArm: Motor 1: 48.44° → 47.86° (Δ-0.58° = -51 steps)[0m
+[0;32mI (11604) RMTArm: Motor 2: 29.56° → 28.82° (Δ-0.74° = -66 steps)[0m
+[0;32mI (11613) RMTArm: Total: 117 steps across all motors[0m
+[0;32mI (11614) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (11614) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (11630) RMTArm: CMD #63 @ 2050ms │ Target: [0.00°, 47.34°, 28.04°][0m
+[0;32mI (11637) RMTArm: Motor 1: 47.86° → 47.34° (Δ-0.53° = -47 steps)[0m
+[0;32mI (11654) RMTArm: Motor 2: 28.82° → 28.04° (Δ-0.78° = -69 steps)[0m
+[0;32mI (11663) RMTArm: Total: 116 steps across all motors[0m
+[0;32mI (11664) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (11664) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (11680) RMTArm: CMD #64 @ 2100ms │ Target: [0.00°, 46.86°, 27.23°][0m
+[0;32mI (11687) RMTArm: Motor 1: 47.34° → 46.86° (Δ-0.48° = -43 steps)[0m
+[0;32mI (11704) RMTArm: Motor 2: 28.04° → 27.23° (Δ-0.81° = -72 steps)[0m
+[0;32mI (11713) RMTArm: Total: 115 steps across all motors[0m
+[0;32mI (11714) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (11714) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (11730) RMTArm: CMD #65 @ 2150ms │ Target: [0.00°, 46.43°, 26.39°][0m
+[0;32mI (11737) RMTArm: Motor 1: 46.86° → 46.43° (Δ-0.43° = -38 steps)[0m
+[0;32mI (11754) RMTArm: Motor 2: 27.23° → 26.39° (Δ-0.84° = -75 steps)[0m
+[0;32mI (11763) RMTArm: Total: 113 steps across all motors[0m
+[0;32mI (11764) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (11764) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (11780) RMTArm: CMD #66 @ 2200ms │ Target: [0.00°, 46.05°, 25.52°][0m
+[0;32mI (11787) RMTArm: Motor 1: 46.43° → 46.05° (Δ-0.37° = -33 steps)[0m
+[0;32mI (11804) RMTArm: Motor 2: 26.39° → 25.52° (Δ-0.86° = -77 steps)[0m
+[0;32mI (11813) RMTArm: Total: 110 steps across all motors[0m
+[0;32mI (11814) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (11814) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (11830) RMTArm: CMD #67 @ 2250ms │ Target: [0.00°, 45.73°, 24.64°][0m
+[0;32mI (11837) RMTArm: Motor 1: 46.05° → 45.73° (Δ-0.32° = -28 steps)[0m
+[0;32mI (11854) RMTArm: Motor 2: 25.52° → 24.64° (Δ-0.89° = -79 steps)[0m
+[0;32mI (11863) RMTArm: Total: 107 steps across all motors[0m
+[0;32mI (11864) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (11864) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (11880) RMTArm: CMD #68 @ 2300ms │ Target: [0.00°, 45.47°, 23.73°][0m
+[0;32mI (11887) RMTArm: Motor 1: 45.73° → 45.47° (Δ-0.26° = -23 steps)[0m
+[0;32mI (11904) RMTArm: Motor 2: 24.64° → 23.73° (Δ-0.90° = -80 steps)[0m
+[0;32mI (11913) RMTArm: Total: 103 steps across all motors[0m
+[0;32mI (11914) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (11914) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (11930) RMTArm: CMD #69 @ 2350ms │ Target: [0.00°, 45.27°, 22.81°][0m
+[0;32mI (11937) RMTArm: Motor 1: 45.47° → 45.27° (Δ-0.21° = -18 steps)[0m
+[0;32mI (11954) RMTArm: Motor 2: 23.73° → 22.81° (Δ-0.92° = -82 steps)[0m
+[0;32mI (11963) RMTArm: Total: 100 steps across all motors[0m
+[0;32mI (11964) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (11964) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (11980) RMTArm: CMD #70 @ 2400ms │ Target: [0.00°, 45.12°, 21.88°][0m
+[0;32mI (11987) RMTArm: Motor 1: 45.27° → 45.12° (Δ-0.15° = -13 steps)[0m
+[0;32mI (12004) RMTArm: Motor 2: 22.81° → 21.88° (Δ-0.93° = -83 steps)[0m
+[0;32mI (12013) RMTArm: Total: 96 steps across all motors[0m
+[0;32mI (12014) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (12014) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (12030) RMTArm: CMD #71 @ 2450ms │ Target: [0.00°, 45.03°, 20.94°][0m
+[0;32mI (12037) RMTArm: Motor 1: 45.12° → 45.03° (Δ-0.09° = -8 steps)[0m
+[0;32mI (12054) RMTArm: Motor 2: 21.88° → 20.94° (Δ-0.94° = -83 steps)[0m
+[0;32mI (12063) RMTArm: Total: 91 steps across all motors[0m
+[0;32mI (12064) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (12064) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (12080) RMTArm: CMD #72 @ 2500ms │ Target: [0.00°, 45.00°, 20.00°][0m
+[0;32mI (12087) RMTArm: Motor 1: 45.03° → 45.00° (Δ-0.03° = -3 steps)[0m
+[0;32mI (12104) RMTArm: Motor 2: 20.94° → 20.00° (Δ-0.94° = -84 steps)[0m
+[0;32mI (12114) RMTArm: Total: 87 steps across all motors[0m
+[0;32mI (12114) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (12114) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (12130) RMTArm: CMD #73 @ 2550ms │ Target: [0.00°, 45.03°, 19.06°][0m
+[0;32mI (12137) RMTArm: Motor 1: 45.00° → 45.03° (Δ+0.03° = +3 steps)[0m
+[0;32mI (12154) RMTArm: Motor 2: 20.00° → 19.06° (Δ-0.94° = -84 steps)[0m
+[0;32mI (12164) RMTArm: Total: 87 steps across all motors[0m
+[0;32mI (12164) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (12164) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (12180) RMTArm: CMD #74 @ 2600ms │ Target: [0.00°, 45.12°, 18.12°][0m
+[0;32mI (12187) RMTArm: Motor 1: 45.03° → 45.12° (Δ+0.09° = +8 steps)[0m
+[0;32mI (12204) RMTArm: Motor 2: 19.06° → 18.12° (Δ-0.94° = -83 steps)[0m
+[0;32mI (12214) RMTArm: Total: 91 steps across all motors[0m
+[0;32mI (12214) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (12214) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (12230) RMTArm: CMD #75 @ 2650ms │ Target: [0.00°, 45.27°, 17.19°][0m
+[0;32mI (12237) RMTArm: Motor 1: 45.12° → 45.27° (Δ+0.15° = +13 steps)[0m
+[0;32mI (12254) RMTArm: Motor 2: 18.12° → 17.19° (Δ-0.93° = -83 steps)[0m
+[0;32mI (12264) RMTArm: Total: 96 steps across all motors[0m
+[0;32mI (12264) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (12264) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (12280) RMTArm: CMD #76 @ 2700ms │ Target: [0.00°, 45.47°, 16.27°][0m
+[0;32mI (12287) RMTArm: Motor 1: 45.27° → 45.47° (Δ+0.21° = +18 steps)[0m
+[0;32mI (12304) RMTArm: Motor 2: 17.19° → 16.27° (Δ-0.92° = -82 steps)[0m
+[0;32mI (12314) RMTArm: Total: 100 steps across all motors[0m
+[0;32mI (12314) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (12314) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (12330) RMTArm: CMD #77 @ 2750ms │ Target: [0.00°, 45.73°, 15.36°][0m
+[0;32mI (12337) RMTArm: Motor 1: 45.47° → 45.73° (Δ+0.26° = +23 steps)[0m
+[0;32mI (12354) RMTArm: Motor 2: 16.27° → 15.36° (Δ-0.90° = -80 steps)[0m
+[0;32mI (12364) RMTArm: Total: 103 steps across all motors[0m
+[0;32mI (12364) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (12364) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (12380) RMTArm: CMD #78 @ 2800ms │ Target: [0.00°, 46.05°, 14.48°][0m
+[0;32mI (12387) RMTArm: Motor 1: 45.73° → 46.05° (Δ+0.32° = +28 steps)[0m
+[0;32mI (12404) RMTArm: Motor 2: 15.36° → 14.48° (Δ-0.89° = -79 steps)[0m
+[0;32mI (12414) RMTArm: Total: 107 steps across all motors[0m
+[0;32mI (12414) RMTArm: Timing: Δt=50.1ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (12414) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (12430) RMTArm: CMD #79 @ 2850ms │ Target: [0.00°, 46.43°, 13.61°][0m
+[0;32mI (12437) RMTArm: Motor 1: 46.05° → 46.43° (Δ+0.37° = +33 steps)[0m
+[0;32mI (12454) RMTArm: Motor 2: 14.48° → 13.61° (Δ-0.86° = -77 steps)[0m
+[0;32mI (12464) RMTArm: Total: 110 steps across all motors[0m
+[0;32mI (12464) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (12464) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (12480) RMTArm: CMD #80 @ 2900ms │ Target: [0.00°, 46.86°, 12.77°][0m
+[0;32mI (12487) RMTArm: Motor 1: 46.43° → 46.86° (Δ+0.43° = +38 steps)[0m
+[0;32mI (12504) RMTArm: Motor 2: 13.61° → 12.77° (Δ-0.84° = -75 steps)[0m
+[0;32mI (12514) RMTArm: Total: 113 steps across all motors[0m
+[0;32mI (12514) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (12514) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (12530) RMTArm: CMD #81 @ 2950ms │ Target: [0.00°, 47.34°, 11.96°][0m
+[0;32mI (12537) RMTArm: Motor 1: 46.86° → 47.34° (Δ+0.48° = +43 steps)[0m
+[0;32mI (12554) RMTArm: Motor 2: 12.77° → 11.96° (Δ-0.81° = -72 steps)[0m
+[0;32mI (12564) RMTArm: Total: 115 steps across all motors[0m
+[0;32mI (12564) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (12564) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (12580) RMTArm: CMD #82 @ 3000ms │ Target: [0.00°, 47.86°, 11.18°][0m
+[0;32mI (12587) RMTArm: Motor 1: 47.34° → 47.86° (Δ+0.53° = +47 steps)[0m
+[0;32mI (12604) RMTArm: Motor 2: 11.96° → 11.18° (Δ-0.78° = -69 steps)[0m
+[0;32mI (12614) RMTArm: Total: 116 steps across all motors[0m
+[0;32mI (12614) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (12614) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (12631) RMTArm: CMD #83 @ 3050ms │ Target: [0.00°, 48.44°, 10.44°][0m
+[0;32mI (12637) RMTArm: Motor 1: 47.86° → 48.44° (Δ+0.58° = +51 steps)[0m
+[0;32mI (12654) RMTArm: Motor 2: 11.18° → 10.44° (Δ-0.74° = -66 steps)[0m
+[0;32mI (12664) RMTArm: Total: 117 steps across all motors[0m
+[0;32mI (12664) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (12664) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (12681) RMTArm: CMD #84 @ 3100ms │ Target: [0.00°, 49.07°, 9.73°][0m
+[0;32mI (12687) RMTArm: Motor 1: 48.44° → 49.07° (Δ+0.62° = +55 steps)[0m
+[0;32mI (12704) RMTArm: Motor 2: 10.44° → 9.73° (Δ-0.71° = -63 steps)[0m
+[0;32mI (12714) RMTArm: Total: 118 steps across all motors[0m
+[0;32mI (12714) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (12714) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (12731) RMTArm: CMD #85 @ 3150ms │ Target: [0.00°, 49.73°, 9.07°][0m
+[0;32mI (12737) RMTArm: Motor 1: 49.07° → 49.73° (Δ+0.67° = +59 steps)[0m
+[0;32mI (12754) RMTArm: Motor 2: 9.73° → 9.07° (Δ-0.67° = -59 steps)[0m
+[0;32mI (12764) RMTArm: Total: 118 steps across all motors[0m
+[0;32mI (12764) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (12764) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (12780) RMTArm: CMD #86 @ 3200ms │ Target: [0.00°, 50.44°, 8.44°][0m
+[0;32mI (12787) RMTArm: Motor 1: 49.73° → 50.44° (Δ+0.71° = +63 steps)[0m
+[0;32mI (12804) RMTArm: Motor 2: 9.07° → 8.44° (Δ-0.62° = -55 steps)[0m
+[0;32mI (12814) RMTArm: Total: 118 steps across all motors[0m
+[0;32mI (12814) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (12814) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (12831) RMTArm: CMD #87 @ 3250ms │ Target: [0.00°, 51.18°, 7.86°][0m
+[0;32mI (12837) RMTArm: Motor 1: 50.44° → 51.18° (Δ+0.74° = +66 steps)[0m
+[0;32mI (12854) RMTArm: Motor 2: 8.44° → 7.86° (Δ-0.58° = -51 steps)[0m
+[0;32mI (12864) RMTArm: Total: 117 steps across all motors[0m
+[0;32mI (12864) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (12864) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (12881) RMTArm: CMD #88 @ 3300ms │ Target: [0.00°, 51.96°, 7.34°][0m
+[0;32mI (12887) RMTArm: Motor 1: 51.18° → 51.96° (Δ+0.78° = +69 steps)[0m
+[0;32mI (12904) RMTArm: Motor 2: 7.86° → 7.34° (Δ-0.53° = -47 steps)[0m
+[0;32mI (12914) RMTArm: Total: 116 steps across all motors[0m
+[0;32mI (12914) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (12914) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (12931) RMTArm: CMD #89 @ 3350ms │ Target: [0.00°, 52.77°, 6.86°][0m
+[0;32mI (12937) RMTArm: Motor 1: 51.96° → 52.77° (Δ+0.81° = +72 steps)[0m
+[0;32mI (12954) RMTArm: Motor 2: 7.34° → 6.86° (Δ-0.48° = -43 steps)[0m
+[0;32mI (12964) RMTArm: Total: 115 steps across all motors[0m
+[0;32mI (12964) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (12964) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (12981) RMTArm: CMD #90 @ 3400ms │ Target: [0.00°, 53.61°, 6.43°][0m
+[0;32mI (12987) RMTArm: Motor 1: 52.77° → 53.61° (Δ+0.84° = +75 steps)[0m
+[0;32mI (13005) RMTArm: Motor 2: 6.86° → 6.43° (Δ-0.43° = -38 steps)[0m
+[0;32mI (13014) RMTArm: Total: 113 steps across all motors[0m
+[0;32mI (13014) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (13014) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (13031) RMTArm: CMD #91 @ 3450ms │ Target: [0.00°, 54.48°, 6.05°][0m
+[0;32mI (13037) RMTArm: Motor 1: 53.61° → 54.48° (Δ+0.86° = +77 steps)[0m
+[0;32mI (13055) RMTArm: Motor 2: 6.43° → 6.05° (Δ-0.37° = -33 steps)[0m
+[0;32mI (13064) RMTArm: Total: 110 steps across all motors[0m
+[0;32mI (13064) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (13064) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (13081) RMTArm: CMD #92 @ 3500ms │ Target: [0.00°, 55.36°, 5.73°][0m
+[0;32mI (13087) RMTArm: Motor 1: 54.48° → 55.36° (Δ+0.89° = +79 steps)[0m
+[0;32mI (13105) RMTArm: Motor 2: 6.05° → 5.73° (Δ-0.32° = -28 steps)[0m
+[0;32mI (13114) RMTArm: Total: 107 steps across all motors[0m
+[0;32mI (13114) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (13114) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (13131) RMTArm: CMD #93 @ 3550ms │ Target: [0.00°, 56.27°, 5.47°][0m
+[0;32mI (13137) RMTArm: Motor 1: 55.36° → 56.27° (Δ+0.90° = +80 steps)[0m
+[0;32mI (13155) RMTArm: Motor 2: 5.73° → 5.47° (Δ-0.26° = -23 steps)[0m
+[0;32mI (13164) RMTArm: Total: 103 steps across all motors[0m
+[0;32mI (13164) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (13164) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (13181) RMTArm: CMD #94 @ 3600ms │ Target: [0.00°, 57.19°, 5.27°][0m
+[0;32mI (13187) RMTArm: Motor 1: 56.27° → 57.19° (Δ+0.92° = +82 steps)[0m
+[0;32mI (13205) RMTArm: Motor 2: 5.47° → 5.27° (Δ-0.21° = -18 steps)[0m
+[0;32mI (13214) RMTArm: Total: 100 steps across all motors[0m
+[0;32mI (13214) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (13214) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (13231) RMTArm: CMD #95 @ 3650ms │ Target: [0.00°, 58.12°, 5.12°][0m
+[0;32mI (13237) RMTArm: Motor 1: 57.19° → 58.12° (Δ+0.93° = +83 steps)[0m
+[0;32mI (13255) RMTArm: Motor 2: 5.27° → 5.12° (Δ-0.15° = -13 steps)[0m
+[0;32mI (13264) RMTArm: Total: 96 steps across all motors[0m
+[0;32mI (13264) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (13264) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (13280) RMTArm: CMD #96 @ 3700ms │ Target: [0.00°, 59.06°, 5.03°][0m
+[0;32mI (13287) RMTArm: Motor 1: 58.12° → 59.06° (Δ+0.94° = +83 steps)[0m
+[0;32mI (13305) RMTArm: Motor 2: 5.12° → 5.03° (Δ-0.09° = -8 steps)[0m
+[0;32mI (13314) RMTArm: Total: 91 steps across all motors[0m
+[0;32mI (13314) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (13314) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (13330) RMTArm: CMD #97 @ 3750ms │ Target: [0.00°, 60.00°, 5.00°][0m
+[0;32mI (13337) RMTArm: Motor 1: 59.06° → 60.00° (Δ+0.94° = +84 steps)[0m
+[0;32mI (13355) RMTArm: Motor 2: 5.03° → 5.00° (Δ-0.03° = -3 steps)[0m
+[0;32mI (13364) RMTArm: Total: 87 steps across all motors[0m
+[0;32mI (13364) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (13364) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (13380) RMTArm: CMD #98 @ 3800ms │ Target: [0.00°, 60.94°, 5.03°][0m
+[0;32mI (13387) RMTArm: Motor 1: 60.00° → 60.94° (Δ+0.94° = +84 steps)[0m
+[0;32mI (13405) RMTArm: Motor 2: 5.00° → 5.03° (Δ+0.03° = +3 steps)[0m
+[0;32mI (13414) RMTArm: Total: 87 steps across all motors[0m
+[0;32mI (13414) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (13414) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (13431) RMTArm: CMD #99 @ 3850ms │ Target: [0.00°, 61.88°, 5.12°][0m
+[0;32mI (13437) RMTArm: Motor 1: 60.94° → 61.88° (Δ+0.94° = +83 steps)[0m
+[0;32mI (13455) RMTArm: Motor 2: 5.03° → 5.12° (Δ+0.09° = +8 steps)[0m
+[0;32mI (13464) RMTArm: Total: 91 steps across all motors[0m
+[0;32mI (13464) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (13464) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (13481) RMTArm: CMD #100 @ 3900ms │ Target: [0.00°, 62.81°, 5.27°][0m
+[0;32mI (13487) RMTArm: Motor 1: 61.88° → 62.81° (Δ+0.93° = +83 steps)[0m
+[0;32mI (13505) RMTArm: Motor 2: 5.12° → 5.27° (Δ+0.15° = +13 steps)[0m
+[0;32mI (13514) RMTArm: Total: 96 steps across all motors[0m
+[0;32mI (13514) RMTArm: [0m
+[0;32mI (13514) RMTArm: ╔════════════════════════════════════════════════════════╗[0m
+[0;32mI (13526) RMTArm: ║               STATISTICS                               ║[0m
+[0;32mI (13533) RMTArm: ╠════════════════════════════════════════════════════════╣[0m
+[0;32mI (13550) RMTArm: ║ Commands received:     100                           ║[0m
+[0;32mI (13557) RMTArm: ║ Checksum errors:         0                           ║[0m
+[0;32mI (13564) RMTArm: ║ Uptime:               13.1 sec                        ║[0m
+[0;32mI (13571) RMTArm: ║ Avg rate:              7.6 cmd/sec                    ║[0m
+[0;32mI (13578) RMTArm: ║                                                        ║[0m
+[0;32mI (13585) RMTArm: ║ Current Position (steps):                              ║[0m
+[0;32mI (13592) RMTArm: ║   Motor 0:          0                               ║[0m
+[0;32mI (13599) RMTArm: ║   Motor 1:       5584                               ║[0m
+[0;32mI (13606) RMTArm: ║   Motor 2:        470                               ║[0m
+[0;32mI (13613) RMTArm: ║                                                        ║[0m
+[0;32mI (13620) RMTArm: ║ Current Position (degrees):                            ║[0m
+[0;32mI (13627) RMTArm: ║   Motor 0:       0.00°                              ║[0m
+[0;32mI (13634) RMTArm: ║   Motor 1:      62.81°                              ║[0m
+[0;32mI (13641) RMTArm: ║   Motor 2:       5.27°                              ║[0m
+[0;32mI (13648) RMTArm: ╚════════════════════════════════════════════════════════╝[0m
+[0;32mI (13665) RMTArm: [0m
+[0;32mI (13666) RMTArm: Timing: Δt=202.3ms (4.9Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (13673) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (13689) RMTArm: CMD #101 @ 3950ms │ Target: [0.00°, 63.73°, 5.47°][0m
+[0;32mI (13696) RMTArm: Motor 1: 62.81° → 63.73° (Δ+0.92° = +82 steps)[0m
+[0;32mI (13702) RMTArm: Motor 2: 5.27° → 5.47° (Δ+0.21° = +18 steps)[0m
+[0;32mI (13708) RMTArm: Total: 100 steps across all motors[0m
+[0;32mI (13713) RMTArm: Timing: Δt=46.7ms (21.4Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (13720) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (13736) RMTArm: CMD #102 @ 4000ms │ Target: [0.00°, 64.64°, 5.73°][0m
+[0;32mI (13743) RMTArm: Motor 1: 63.73° → 64.64° (Δ+0.90° = +80 steps)[0m
+[0;32mI (13752) RMTArm: Motor 2: 5.47° → 5.73° (Δ+0.26° = +23 steps)[0m
+[0;32mI (13758) RMTArm: Total: 103 steps across all motors[0m
+[0;32mI (13760) RMTArm: Timing: Δt=46.6ms (21.5Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (13766) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (13783) RMTArm: CMD #103 @ 4050ms │ Target: [0.00°, 65.52°, 6.05°][0m
+[0;32mI (13789) RMTArm: Motor 1: 64.64° → 65.52° (Δ+0.89° = +79 steps)[0m
+[0;32mI (13802) RMTArm: Motor 2: 5.73° → 6.05° (Δ+0.32° = +28 steps)[0m
+[0;32mI (13808) RMTArm: Total: 107 steps across all motors[0m
+[0;32mI (13809) RMTArm: Timing: Δt=49.0ms (20.4Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (13813) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (13829) RMTArm: CMD #104 @ 4100ms │ Target: [0.00°, 66.39°, 6.43°][0m
+[0;32mI (13836) RMTArm: Motor 1: 65.52° → 66.39° (Δ+0.86° = +77 steps)[0m
+[0;32mI (13852) RMTArm: Motor 2: 6.05° → 6.43° (Δ+0.37° = +33 steps)[0m
+[0;32mI (13858) RMTArm: Total: 110 steps across all motors[0m
+[0;32mI (13859) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (13859) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (13876) RMTArm: CMD #105 @ 4150ms │ Target: [0.00°, 67.23°, 6.86°][0m
+[0;32mI (13883) RMTArm: Motor 1: 66.39° → 67.23° (Δ+0.84° = +75 steps)[0m
+[0;32mI (13903) RMTArm: Motor 2: 6.43° → 6.86° (Δ+0.43° = +38 steps)[0m
+[0;32mI (13908) RMTArm: Total: 113 steps across all motors[0m
+[0;32mI (13909) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (13909) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (13926) RMTArm: CMD #106 @ 4200ms │ Target: [0.00°, 68.04°, 7.34°][0m
+[0;32mI (13932) RMTArm: Motor 1: 67.23° → 68.04° (Δ+0.81° = +72 steps)[0m
+[0;32mI (13953) RMTArm: Motor 2: 6.86° → 7.34° (Δ+0.48° = +43 steps)[0m
+[0;32mI (13958) RMTArm: Total: 115 steps across all motors[0m
+[0;32mI (13959) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (13959) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (13976) RMTArm: CMD #107 @ 4250ms │ Target: [0.00°, 68.82°, 7.86°][0m
+[0;32mI (13982) RMTArm: Motor 1: 68.04° → 68.82° (Δ+0.78° = +69 steps)[0m
+[0;32mI (14003) RMTArm: Motor 2: 7.34° → 7.86° (Δ+0.53° = +47 steps)[0m
+[0;32mI (14008) RMTArm: Total: 116 steps across all motors[0m
+[0;32mI (14009) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (14009) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (14026) RMTArm: CMD #108 @ 4300ms │ Target: [0.00°, 69.56°, 8.44°][0m
+[0;32mI (14032) RMTArm: Motor 1: 68.82° → 69.56° (Δ+0.74° = +66 steps)[0m
+[0;32mI (14053) RMTArm: Motor 2: 7.86° → 8.44° (Δ+0.58° = +51 steps)[0m
+[0;32mI (14058) RMTArm: Total: 117 steps across all motors[0m
+[0;32mI (14059) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (14059) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (14076) RMTArm: CMD #109 @ 4350ms │ Target: [0.00°, 70.27°, 9.07°][0m
+[0;32mI (14082) RMTArm: Motor 1: 69.56° → 70.27° (Δ+0.71° = +63 steps)[0m
+[0;32mI (14103) RMTArm: Motor 2: 8.44° → 9.07° (Δ+0.62° = +55 steps)[0m
+[0;32mI (14108) RMTArm: Total: 118 steps across all motors[0m
+[0;32mI (14109) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (14109) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (14126) RMTArm: CMD #110 @ 4400ms │ Target: [0.00°, 70.93°, 9.73°][0m
+[0;32mI (14132) RMTArm: Motor 1: 70.27° → 70.93° (Δ+0.67° = +59 steps)[0m
+[0;32mI (14153) RMTArm: Motor 2: 9.07° → 9.73° (Δ+0.67° = +59 steps)[0m
+[0;32mI (14158) RMTArm: Total: 118 steps across all motors[0m
+[0;32mI (14159) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (14159) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (14176) RMTArm: CMD #111 @ 4450ms │ Target: [0.00°, 71.56°, 10.44°][0m
+[0;32mI (14182) RMTArm: Motor 1: 70.93° → 71.56° (Δ+0.62° = +55 steps)[0m
+[0;32mI (14203) RMTArm: Motor 2: 9.73° → 10.44° (Δ+0.71° = +63 steps)[0m
+[0;32mI (14208) RMTArm: Total: 118 steps across all motors[0m
+[0;32mI (14209) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (14209) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (14226) RMTArm: CMD #112 @ 4500ms │ Target: [0.00°, 72.14°, 11.18°][0m
+[0;32mI (14233) RMTArm: Motor 1: 71.56° → 72.14° (Δ+0.58° = +51 steps)[0m
+[0;32mI (14253) RMTArm: Motor 2: 10.44° → 11.18° (Δ+0.74° = +66 steps)[0m
+[0;32mI (14258) RMTArm: Total: 117 steps across all motors[0m
+[0;32mI (14259) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (14259) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (14276) RMTArm: CMD #113 @ 4550ms │ Target: [0.00°, 72.66°, 11.96°][0m
+[0;32mI (14283) RMTArm: Motor 1: 72.14° → 72.66° (Δ+0.53° = +47 steps)[0m
+[0;32mI (14303) RMTArm: Motor 2: 11.18° → 11.96° (Δ+0.78° = +69 steps)[0m
+[0;32mI (14309) RMTArm: Total: 116 steps across all motors[0m
+[0;32mI (14309) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (14309) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (14326) RMTArm: CMD #114 @ 4600ms │ Target: [0.00°, 73.14°, 12.77°][0m
+[0;32mI (14333) RMTArm: Motor 1: 72.66° → 73.14° (Δ+0.48° = +43 steps)[0m
+[0;32mI (14353) RMTArm: Motor 2: 11.96° → 12.77° (Δ+0.81° = +72 steps)[0m
+[0;32mI (14359) RMTArm: Total: 115 steps across all motors[0m
+[0;32mI (14359) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (14359) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (14376) RMTArm: CMD #115 @ 4650ms │ Target: [0.00°, 73.57°, 13.61°][0m
+[0;32mI (14383) RMTArm: Motor 1: 73.14° → 73.57° (Δ+0.43° = +38 steps)[0m
+[0;32mI (14403) RMTArm: Motor 2: 12.77° → 13.61° (Δ+0.84° = +75 steps)[0m
+[0;32mI (14409) RMTArm: Total: 113 steps across all motors[0m
+[0;32mI (14409) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (14409) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (14426) RMTArm: CMD #116 @ 4700ms │ Target: [0.00°, 73.95°, 14.48°][0m
+[0;32mI (14433) RMTArm: Motor 1: 73.57° → 73.95° (Δ+0.37° = +33 steps)[0m
+[0;32mI (14453) RMTArm: Motor 2: 13.61° → 14.48° (Δ+0.86° = +77 steps)[0m
+[0;32mI (14459) RMTArm: Total: 110 steps across all motors[0m
+[0;32mI (14459) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (14459) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (14476) RMTArm: CMD #117 @ 4750ms │ Target: [0.00°, 74.27°, 15.36°][0m
+[0;32mI (14483) RMTArm: Motor 1: 73.95° → 74.27° (Δ+0.32° = +28 steps)[0m
+[0;32mI (14503) RMTArm: Motor 2: 14.48° → 15.36° (Δ+0.89° = +79 steps)[0m
+[0;32mI (14509) RMTArm: Total: 107 steps across all motors[0m
+[0;32mI (14509) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (14509) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (14526) RMTArm: CMD #118 @ 4800ms │ Target: [0.00°, 74.53°, 16.27°][0m
+[0;32mI (14533) RMTArm: Motor 1: 74.27° → 74.53° (Δ+0.26° = +23 steps)[0m
+[0;32mI (14553) RMTArm: Motor 2: 15.36° → 16.27° (Δ+0.90° = +80 steps)[0m
+[0;32mI (14559) RMTArm: Total: 103 steps across all motors[0m
+[0;32mI (14559) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (14560) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (14576) RMTArm: CMD #119 @ 4850ms │ Target: [0.00°, 74.73°, 17.19°][0m
+[0;32mI (14583) RMTArm: Motor 1: 74.53° → 74.73° (Δ+0.21° = +18 steps)[0m
+[0;32mI (14603) RMTArm: Motor 2: 16.27° → 17.19° (Δ+0.92° = +82 steps)[0m
+[0;32mI (14609) RMTArm: Total: 100 steps across all motors[0m
+[0;32mI (14609) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (14609) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (14626) RMTArm: CMD #120 @ 4900ms │ Target: [0.00°, 74.88°, 18.12°][0m
+[0;32mI (14633) RMTArm: Motor 1: 74.73° → 74.88° (Δ+0.15° = +13 steps)[0m
+[0;32mI (14653) RMTArm: Motor 2: 17.19° → 18.12° (Δ+0.93° = +83 steps)[0m
+[0;32mI (14659) RMTArm: Total: 96 steps across all motors[0m
+[0;32mI (14659) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (14659) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (14676) RMTArm: CMD #121 @ 4950ms │ Target: [0.00°, 74.97°, 19.06°][0m
+[0;32mI (14683) RMTArm: Motor 1: 74.88° → 74.97° (Δ+0.09° = +8 steps)[0m
+[0;32mI (14703) RMTArm: Motor 2: 18.12° → 19.06° (Δ+0.94° = +83 steps)[0m
+[0;32mI (14709) RMTArm: Total: 91 steps across all motors[0m
+[0;32mI (14709) RMTArm: Timing: Δt=50.0ms (20.0Hz) │ Expected: 50ms (20.0Hz)[0m
+[0;32mI (14709) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (14726) RMTArm: CMD #122 @ 5000ms │ Target: [0.00°, 75.00°, 20.00°][0m
+[0;32mI (14733) RMTArm: Motor 1: 74.97° → 75.00° (Δ+0.03° = +3 steps)[0m
+[0;32mI (14753) RMTArm: Motor 2: 19.06° → 20.00° (Δ+0.94° = +84 steps)[0m
+[0;32mI (14759) RMTArm: Total: 87 steps across all motors[0m
+[0;32mI (16584) RMTArm: Timing: Δt=1875.7ms (0.5Hz) │ Expected: 4294962296ms (0.0Hz)[0m
+[0;32mI (16585) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (16598) RMTArm: CMD #123 @ 0ms │ Target: [0.00°, 60.00°, 20.00°][0m
+[0;32mI (16604) RMTArm: Motor 1: 75.00° → 60.00° (Δ-15.00° = -1333 steps)[0m
+[0;33mW (16610) RMTArm: Motor 1: 1333 steps exceeds buffer, clamping to 512[0m
+[0;32mI (16617) RMTArm: Total: 1333 steps across all motors[0m
+[0;32mI (16621) RMTArm: Timing: Δt=36.9ms (27.1Hz) │ Expected: 0ms (0.0Hz)[0m
+[0;32mI (16628) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (16644) RMTArm: CMD #124 @ 500ms │ Target: [0.00°, 45.00°, 30.00°][0m
+[0;32mI (16651) RMTArm: Motor 1: 60.00° → 45.00° (Δ-15.00° = -1333 steps)[0m
+[0;33mW (16657) RMTArm: Motor 1: 1333 steps exceeds buffer, clamping to 512[0m
+[0;32mI (16667) RMTArm: Motor 2: 20.00° → 30.00° (Δ+10.00° = +889 steps)[0m
+[0;33mW (16670) RMTArm: Motor 2: 889 steps exceeds buffer, clamping to 512[0m
+[0;32mI (16676) RMTArm: Total: 2222 steps across all motors[0m
+[0;32mI (17084) RMTArm: Timing: Δt=462.6ms (2.2Hz) │ Expected: 500ms (2.0Hz)[0m
+[0;32mI (17084) RMTArm: ─────────────────────────────────────────────────────────[0m
+[0;32mI (17096) RMTArm: CMD #125 @ 1000ms │ Target: [0.00°, 0.00°, 0.00°][0m
+[0;32mI (17103) RMTArm: Motor 1: 45.00° → 0.00° (Δ-45.00° = -4000 steps)[0m
+[0;33mW (17109) RMTArm: Motor 1: 4000 steps exceeds buffer, clamping to 512[0m
+[0;32mI (17116) RMTArm: Motor 2: 30.00° → 0.00° (Δ-30.00° = -2667 steps)[0m
+[0;33mW (17122) RMTArm: Motor 2: 2667 steps exceeds buffer, clamping to 512[0m
+[0;32mI (17128) RMTArm: Total: 6667 steps across all motors[0m

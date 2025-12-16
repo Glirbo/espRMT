@@ -1,0 +1,110 @@
+[1/9] Performing build step for 'bootloader'
+[1/1] cd /home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader/esp-idf/esptool_py && /home/mikkel/.espressif/python_env/idf5.4_py3.8_env/bin/python /home/mikkel/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 /home/mikkel/ai-projects/RMTArm/esp32-idf/build/bootloader/bootloader.bin
+Bootloader binary size 0x5220 bytes. 0x2de0 bytes (36%) free.
+[2/9] No install step for 'bootloader'
+[3/9] Completed 'bootloader'
+[4/9] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj
+FAILED: esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj 
+/home/mikkel/.espressif/tools/xtensa-esp-elf/esp-14.2.0_20241119/xtensa-esp-elf/bin/xtensa-esp32s3-elf-gcc -DESP_PLATFORM -DIDF_VER=\"v5.4.1\" -DMBEDTLS_CONFIG_FILE=\"mbedtls/esp_config.h\" -DSOC_MMU_PAGE_SIZE=CONFIG_MMU_PAGE_SIZE -DSOC_XTAL_FREQ_MHZ=CONFIG_XTAL_FREQ -DUNITY_INCLUDE_CONFIG_H -D_GLIBCXX_HAVE_POSIX_SEMAPHORE -D_GLIBCXX_USE_POSIX_SEMAPHORE -D_GNU_SOURCE -D_POSIX_READER_WRITER_LOCKS -I/home/mikkel/ai-projects/RMTArm/esp32-idf/build/config -I/home/mikkel/ai-projects/RMTArm/esp32-idf/main -I/home/mikkel/esp/esp-idf/components/newlib/platform_include -I/home/mikkel/esp/esp-idf/components/freertos/config/include -I/home/mikkel/esp/esp-idf/components/freertos/config/include/freertos -I/home/mikkel/esp/esp-idf/components/freertos/config/xtensa/include -I/home/mikkel/esp/esp-idf/components/freertos/FreeRTOS-Kernel/include -I/home/mikkel/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/include -I/home/mikkel/esp/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/include/freertos -I/home/mikkel/esp/esp-idf/components/freertos/esp_additions/include -I/home/mikkel/esp/esp-idf/components/esp_hw_support/include -I/home/mikkel/esp/esp-idf/components/esp_hw_support/include/soc -I/home/mikkel/esp/esp-idf/components/esp_hw_support/include/soc/esp32s3 -I/home/mikkel/esp/esp-idf/components/esp_hw_support/dma/include -I/home/mikkel/esp/esp-idf/components/esp_hw_support/ldo/include -I/home/mikkel/esp/esp-idf/components/esp_hw_support/debug_probe/include -I/home/mikkel/esp/esp-idf/components/esp_hw_support/port/esp32s3/. -I/home/mikkel/esp/esp-idf/components/esp_hw_support/port/esp32s3/include -I/home/mikkel/esp/esp-idf/components/heap/include -I/home/mikkel/esp/esp-idf/components/heap/tlsf -I/home/mikkel/esp/esp-idf/components/log/include -I/home/mikkel/esp/esp-idf/components/soc/include -I/home/mikkel/esp/esp-idf/components/soc/esp32s3 -I/home/mikkel/esp/esp-idf/components/soc/esp32s3/include -I/home/mikkel/esp/esp-idf/components/soc/esp32s3/register -I/home/mikkel/esp/esp-idf/components/hal/platform_port/include -I/home/mikkel/esp/esp-idf/components/hal/esp32s3/include -I/home/mikkel/esp/esp-idf/components/hal/include -I/home/mikkel/esp/esp-idf/components/esp_rom/include -I/home/mikkel/esp/esp-idf/components/esp_rom/esp32s3/include -I/home/mikkel/esp/esp-idf/components/esp_rom/esp32s3/include/esp32s3 -I/home/mikkel/esp/esp-idf/components/esp_rom/esp32s3 -I/home/mikkel/esp/esp-idf/components/esp_common/include -I/home/mikkel/esp/esp-idf/components/esp_system/include -I/home/mikkel/esp/esp-idf/components/esp_system/port/soc -I/home/mikkel/esp/esp-idf/components/esp_system/port/include/private -I/home/mikkel/esp/esp-idf/components/xtensa/esp32s3/include -I/home/mikkel/esp/esp-idf/components/xtensa/include -I/home/mikkel/esp/esp-idf/components/xtensa/deprecated_include -I/home/mikkel/esp/esp-idf/components/lwip/include -I/home/mikkel/esp/esp-idf/components/lwip/include/apps -I/home/mikkel/esp/esp-idf/components/lwip/include/apps/sntp -I/home/mikkel/esp/esp-idf/components/lwip/lwip/src/include -I/home/mikkel/esp/esp-idf/components/lwip/port/include -I/home/mikkel/esp/esp-idf/components/lwip/port/freertos/include -I/home/mikkel/esp/esp-idf/components/lwip/port/esp32xx/include -I/home/mikkel/esp/esp-idf/components/lwip/port/esp32xx/include/arch -I/home/mikkel/esp/esp-idf/components/lwip/port/esp32xx/include/sys -I/home/mikkel/esp/esp-idf/components/esp_driver_gpio/include -I/home/mikkel/esp/esp-idf/components/esp_pm/include -I/home/mikkel/esp/esp-idf/components/mbedtls/port/include -I/home/mikkel/esp/esp-idf/components/mbedtls/mbedtls/include -I/home/mikkel/esp/esp-idf/components/mbedtls/mbedtls/library -I/home/mikkel/esp/esp-idf/components/mbedtls/esp_crt_bundle/include -I/home/mikkel/esp/esp-idf/components/mbedtls/mbedtls/3rdparty/everest/include -I/home/mikkel/esp/esp-idf/components/mbedtls/mbedtls/3rdparty/p256-m -I/home/mikkel/esp/esp-idf/components/mbedtls/mbedtls/3rdparty/p256-m/p256-m -I/home/mikkel/esp/esp-idf/components/esp_app_format/include -I/home/mikkel/esp/esp-idf/components/esp_bootloader_format/include -I/home/mikkel/esp/esp-idf/components/app_update/include -I/home/mikkel/esp/esp-idf/components/bootloader_support/include -I/home/mikkel/esp/esp-idf/components/bootloader_support/bootloader_flash/include -I/home/mikkel/esp/esp-idf/components/esp_partition/include -I/home/mikkel/esp/esp-idf/components/efuse/include -I/home/mikkel/esp/esp-idf/components/efuse/esp32s3/include -I/home/mikkel/esp/esp-idf/components/esp_mm/include -I/home/mikkel/esp/esp-idf/components/spi_flash/include -I/home/mikkel/esp/esp-idf/components/esp_security/include -I/home/mikkel/esp/esp-idf/components/pthread/include -I/home/mikkel/esp/esp-idf/components/esp_timer/include -I/home/mikkel/esp/esp-idf/components/esp_driver_gptimer/include -I/home/mikkel/esp/esp-idf/components/esp_ringbuf/include -I/home/mikkel/esp/esp-idf/components/esp_driver_uart/include -I/home/mikkel/esp/esp-idf/components/vfs/include -I/home/mikkel/esp/esp-idf/components/app_trace/include -I/home/mikkel/esp/esp-idf/components/esp_event/include -I/home/mikkel/esp/esp-idf/components/nvs_flash/include -I/home/mikkel/esp/esp-idf/components/esp_driver_pcnt/include -I/home/mikkel/esp/esp-idf/components/esp_driver_spi/include -I/home/mikkel/esp/esp-idf/components/esp_driver_mcpwm/include -I/home/mikkel/esp/esp-idf/components/esp_driver_ana_cmpr/include -I/home/mikkel/esp/esp-idf/components/esp_driver_i2s/include -I/home/mikkel/esp/esp-idf/components/sdmmc/include -I/home/mikkel/esp/esp-idf/components/esp_driver_sdmmc/include -I/home/mikkel/esp/esp-idf/components/esp_driver_sdspi/include -I/home/mikkel/esp/esp-idf/components/esp_driver_sdio/include -I/home/mikkel/esp/esp-idf/components/esp_driver_dac/include -I/home/mikkel/esp/esp-idf/components/esp_driver_rmt/include -I/home/mikkel/esp/esp-idf/components/esp_driver_tsens/include -I/home/mikkel/esp/esp-idf/components/esp_driver_sdm/include -I/home/mikkel/esp/esp-idf/components/esp_driver_i2c/include -I/home/mikkel/esp/esp-idf/components/esp_driver_ledc/include -I/home/mikkel/esp/esp-idf/components/esp_driver_parlio/include -I/home/mikkel/esp/esp-idf/components/esp_driver_usb_serial_jtag/include -I/home/mikkel/esp/esp-idf/components/driver/deprecated -I/home/mikkel/esp/esp-idf/components/driver/i2c/include -I/home/mikkel/esp/esp-idf/components/driver/touch_sensor/include -I/home/mikkel/esp/esp-idf/components/driver/twai/include -I/home/mikkel/esp/esp-idf/components/driver/touch_sensor/esp32s3/include -I/home/mikkel/esp/esp-idf/components/esp_phy/include -I/home/mikkel/esp/esp-idf/components/esp_phy/esp32s3/include -I/home/mikkel/esp/esp-idf/components/esp_vfs_console/include -I/home/mikkel/esp/esp-idf/components/esp_netif/include -I/home/mikkel/esp/esp-idf/components/wpa_supplicant/include -I/home/mikkel/esp/esp-idf/components/wpa_supplicant/port/include -I/home/mikkel/esp/esp-idf/components/wpa_supplicant/esp_supplicant/include -I/home/mikkel/esp/esp-idf/components/esp_coex/include -I/home/mikkel/esp/esp-idf/components/esp_wifi/include -I/home/mikkel/esp/esp-idf/components/esp_wifi/include/local -I/home/mikkel/esp/esp-idf/components/esp_wifi/wifi_apps/include -I/home/mikkel/esp/esp-idf/components/esp_wifi/wifi_apps/nan_app/include -I/home/mikkel/esp/esp-idf/components/unity/include -I/home/mikkel/esp/esp-idf/components/unity/unity/src -I/home/mikkel/esp/esp-idf/components/cmock/CMock/src -I/home/mikkel/esp/esp-idf/components/console -I/home/mikkel/esp/esp-idf/components/http_parser -I/home/mikkel/esp/esp-idf/components/esp-tls -I/home/mikkel/esp/esp-idf/components/esp-tls/esp-tls-crypto -I/home/mikkel/esp/esp-idf/components/esp_adc/include -I/home/mikkel/esp/esp-idf/components/esp_adc/interface -I/home/mikkel/esp/esp-idf/components/esp_adc/esp32s3/include -I/home/mikkel/esp/esp-idf/components/esp_adc/deprecated/include -I/home/mikkel/esp/esp-idf/components/esp_driver_isp/include -I/home/mikkel/esp/esp-idf/components/esp_driver_cam/include -I/home/mikkel/esp/esp-idf/components/esp_driver_cam/interface -I/home/mikkel/esp/esp-idf/components/esp_driver_jpeg/include -I/home/mikkel/esp/esp-idf/components/esp_driver_ppa/include -I/home/mikkel/esp/esp-idf/components/esp_eth/include -I/home/mikkel/esp/esp-idf/components/esp_gdbstub/include -I/home/mikkel/esp/esp-idf/components/esp_hid/include -I/home/mikkel/esp/esp-idf/components/tcp_transport/include -I/home/mikkel/esp/esp-idf/components/esp_http_client/include -I/home/mikkel/esp/esp-idf/components/esp_http_server/include -I/home/mikkel/esp/esp-idf/components/esp_https_ota/include -I/home/mikkel/esp/esp-idf/components/esp_https_server/include -I/home/mikkel/esp/esp-idf/components/esp_psram/include -I/home/mikkel/esp/esp-idf/components/esp_lcd/include -I/home/mikkel/esp/esp-idf/components/esp_lcd/interface -I/home/mikkel/esp/esp-idf/components/esp_lcd/rgb/include -I/home/mikkel/esp/esp-idf/components/protobuf-c/protobuf-c -I/home/mikkel/esp/esp-idf/components/protocomm/include/common -I/home/mikkel/esp/esp-idf/components/protocomm/include/security -I/home/mikkel/esp/esp-idf/components/protocomm/include/transports -I/home/mikkel/esp/esp-idf/components/protocomm/include/crypto/srp6a -I/home/mikkel/esp/esp-idf/components/protocomm/proto-c -I/home/mikkel/esp/esp-idf/components/esp_local_ctrl/include -I/home/mikkel/esp/esp-idf/components/espcoredump/include -I/home/mikkel/esp/esp-idf/components/espcoredump/include/port/xtensa -I/home/mikkel/esp/esp-idf/components/wear_levelling/include -I/home/mikkel/esp/esp-idf/components/fatfs/diskio -I/home/mikkel/esp/esp-idf/components/fatfs/src -I/home/mikkel/esp/esp-idf/components/fatfs/vfs -I/home/mikkel/esp/esp-idf/components/idf_test/include -I/home/mikkel/esp/esp-idf/components/idf_test/include/esp32s3 -I/home/mikkel/esp/esp-idf/components/ieee802154/include -I/home/mikkel/esp/esp-idf/components/json/cJSON -I/home/mikkel/esp/esp-idf/components/mqtt/esp-mqtt/include -I/home/mikkel/esp/esp-idf/components/nvs_sec_provider/include -I/home/mikkel/esp/esp-idf/components/perfmon/include -I/home/mikkel/esp/esp-idf/components/rt/include -I/home/mikkel/esp/esp-idf/components/spiffs/include -I/home/mikkel/esp/esp-idf/components/touch_element/include -I/home/mikkel/esp/esp-idf/components/usb/include -I/home/mikkel/esp/esp-idf/components/wifi_provisioning/include -mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy -fdiagnostics-color=always -ffunction-sections -fdata-sections -Wall -Werror=all -Wno-error=unused-function -Wno-error=unused-variable -Wno-error=unused-but-set-variable -Wno-error=deprecated-declarations -Wextra -Wno-error=extra -Wno-unused-parameter -Wno-sign-compare -Wno-enum-conversion -gdwarf-4 -ggdb -Og -fno-shrink-wrap -fmacro-prefix-map=/home/mikkel/ai-projects/RMTArm/esp32-idf=. -fmacro-prefix-map=/home/mikkel/esp/esp-idf=/IDF -fstrict-volatile-bitfields -fno-jump-tables -fno-tree-switch-conversion -std=gnu17 -Wno-old-style-declaration -MD -MT esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj -MF esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj.d -o esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj -c /home/mikkel/ai-projects/RMTArm/esp32-idf/main/main.c
+In file included from /home/mikkel/ai-projects/RMTArm/esp32-idf/main/main.c:14:
+/home/mikkel/esp/esp-idf/components/driver/deprecated/driver/rmt.h:18:2: warning: #warning "The legacy RMT driver is deprecated, please use driver/rmt_tx.h and/or driver/rmt_rx.h" [-Wcpp]
+   18 | #warning "The legacy RMT driver is deprecated, please use driver/rmt_tx.h and/or driver/rmt_rx.h"
+      |  ^~~~~~~
+/home/mikkel/ai-projects/RMTArm/esp32-idf/main/main.c: In function 'motion_control_task':
+/home/mikkel/ai-projects/RMTArm/esp32-idf/main/main.c:305:30: error: implicit declaration of function 'esp_timer_get_time' [-Wimplicit-function-declaration]
+  305 |             int64_t now_us = esp_timer_get_time();
+      |                              ^~~~~~~~~~~~~~~~~~
+In file included from /home/mikkel/esp/esp-idf/components/log/include/esp_log.h:15,
+                 from /home/mikkel/ai-projects/RMTArm/esp32-idf/main/main.c:16:
+/home/mikkel/esp/esp-idf/components/log/include/esp_log_color.h:98:31: error: format '%u' expects argument of type 'unsigned int', but argument 8 has type 'uint32_t' {aka 'long unsigned int'} [-Werror=format=]
+   98 | #define LOG_COLOR_E           ""
+      |                               ^~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log.h:62:37: note: in expansion of macro 'LOG_COLOR_E'
+   62 | #define LOG_FORMAT(letter, format)  LOG_COLOR_ ## letter #letter " (%" PRIu32 ") %s: " format LOG_RESET_COLOR "\n"
+      |                                     ^~~~~~~~~~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log.h:182:86: note: in expansion of macro 'LOG_FORMAT'
+  182 |         if (level==ESP_LOG_ERROR )          { esp_log_write(ESP_LOG_ERROR,      tag, LOG_FORMAT(E, format), esp_log_timestamp(), tag, ##__VA_ARGS__); } \
+      |                                                                                      ^~~~~~~~~~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log.h:205:38: note: in expansion of macro 'ESP_LOG_LEVEL'
+  205 |         if (_ESP_LOG_ENABLED(level)) ESP_LOG_LEVEL(level, tag, format, ##__VA_ARGS__); \
+      |                                      ^~~~~~~~~~~~~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log.h:114:38: note: in expansion of macro 'ESP_LOG_LEVEL_LOCAL'
+  114 | #define ESP_LOGI( tag, format, ... ) ESP_LOG_LEVEL_LOCAL(ESP_LOG_INFO,    tag, format, ##__VA_ARGS__)
+      |                                      ^~~~~~~~~~~~~~~~~~~
+/home/mikkel/ai-projects/RMTArm/esp32-idf/main/main.c:326:17: note: in expansion of macro 'ESP_LOGI'
+  326 |                 ESP_LOGI(TAG, "Timing: Δt=%.1fms (%.1fHz) │ Expected: %ums (%.1fHz)",
+      |                 ^~~~~~~~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log_color.h:99:31: error: format '%u' expects argument of type 'unsigned int', but argument 8 has type 'uint32_t' {aka 'long unsigned int'} [-Werror=format=]
+   99 | #define LOG_COLOR_W           ""
+      |                               ^~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log.h:62:37: note: in expansion of macro 'LOG_COLOR_W'
+   62 | #define LOG_FORMAT(letter, format)  LOG_COLOR_ ## letter #letter " (%" PRIu32 ") %s: " format LOG_RESET_COLOR "\n"
+      |                                     ^~~~~~~~~~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log.h:183:86: note: in expansion of macro 'LOG_FORMAT'
+  183 |         else if (level==ESP_LOG_WARN )      { esp_log_write(ESP_LOG_WARN,       tag, LOG_FORMAT(W, format), esp_log_timestamp(), tag, ##__VA_ARGS__); } \
+      |                                                                                      ^~~~~~~~~~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log.h:205:38: note: in expansion of macro 'ESP_LOG_LEVEL'
+  205 |         if (_ESP_LOG_ENABLED(level)) ESP_LOG_LEVEL(level, tag, format, ##__VA_ARGS__); \
+      |                                      ^~~~~~~~~~~~~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log.h:114:38: note: in expansion of macro 'ESP_LOG_LEVEL_LOCAL'
+  114 | #define ESP_LOGI( tag, format, ... ) ESP_LOG_LEVEL_LOCAL(ESP_LOG_INFO,    tag, format, ##__VA_ARGS__)
+      |                                      ^~~~~~~~~~~~~~~~~~~
+/home/mikkel/ai-projects/RMTArm/esp32-idf/main/main.c:326:17: note: in expansion of macro 'ESP_LOGI'
+  326 |                 ESP_LOGI(TAG, "Timing: Δt=%.1fms (%.1fHz) │ Expected: %ums (%.1fHz)",
+      |                 ^~~~~~~~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log_color.h:101:31: error: format '%u' expects argument of type 'unsigned int', but argument 8 has type 'uint32_t' {aka 'long unsigned int'} [-Werror=format=]
+  101 | #define LOG_COLOR_D           ""
+      |                               ^~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log.h:62:37: note: in expansion of macro 'LOG_COLOR_D'
+   62 | #define LOG_FORMAT(letter, format)  LOG_COLOR_ ## letter #letter " (%" PRIu32 ") %s: " format LOG_RESET_COLOR "\n"
+      |                                     ^~~~~~~~~~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log.h:184:86: note: in expansion of macro 'LOG_FORMAT'
+  184 |         else if (level==ESP_LOG_DEBUG )     { esp_log_write(ESP_LOG_DEBUG,      tag, LOG_FORMAT(D, format), esp_log_timestamp(), tag, ##__VA_ARGS__); } \
+      |                                                                                      ^~~~~~~~~~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log.h:205:38: note: in expansion of macro 'ESP_LOG_LEVEL'
+  205 |         if (_ESP_LOG_ENABLED(level)) ESP_LOG_LEVEL(level, tag, format, ##__VA_ARGS__); \
+      |                                      ^~~~~~~~~~~~~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log.h:114:38: note: in expansion of macro 'ESP_LOG_LEVEL_LOCAL'
+  114 | #define ESP_LOGI( tag, format, ... ) ESP_LOG_LEVEL_LOCAL(ESP_LOG_INFO,    tag, format, ##__VA_ARGS__)
+      |                                      ^~~~~~~~~~~~~~~~~~~
+/home/mikkel/ai-projects/RMTArm/esp32-idf/main/main.c:326:17: note: in expansion of macro 'ESP_LOGI'
+  326 |                 ESP_LOGI(TAG, "Timing: Δt=%.1fms (%.1fHz) │ Expected: %ums (%.1fHz)",
+      |                 ^~~~~~~~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log_color.h:102:31: error: format '%u' expects argument of type 'unsigned int', but argument 8 has type 'uint32_t' {aka 'long unsigned int'} [-Werror=format=]
+  102 | #define LOG_COLOR_V           ""
+      |                               ^~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log.h:62:37: note: in expansion of macro 'LOG_COLOR_V'
+   62 | #define LOG_FORMAT(letter, format)  LOG_COLOR_ ## letter #letter " (%" PRIu32 ") %s: " format LOG_RESET_COLOR "\n"
+      |                                     ^~~~~~~~~~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log.h:185:86: note: in expansion of macro 'LOG_FORMAT'
+  185 |         else if (level==ESP_LOG_VERBOSE )   { esp_log_write(ESP_LOG_VERBOSE,    tag, LOG_FORMAT(V, format), esp_log_timestamp(), tag, ##__VA_ARGS__); } \
+      |                                                                                      ^~~~~~~~~~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log.h:205:38: note: in expansion of macro 'ESP_LOG_LEVEL'
+  205 |         if (_ESP_LOG_ENABLED(level)) ESP_LOG_LEVEL(level, tag, format, ##__VA_ARGS__); \
+      |                                      ^~~~~~~~~~~~~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log.h:114:38: note: in expansion of macro 'ESP_LOG_LEVEL_LOCAL'
+  114 | #define ESP_LOGI( tag, format, ... ) ESP_LOG_LEVEL_LOCAL(ESP_LOG_INFO,    tag, format, ##__VA_ARGS__)
+      |                                      ^~~~~~~~~~~~~~~~~~~
+/home/mikkel/ai-projects/RMTArm/esp32-idf/main/main.c:326:17: note: in expansion of macro 'ESP_LOGI'
+  326 |                 ESP_LOGI(TAG, "Timing: Δt=%.1fms (%.1fHz) │ Expected: %ums (%.1fHz)",
+      |                 ^~~~~~~~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log_color.h:100:31: error: format '%u' expects argument of type 'unsigned int', but argument 8 has type 'uint32_t' {aka 'long unsigned int'} [-Werror=format=]
+  100 | #define LOG_COLOR_I           ""
+      |                               ^~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log.h:62:37: note: in expansion of macro 'LOG_COLOR_I'
+   62 | #define LOG_FORMAT(letter, format)  LOG_COLOR_ ## letter #letter " (%" PRIu32 ") %s: " format LOG_RESET_COLOR "\n"
+      |                                     ^~~~~~~~~~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log.h:186:86: note: in expansion of macro 'LOG_FORMAT'
+  186 |         else                                { esp_log_write(ESP_LOG_INFO,       tag, LOG_FORMAT(I, format), esp_log_timestamp(), tag, ##__VA_ARGS__); } \
+      |                                                                                      ^~~~~~~~~~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log.h:205:38: note: in expansion of macro 'ESP_LOG_LEVEL'
+  205 |         if (_ESP_LOG_ENABLED(level)) ESP_LOG_LEVEL(level, tag, format, ##__VA_ARGS__); \
+      |                                      ^~~~~~~~~~~~~
+/home/mikkel/esp/esp-idf/components/log/include/esp_log.h:114:38: note: in expansion of macro 'ESP_LOG_LEVEL_LOCAL'
+  114 | #define ESP_LOGI( tag, format, ... ) ESP_LOG_LEVEL_LOCAL(ESP_LOG_INFO,    tag, format, ##__VA_ARGS__)
+      |                                      ^~~~~~~~~~~~~~~~~~~
+/home/mikkel/ai-projects/RMTArm/esp32-idf/main/main.c:326:17: note: in expansion of macro 'ESP_LOGI'
+  326 |                 ESP_LOGI(TAG, "Timing: Δt=%.1fms (%.1fHz) │ Expected: %ums (%.1fHz)",
+      |                 ^~~~~~~~
+cc1: some warnings being treated as errors
+ninja: build stopped: subcommand failed.
