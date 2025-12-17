@@ -9,7 +9,7 @@
  *   - GPIO21: Always high (3.3V output) for external power requirements
  *
  * Position Query Protocol:
- *   - Request: Single byte 'P' or '?' sent to UART0
+ *   - Request: Three-byte ASCII string "POS" sent to UART0 (reduced noise vs single 'P')
  *   - Response: ASCII string "POS:j1,j2,j3,j4,j5,j6\n" (e.g., "POS:0.00,45.00,30.00,0.00,0.00,0.00\n")
  *   - Main loop optimized for ~60 Hz cycling to catch queries reliably
  *   - Position query logging DISABLED to prevent UART interference (clean data only)
@@ -293,23 +293,29 @@ bool check_position_request(void)
         return false;
     }
 
-    uint8_t byte;
-    int len = uart_read_bytes(UART_NUM, &byte, 1, 10 / portTICK_PERIOD_MS);
+    uint8_t buffer[3];
+    int len = uart_read_bytes(UART_NUM, buffer, 3, 10 / portTICK_PERIOD_MS);
 
-    if (len != 1) {
-        return false;  // No data available
+    if (len != 3) {
+        // Not enough bytes or timeout - store what we got as pending for motion command
+        if (len > 0) {
+            memcpy(pending_packet, buffer, len);
+            pending_packet_len = len;
+        }
+        return false;
     }
 
-    if (byte == 'P' || byte == '?') {
+    // Check if it's "POS" command
+    if (buffer[0] == 'P' && buffer[1] == 'O' && buffer[2] == 'S') {
         // Position request received
         send_current_position();
         return true;
     }
 
-    // This byte is the start of a motion command
-    // Store it so receive_command() can use it
-    pending_packet[0] = byte;
-    pending_packet_len = 1;
+    // These bytes are the start of a motion command
+    // Store them so receive_command() can use them
+    memcpy(pending_packet, buffer, 3);
+    pending_packet_len = 3;
     return false;
 }
 
@@ -502,7 +508,8 @@ void motion_control_task(void *pvParameters)
             vTaskDelay(1 / portTICK_PERIOD_MS);
         }
 
-        // Print compact statistics every 500 commands (less logging overhead)
+        // Statistics logging disabled (to re-enable, uncomment the block below)
+        /*
         if (commands_received % 500 == 0 && commands_received > 0) {
             TickType_t now = xTaskGetTickCount();
             float uptime_sec = (now - task_start) / (float)configTICK_RATE_HZ;
@@ -516,6 +523,7 @@ void motion_control_task(void *pvParameters)
                      current_steps[3], current_steps[4], current_steps[5]);
             ESP_LOGI(TAG, "");
         }
+        */
     }
 }
 

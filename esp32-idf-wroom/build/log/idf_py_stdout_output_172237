@@ -1,0 +1,28 @@
+[1/9] Performing build step for 'bootloader'
+[1/1] cd /home/mikkel/git/espRMT/esp32-idf-wroom/build/bootloader/esp-idf/esptool_py && /home/mikkel/.espressif/python_env/idf5.4_py3.8_env/bin/python /home/mikkel/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 /home/mikkel/git/espRMT/esp32-idf-wroom/build/bootloader/bootloader.bin
+Bootloader binary size 0x56e0 bytes. 0x1920 bytes (22%) free.
+[2/9] No install step for 'bootloader'
+[3/9] Completed 'bootloader'
+[4/9] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj
+In file included from /home/mikkel/git/espRMT/esp32-idf-wroom/main/main.c:32:
+/home/mikkel/esp/esp-idf/components/driver/deprecated/driver/rmt.h:18:2: warning: #warning "The legacy RMT driver is deprecated, please use driver/rmt_tx.h and/or driver/rmt_rx.h" [-Wcpp]
+   18 | #warning "The legacy RMT driver is deprecated, please use driver/rmt_tx.h and/or driver/rmt_rx.h"
+      |  ^~~~~~~
+/home/mikkel/git/espRMT/esp32-idf-wroom/main/main.c: In function 'motion_control_task':
+/home/mikkel/git/espRMT/esp32-idf-wroom/main/main.c:455:16: warning: unused variable 'task_start' [-Wunused-variable]
+  455 |     TickType_t task_start = xTaskGetTickCount();
+      |                ^~~~~~~~~~
+/home/mikkel/git/espRMT/esp32-idf-wroom/main/main.c:452:14: warning: unused variable 'checksum_errors' [-Wunused-variable]
+  452 |     uint32_t checksum_errors = 0;
+      |              ^~~~~~~~~~~~~~~
+[5/9] Linking C static library esp-idf/main/libmain.a
+[6/9] Generating ld/sections.ld
+[7/9] Linking CXX executable rmtarm.elf
+[8/9] Generating binary image from built executable
+esptool.py v4.8.1
+Creating esp32 image...
+Merged 2 ELF sections
+Successfully created esp32 image.
+Generated /home/mikkel/git/espRMT/esp32-idf-wroom/build/rmtarm.bin
+[9/9] cd /home/mikkel/git/espRMT/esp32-idf-wroom/build/esp-idf/esptool_py && /home/mikkel/.espressif/python_env/idf5.4_py3.8_env/bin/python /home/mikkel/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/mikkel/git/espRMT/esp32-idf-wroom/build/partition_table/partition-table.bin /home/mikkel/git/espRMT/esp32-idf-wroom/build/rmtarm.bin
+rmtarm.bin binary size 0x24650 bytes. Smallest app partition is 0x100000 bytes. 0xdb9b0 bytes (86%) free.

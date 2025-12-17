@@ -6297,24 +6297,6 @@
                         "children": [
                             {
                                 "children": [],
-                                "depends_on": "SOC_I2C_SUPPORTED",
-                                "help": "This configuration option allows the user to bypass the conflict check mechanism with legacy code.",
-                                "id": "I2C_SKIP_LEGACY_CONFLICT_CHECK",
-                                "name": "I2C_SKIP_LEGACY_CONFLICT_CHECK",
-                                "range": null,
-                                "title": "Skip legacy conflict check",
-                                "type": "bool"
-                            }
-                        ],
-                        "depends_on": "SOC_I2C_SUPPORTED",
-                        "id": "component-config-driver-configurations-legacy-i2c-driver-configurations",
-                        "title": "Legacy I2C Driver Configurations",
-                        "type": "menu"
-                    },
-                    {
-                        "children": [
-                            {
-                                "children": [],
                                 "depends_on": "SOC_PCNT_SUPPORTED",
                                 "help": "whether to suppress the deprecation warnings when using legacy PCNT driver (driver/pcnt.h).\nIf you want to continue using the legacy driver, and don't want to see related deprecation warnings,\nyou can enable this option.",
                                 "id": "PCNT_SUPPRESS_DEPRECATE_WARN",
@@ -6907,31 +6889,31 @@
                     {
                         "children": [],
                         "depends_on": "SOC_MIPI_CSI_SUPPORTED && (SOC_MIPI_CSI_SUPPORTED || SOC_LCDCAM_CAM_SUPPORTED)",
-                        "help": "Ensure the CSI driver ISR is Cache-Safe. When enabled, the ISR handler\nwill be available when the cache is disabled.",
-                        "id": "CAM_CTLR_MIPI_CSI_ISR_CACHE_SAFE",
-                        "name": "CAM_CTLR_MIPI_CSI_ISR_CACHE_SAFE",
+                        "help": "Ensure the CSI driver ISR is IRAM-Safe. When enabled, the ISR handler\nwill be available when the cache is disabled.",
+                        "id": "CAM_CTLR_MIPI_CSI_ISR_IRAM_SAFE",
+                        "name": "CAM_CTLR_MIPI_CSI_ISR_IRAM_SAFE",
                         "range": null,
-                        "title": "CSI ISR Cache-Safe",
+                        "title": "CSI ISR IRAM-Safe",
                         "type": "bool"
                     },
                     {
                         "children": [],
                         "depends_on": "SOC_MIPI_CSI_SUPPORTED || SOC_LCDCAM_CAM_SUPPORTED",
-                        "help": "Ensure the ISP_DVP driver ISR is Cache-Safe. When enabled, the ISR handler\nwill be available when the cache is disabled.",
-                        "id": "CAM_CTLR_ISP_DVP_ISR_CACHE_SAFE",
-                        "name": "CAM_CTLR_ISP_DVP_ISR_CACHE_SAFE",
+                        "help": "Ensure the ISP_DVP driver ISR is IRAM-Safe. When enabled, the ISR handler\nwill be available when the cache is disabled.",
+                        "id": "CAM_CTLR_ISP_DVP_ISR_IRAM_SAFE",
+                        "name": "CAM_CTLR_ISP_DVP_ISR_IRAM_SAFE",
                         "range": null,
-                        "title": "ISP_DVP ISR Cache-Safe",
+                        "title": "ISP_DVP ISR IRAM-Safe",
                         "type": "bool"
                     },
                     {
                         "children": [],
                         "depends_on": "SOC_LCDCAM_CAM_SUPPORTED && (SOC_MIPI_CSI_SUPPORTED || SOC_LCDCAM_CAM_SUPPORTED)",
-                        "help": "Ensure the DVP driver ISR is Cache-Safe. When enabled, the ISR handler\nwill be available when the cache is disabled.",
-                        "id": "CAM_CTLR_DVP_CAM_ISR_CACHE_SAFE",
-                        "name": "CAM_CTLR_DVP_CAM_ISR_CACHE_SAFE",
+                        "help": "Ensure the DVP driver ISR is IRAM-Safe. When enabled, the ISR handler\nwill be available when the cache is disabled.",
+                        "id": "CAM_CTLR_DVP_CAM_ISR_IRAM_SAFE",
+                        "name": "CAM_CTLR_DVP_CAM_ISR_IRAM_SAFE",
                         "range": null,
-                        "title": "DVP ISR Cache-Safe",
+                        "title": "DVP ISR IRAM-Safe",
                         "type": "bool"
                     }
                 ],
@@ -7021,51 +7003,41 @@
                     {
                         "children": [],
                         "depends_on": "SOC_GPTIMER_SUPPORTED",
-                        "help": "Place GPTimer ISR handler in IRAM to reduce latency caused by cache miss.",
+                        "help": "Place GPTimer ISR handler into IRAM for better performance and fewer cache misses.",
                         "id": "GPTIMER_ISR_HANDLER_IN_IRAM",
                         "name": "GPTIMER_ISR_HANDLER_IN_IRAM",
                         "range": null,
-                        "title": "Place GPTimer ISR handler in IRAM to reduce latency",
+                        "title": "Place GPTimer ISR handler into IRAM",
                         "type": "bool"
                     },
                     {
                         "children": [],
                         "depends_on": "SOC_GPTIMER_SUPPORTED",
-                        "help": "Place GPTimer control functions (like start/stop) in IRAM, to reduce latency caused by cache miss.\nIf enabled, these functions can also be called when cache is disabled.",
+                        "help": "Place GPTimer control functions (like start/stop) into IRAM,\nso that these functions can be IRAM-safe and able to be called in the other IRAM interrupt context.\nEnabling this option can improve driver performance as well.",
                         "id": "GPTIMER_CTRL_FUNC_IN_IRAM",
                         "name": "GPTIMER_CTRL_FUNC_IN_IRAM",
                         "range": null,
-                        "title": "Place GPTimer control functions in IRAM",
+                        "title": "Place GPTimer control functions into IRAM",
                         "type": "bool"
                     },
                     {
                         "children": [],
                         "depends_on": "SOC_GPTIMER_SUPPORTED",
-                        "help": "Enable this option to allow the GPTimer Interrupt Service Routine (ISR)\nto execute even when the cache is disabled. This can be useful in scenarios where the cache\nmight be turned off, but the GPTimer functionality is still required to operate correctly.",
+                        "help": "Ensure the GPTimer interrupt is IRAM-Safe by allowing the interrupt handler to be\nexecutable when the cache is disabled (e.g. SPI Flash write).",
                         "id": "GPTIMER_ISR_IRAM_SAFE",
                         "name": "GPTIMER_ISR_IRAM_SAFE",
                         "range": null,
-                        "title": "Allow GPTimer ISR to execute when cache is disabled",
+                        "title": "GPTimer ISR IRAM-Safe",
                         "type": "bool"
                     },
                     {
                         "children": [],
                         "depends_on": "SOC_GPTIMER_SUPPORTED",
-                        "help": "This will ensure the GPTimer object will not be allocated from a memory region\nwhere its cache can be disabled.",
-                        "id": "GPTIMER_OBJ_CACHE_SAFE",
-                        "name": "GPTIMER_OBJ_CACHE_SAFE",
-                        "range": null,
-                        "title": null,
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "SOC_GPTIMER_SUPPORTED",
-                        "help": "If enabled, GPTimer component will:\n1. ignore the global logging settings\n2. compile all log messages into the binary\n3. set the runtime log level to VERBOSE\nPlease enable this option by caution, as it will increase the binary size.",
+                        "help": "whether to enable the debug log message for GPTimer driver.\nNote that, this option only controls the GPTimer driver log, won't affect other drivers.",
                         "id": "GPTIMER_ENABLE_DEBUG_LOG",
                         "name": "GPTIMER_ENABLE_DEBUG_LOG",
                         "range": null,
-                        "title": "Force enable debug log",
+                        "title": "Enable debug log",
                         "type": "bool"
                     }
                 ],
@@ -8185,41 +8157,21 @@
                             {
                                 "children": [],
                                 "depends_on": "SOC_GDMA_SUPPORTED",
-                                "help": "Place GDMA ISR handler functions in IRAM to reduce latency caused by cache miss.",
-                                "id": "GDMA_ISR_HANDLER_IN_IRAM",
-                                "name": "GDMA_ISR_HANDLER_IN_IRAM",
-                                "range": null,
-                                "title": "Place GDMA ISR handler in IRAM to reduce latency",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "SOC_GDMA_SUPPORTED",
-                                "help": "This will ensure the GDMA object is DRAM-Safe, allow to avoid external memory\ncache misses, and also be accessible whilst the cache is disabled.",
-                                "id": "GDMA_OBJ_DRAM_SAFE",
-                                "name": "GDMA_OBJ_DRAM_SAFE",
-                                "range": null,
-                                "title": null,
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "SOC_GDMA_SUPPORTED",
-                                "help": "If enabled, GDMA driver component will:\n1. ignore the global logging settings\n2. compile all log messages into the binary\n3. set the runtime log level to VERBOSE\nPlease enable this option by caution, as it will increase the binary size.",
-                                "id": "GDMA_ENABLE_DEBUG_LOG",
-                                "name": "GDMA_ENABLE_DEBUG_LOG",
-                                "range": null,
-                                "title": "Force enable debug log",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "SOC_GDMA_SUPPORTED",
-                                "help": "This will ensure the GDMA interrupt handler is IRAM-Safe, allow to avoid flash\ncache misses, and also be able to run whilst the cache is disabled.\n(e.g. SPI Flash write).\nIf this option is enabled, ALL GDMA channel's ISR handlers should be placed in IRAM, which is a overkill.\nIt's recommend to set the \"isr_cache_safe\" in the \"gdma_channel_alloc_config_t\".\nThen other GDMA channels won't be influenced.",
+                                "help": "This will ensure the GDMA interrupt handler is IRAM-Safe, allow to avoid flash\ncache misses, and also be able to run whilst the cache is disabled.\n(e.g. SPI Flash write).",
                                 "id": "GDMA_ISR_IRAM_SAFE",
                                 "name": "GDMA_ISR_IRAM_SAFE",
                                 "range": null,
-                                "title": "GDMA ISR IRAM-Safe (Deprecated. Read Help!)",
+                                "title": "GDMA ISR IRAM-Safe",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": "SOC_GDMA_SUPPORTED",
+                                "help": "Whether to enable the debug log message for GDMA driver.\nNote that, this option only controls the GDMA driver log, won't affect other drivers.",
+                                "id": "GDMA_ENABLE_DEBUG_LOG",
+                                "name": "GDMA_ENABLE_DEBUG_LOG",
+                                "range": null,
+                                "title": "Enable debug log",
                                 "type": "bool"
                             }
                         ],
@@ -8998,7 +8950,7 @@
                     {
                         "children": [],
                         "depends_on": "SOC_PM_SUPPORT_TOP_PD && SOC_PAU_SUPPORTED",
-                        "help": "If enabled, digital peripherals will try to powered down in light sleep, then all related peripherals will\nnot be available during sleep, including wake-up sources from the peripherals (For detailed availability\ninformation, see the note of the corresponding wakeup source enable function).\nThe chip will automatically save/restore register context during sleep/wakeup to make the upper layer\nuser unaware of the peripheral powerdown during sleep. Enabling this option will increase static RAM and\nheap usage but will also significantly reduce power.\nconsumption during lightsleep, the actual memory cost depends on the peripherals you have initialized,\nfor specific power consumption data in this mode, please refer to Electrical Characteristics section\nin the chip datasheet.\n(In order to save/restore the context of the necessary hardware for FreeRTOS to run, it will need\nat least 4.55 KB free heap at sleep time. Otherwise sleep will not power down the peripherals.)\n\nNote1: Please use this option with caution, the current IDF does not support the retention of\nall peripherals. When the digital peripherals are powered off and a sleep and wake-up is completed,\nthe peripherals that have not saved the running context are equivalent to performing a reset.\n!!! Please confirm the peripherals used in your application and their sleep retention support status\nbefore enabling this option, peripherals sleep retention driver support status is tracked in\npower_management.rst\n\nNote2: When this option is enabled simultaneously with FREERTOS_USE_TICKLESS_IDLE, since the UART will\nbe powered down, the uart FIFO will be flushed before sleep to avoid data loss, however, this has the\npotential to block the sleep process and cause the wakeup time to be skipped, which will cause the tick\nof freertos to not be compensated correctly when returning from sleep and cause the system to crash.\nTo avoid this, you can increase FREERTOS_IDLE_TIME_BEFORE_SLEEP threshold in menuconfig.\n\nNote3: Enabling this option does not necessarily mean that the peripheral power domain will be\nturned down during sleep. The control priority of `esp_sleep_pd_config` is higher than this option,\nuser code can still prevent the peripheral power domain from powering down during sleep by\n`esp_sleep_pd_config(ESP_PD_DOMAIN_TOP, ESP_PD_OPTION_ON)`. In addition, whether the peripheral power\ndomain is powered down during sleep also depends on the sleep working strategy selected by the driver.\nIf any module belonging to the peripheral power domain chooses not to be powered down during sleep,\nthen the peripheral power domain will not be powered off either.",
+                        "help": "If enabled, digital peripherals will be powered down in light sleep, it will reduce sleep\ncurrent consumption by about 100 uA. Chip will save/restore register context at sleep/wake\ntime to keep the system running. Enabling this option will increase static RAM and heap usage,\nthe actual cost depends on the peripherals you have initialized. In order to save/restore the\ncontext of the necessary hardware for FreeRTOS to run, it will need at least 4.55 KB free heap\nat sleep time. Otherwise sleep will not power down the peripherals.\n\nNote1: Please use this option with caution, the current IDF does not support the retention of\nall peripherals. When the digital peripherals are powered off and a sleep and wake-up is completed,\nthe peripherals that have not saved the running context are equivalent to performing a reset.\n!!! Please confirm the peripherals used in your application and their sleep retention support status\nbefore enabling this option, peripherals sleep retention driver support status is tracked in\npower_management.rst\n\nNote2: When this option is enabled simultaneously with FREERTOS_USE_TICKLESS_IDLE, since the UART will\nbe powered down, the uart FIFO will be flushed before sleep to avoid data loss, however, this has the\npotential to block the sleep process and cause the wakeup time to be skipped, which will cause the tick\nof freertos to not be compensated correctly when returning from sleep and cause the system to crash.\nTo avoid this, you can increase FREERTOS_IDLE_TIME_BEFORE_SLEEP threshold in menuconfig.",
                         "id": "PM_POWER_DOWN_PERIPHERAL_IN_LIGHT_SLEEP",
                         "name": "PM_POWER_DOWN_PERIPHERAL_IN_LIGHT_SLEEP",
                         "range": null,
@@ -9138,33 +9090,24 @@
                                         "type": "int"
                                     },
                                     {
-                                        "children": [],
+                                        "children": [
+                                            {
+                                                "children": [],
+                                                "depends_on": "SPIRAM_BOOT_INIT && !SPIRAM_ALLOW_BSS_SEG_EXTERNAL_MEMORY && !SPIRAM_ALLOW_NOINIT_SEG_EXTERNAL_MEMORY && SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                                "help": "Normally, if psram initialization is enabled during compile time but not found at runtime, it\nis seen as an error making the CPU panic. If this is enabled, booting will complete\nbut no PSRAM will be available. In particular, it is important to note that when SPIRAM_IGNORE_NOTFOUND\nis enabled, some WIFI related configs will be set to the default value used when SPIRAM is disabled.\nIt can be assumed that by enabling this config, WIFI and LWIP will assume that the current chip does not\nhave SPIRAM. SPIRAM_TRY_ALLOCATE_WIFI_LWIP will not work, buffers in WIFI and LWIP will be set to smaller\nranges and default values. WIFI_CACHE_TX_BUFFER_NUM and ESP_WIFI_AMSDU_TX_ENABLED will be disabled,\nESP_WIFI_TX_BUFFER will be set to ESP_WIFI_DYNAMIC_TX_BUFFER.",
+                                                "id": "SPIRAM_IGNORE_NOTFOUND",
+                                                "name": "SPIRAM_IGNORE_NOTFOUND",
+                                                "range": null,
+                                                "title": "Ignore PSRAM when not found",
+                                                "type": "bool"
+                                            }
+                                        ],
                                         "depends_on": "SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
                                         "help": "If this is enabled, the SPI RAM will be enabled during initial boot. Unless you\nhave specific requirements, you'll want to leave this enabled so memory allocated\nduring boot-up can also be placed in SPI RAM.",
                                         "id": "SPIRAM_BOOT_INIT",
                                         "name": "SPIRAM_BOOT_INIT",
                                         "range": null,
                                         "title": "Initialize SPI RAM during startup",
-                                        "type": "bool"
-                                    },
-                                    {
-                                        "children": [],
-                                        "depends_on": "SPIRAM && SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
-                                        "help": "If this is enabled, the PSRAM will be pre-configured for memory protection during initial boot.\nThis configuration takes into consideration the PSRAM memory configurations that are performed\nby ESP-IDF's default PSRAM initialization function, esp_psram_init().\nThus, the config is enabled by default when SPIRAM_BOOT_INIT is enabled,\nbecause the function esp_psram_init() would be called in the startup code.\n\nIn case you wish to disable SPIRAM_BOOT_INIT just for delaying the PSRAM initialization and plan\nto use the ESP-IDF's default PSRAM initialization function, esp_psram_init() in the application code,\nyou should still enable this config to enable memory protection for the PSRAM.\n\nNote that enabling this config also considers that the rest of the PSRAM memory that is left after\nthe memory configurations are performed by esp_psram_init(), can be allocated to the heap using the function\nesp_psram_extram_add_to_heap_allocator(), thus configures this region with heap memory protection (RW).\n\nAs an advanced usage, if you plan to initialize the PSRAM memory regions manually by yourself without\nusing the function esp_psram_init(), you should disable this config to avoid any memory protection and\nusage conflicts.",
-                                        "id": "SPIRAM_PRE_CONFIGURE_MEMORY_PROTECTION",
-                                        "name": "SPIRAM_PRE_CONFIGURE_MEMORY_PROTECTION",
-                                        "range": null,
-                                        "title": "Pre-configure memory protection for PSRAM",
-                                        "type": "bool"
-                                    },
-                                    {
-                                        "children": [],
-                                        "depends_on": "SPIRAM_BOOT_INIT && !SPIRAM_ALLOW_BSS_SEG_EXTERNAL_MEMORY && !SPIRAM_ALLOW_NOINIT_SEG_EXTERNAL_MEMORY && SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
-                                        "help": "Normally, if psram initialization is enabled during compile time but not found at runtime, it\nis seen as an error making the CPU panic. If this is enabled, booting will complete\nbut no PSRAM will be available. In particular, it is important to note that when SPIRAM_IGNORE_NOTFOUND\nis enabled, some WIFI related configs will be set to the default value used when SPIRAM is disabled.\nIt can be assumed that by enabling this config, WIFI and LWIP will assume that the current chip does not\nhave SPIRAM. SPIRAM_TRY_ALLOCATE_WIFI_LWIP will not work, buffers in WIFI and LWIP will be set to smaller\nranges and default values. WIFI_CACHE_TX_BUFFER_NUM and ESP_WIFI_AMSDU_TX_ENABLED will be disabled,\nESP_WIFI_TX_BUFFER will be set to ESP_WIFI_DYNAMIC_TX_BUFFER.",
-                                        "id": "SPIRAM_IGNORE_NOTFOUND",
-                                        "name": "SPIRAM_IGNORE_NOTFOUND",
-                                        "range": null,
-                                        "title": "Ignore PSRAM when not found",
                                         "type": "bool"
                                     },
                                     {
@@ -11893,16 +11836,6 @@
                                                         "range": null,
                                                         "title": "Retry count after which to switch to legacy roaming",
                                                         "type": "int"
-                                                    },
-                                                    {
-                                                        "children": [],
-                                                        "depends_on": "ESP_WIFI_ROAMING_NETWORK_ASSISTED_ROAM && ESP_WIFI_ENABLE_ROAMING_APP && (ESP_WIFI_ENABLED || ESP_HOST_WIFI_ENABLED)",
-                                                        "help": "Station will not ask for IP renew after a BTM based roaming. Before enabling please\nmake sure your network supports this.",
-                                                        "id": "ESP_WIFI_NETWORK_ASSISTED_ROAMING_IP_RENEW_SKIP",
-                                                        "name": "ESP_WIFI_NETWORK_ASSISTED_ROAMING_IP_RENEW_SKIP",
-                                                        "range": null,
-                                                        "title": "Skip IP renew during BTM based roaming",
-                                                        "type": "bool"
                                                     }
                                                 ],
                                                 "depends_on": "ESP_WIFI_WNM_SUPPORT && ESP_WIFI_ENABLE_ROAMING_APP && (ESP_WIFI_ENABLED || ESP_HOST_WIFI_ENABLED)",
@@ -13361,8 +13294,8 @@
                     },
                     {
                         "children": [],
-                        "depends_on": null,
-                        "help": "Enable this flag to save up RAM space by placing the heap component in the flash memory\n\nNote that it is only safe to enable this configuration if no functions from esp_heap_caps.h\nor esp_heap_trace.h are called from IRAM ISR which runs when cache is disabled.",
+                        "depends_on": "!HEAP_TLSF_USE_ROM_IMPL",
+                        "help": "Enable this flag to save up RAM space by placing the heap component in the flash memory\n\nNote that it is only safe to enable this configuration if no functions from esp_heap_caps.h\nor esp_heap_trace.h are called from ISR.",
                         "id": "HEAP_PLACE_FUNCTION_INTO_FLASH",
                         "name": "HEAP_PLACE_FUNCTION_INTO_FLASH",
                         "range": null,
@@ -13500,7 +13433,133 @@
                                 "type": "bool"
                             },
                             {
-                                "children": [],
+                                "children": [
+                                    {
+                                        "children": [],
+                                        "depends_on": "IEEE802154_DEBUG",
+                                        "help": "Enabling this option to count IEEE802154 rx buffer when allocating or freeing.",
+                                        "id": "IEEE802154_RX_BUFFER_STATISTIC",
+                                        "name": "IEEE802154_RX_BUFFER_STATISTIC",
+                                        "range": null,
+                                        "title": "Rx buffer statistic",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "IEEE802154_DEBUG",
+                                        "help": "Enabling this option to print more information when assert.",
+                                        "id": "IEEE802154_ASSERT",
+                                        "name": "IEEE802154_ASSERT",
+                                        "range": null,
+                                        "title": "Enrich the assert information",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [
+                                            {
+                                                "children": [
+                                                    {
+                                                        "children": [],
+                                                        "depends_on": "IEEE802154_RECORD_EVENT",
+                                                        "help": "set the record event table size",
+                                                        "id": "IEEE802154_RECORD_EVENT_SIZE",
+                                                        "name": "IEEE802154_RECORD_EVENT_SIZE",
+                                                        "range": null,
+                                                        "title": "Record event table size",
+                                                        "type": "int"
+                                                    }
+                                                ],
+                                                "depends_on": "IEEE802154_RECORD",
+                                                "help": "Enabling this option to record event, when assert, the recorded event will be printed.",
+                                                "id": "IEEE802154_RECORD_EVENT",
+                                                "name": "IEEE802154_RECORD_EVENT",
+                                                "range": null,
+                                                "title": "Enable record event information for debugging",
+                                                "type": "bool"
+                                            },
+                                            {
+                                                "children": [
+                                                    {
+                                                        "children": [],
+                                                        "depends_on": "IEEE802154_RECORD_STATE",
+                                                        "help": "set the record state table size",
+                                                        "id": "IEEE802154_RECORD_STATE_SIZE",
+                                                        "name": "IEEE802154_RECORD_STATE_SIZE",
+                                                        "range": null,
+                                                        "title": "Record state table size",
+                                                        "type": "int"
+                                                    }
+                                                ],
+                                                "depends_on": "IEEE802154_RECORD",
+                                                "help": "Enabling this option to record state, when assert, the recorded state will be printed.",
+                                                "id": "IEEE802154_RECORD_STATE",
+                                                "name": "IEEE802154_RECORD_STATE",
+                                                "range": null,
+                                                "title": "Enable record state information for debugging",
+                                                "type": "bool"
+                                            },
+                                            {
+                                                "children": [
+                                                    {
+                                                        "children": [],
+                                                        "depends_on": "IEEE802154_RECORD_CMD",
+                                                        "help": "set the record command table size",
+                                                        "id": "IEEE802154_RECORD_CMD_SIZE",
+                                                        "name": "IEEE802154_RECORD_CMD_SIZE",
+                                                        "range": null,
+                                                        "title": "Record command table size",
+                                                        "type": "int"
+                                                    }
+                                                ],
+                                                "depends_on": "IEEE802154_RECORD",
+                                                "help": "Enabling this option to record the command, when assert, the recorded\ncommand will be printed.",
+                                                "id": "IEEE802154_RECORD_CMD",
+                                                "name": "IEEE802154_RECORD_CMD",
+                                                "range": null,
+                                                "title": "Enable record command information for debugging",
+                                                "type": "bool"
+                                            },
+                                            {
+                                                "children": [
+                                                    {
+                                                        "children": [],
+                                                        "depends_on": "IEEE802154_RECORD_ABORT",
+                                                        "help": "set the record abort table size",
+                                                        "id": "IEEE802154_RECORD_ABORT_SIZE",
+                                                        "name": "IEEE802154_RECORD_ABORT_SIZE",
+                                                        "range": null,
+                                                        "title": "Record abort table size",
+                                                        "type": "int"
+                                                    }
+                                                ],
+                                                "depends_on": "IEEE802154_RECORD",
+                                                "help": "Enabling this option to record the abort, when assert, the recorded\nabort will be printed.",
+                                                "id": "IEEE802154_RECORD_ABORT",
+                                                "name": "IEEE802154_RECORD_ABORT",
+                                                "range": null,
+                                                "title": "Enable record abort information for debugging",
+                                                "type": "bool"
+                                            }
+                                        ],
+                                        "depends_on": "IEEE802154_DEBUG",
+                                        "help": "Enabling this option to add some probe codes in the driver, and record these information.",
+                                        "id": "IEEE802154_RECORD",
+                                        "name": "IEEE802154_RECORD",
+                                        "range": null,
+                                        "title": "Record the information with IEEE802154 state and event",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "IEEE802154_DEBUG",
+                                        "help": "Enabling this option to record the tx and rx",
+                                        "id": "IEEE802154_TXRX_STATISTIC",
+                                        "name": "IEEE802154_TXRX_STATISTIC",
+                                        "range": null,
+                                        "title": "Enable record tx/rx packets information for debugging",
+                                        "type": "bool"
+                                    }
+                                ],
                                 "depends_on": "IEEE802154_ENABLED",
                                 "help": "Enabling this option allows different kinds of IEEE802154 debug output.\nAll IEEE802154 debug features increase the size of the final binary.",
                                 "id": "IEEE802154_DEBUG",
@@ -13509,16 +13568,6 @@
                                 "range": null,
                                 "title": "Enable IEEE802154 Debug",
                                 "type": "menu"
-                            },
-                            {
-                                "children": [],
-                                "depends_on": "IEEE802154_ENABLED",
-                                "help": "Enabling this option to monitor and detect certain abnormal or unexpected\nstates during the operation of the IEEE 802.15.4. When this option is enabled,\nit will perform additional runtime checks and assertions.",
-                                "id": "IEEE802154_DEBUG_ASSERT_MONITOR",
-                                "name": "IEEE802154_DEBUG_ASSERT_MONITOR",
-                                "range": null,
-                                "title": "Enable IEEE802154 assert monitor",
-                                "type": "bool"
                             }
                         ],
                         "depends_on": null,
@@ -13527,152 +13576,6 @@
                         "name": "IEEE802154_ENABLED",
                         "range": null,
                         "title": "IEEE802154 Enable",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "IEEE802154_DEBUG",
-                        "help": "Enabling this option to count IEEE802154 rx buffer when allocating or freeing.",
-                        "id": "IEEE802154_RX_BUFFER_STATISTIC",
-                        "name": "IEEE802154_RX_BUFFER_STATISTIC",
-                        "range": null,
-                        "title": "Rx buffer statistic",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "IEEE802154_DEBUG",
-                        "help": "Enabling this option to print more information when assert.",
-                        "id": "IEEE802154_ASSERT",
-                        "name": "IEEE802154_ASSERT",
-                        "range": null,
-                        "title": "Enrich the assert information",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [
-                            {
-                                "children": [
-                                    {
-                                        "children": [],
-                                        "depends_on": "IEEE802154_RECORD_EVENT",
-                                        "help": "set the record event table size",
-                                        "id": "IEEE802154_RECORD_EVENT_SIZE",
-                                        "name": "IEEE802154_RECORD_EVENT_SIZE",
-                                        "range": null,
-                                        "title": "Record event table size",
-                                        "type": "int"
-                                    }
-                                ],
-                                "depends_on": "IEEE802154_RECORD",
-                                "help": "Enabling this option to record event, when assert, the recorded event will be printed.",
-                                "id": "IEEE802154_RECORD_EVENT",
-                                "name": "IEEE802154_RECORD_EVENT",
-                                "range": null,
-                                "title": "Enable record event information for debugging",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [
-                                    {
-                                        "children": [],
-                                        "depends_on": "IEEE802154_RECORD_STATE",
-                                        "help": "set the record state table size",
-                                        "id": "IEEE802154_RECORD_STATE_SIZE",
-                                        "name": "IEEE802154_RECORD_STATE_SIZE",
-                                        "range": null,
-                                        "title": "Record state table size",
-                                        "type": "int"
-                                    }
-                                ],
-                                "depends_on": "IEEE802154_RECORD",
-                                "help": "Enabling this option to record state, when assert, the recorded state will be printed.",
-                                "id": "IEEE802154_RECORD_STATE",
-                                "name": "IEEE802154_RECORD_STATE",
-                                "range": null,
-                                "title": "Enable record state information for debugging",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [
-                                    {
-                                        "children": [],
-                                        "depends_on": "IEEE802154_RECORD_CMD",
-                                        "help": "set the record command table size",
-                                        "id": "IEEE802154_RECORD_CMD_SIZE",
-                                        "name": "IEEE802154_RECORD_CMD_SIZE",
-                                        "range": null,
-                                        "title": "Record command table size",
-                                        "type": "int"
-                                    }
-                                ],
-                                "depends_on": "IEEE802154_RECORD",
-                                "help": "Enabling this option to record the command, when assert, the recorded\ncommand will be printed.",
-                                "id": "IEEE802154_RECORD_CMD",
-                                "name": "IEEE802154_RECORD_CMD",
-                                "range": null,
-                                "title": "Enable record command information for debugging",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [
-                                    {
-                                        "children": [],
-                                        "depends_on": "IEEE802154_RECORD_ABORT",
-                                        "help": "set the record abort table size",
-                                        "id": "IEEE802154_RECORD_ABORT_SIZE",
-                                        "name": "IEEE802154_RECORD_ABORT_SIZE",
-                                        "range": null,
-                                        "title": "Record abort table size",
-                                        "type": "int"
-                                    }
-                                ],
-                                "depends_on": "IEEE802154_RECORD",
-                                "help": "Enabling this option to record the abort, when assert, the recorded\nabort will be printed.",
-                                "id": "IEEE802154_RECORD_ABORT",
-                                "name": "IEEE802154_RECORD_ABORT",
-                                "range": null,
-                                "title": "Enable record abort information for debugging",
-                                "type": "bool"
-                            }
-                        ],
-                        "depends_on": "IEEE802154_DEBUG",
-                        "help": "Enabling this option to add some probe codes in the driver, and record these information.",
-                        "id": "IEEE802154_RECORD",
-                        "name": "IEEE802154_RECORD",
-                        "range": null,
-                        "title": "Record the information with IEEE802154 state and event",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [
-                            {
-                                "children": [],
-                                "depends_on": "IEEE802154_RECORD_TXRX_FRAME",
-                                "help": "set the record frame table size",
-                                "id": "IEEE802154_RECORD_TXRX_FRAME_SIZE",
-                                "name": "IEEE802154_RECORD_TXRX_FRAME_SIZE",
-                                "range": null,
-                                "title": "Record frame table size",
-                                "type": "int"
-                            }
-                        ],
-                        "depends_on": "IEEE802154_DEBUG",
-                        "help": "Enabling this option to record the tx and rx packets",
-                        "id": "IEEE802154_RECORD_TXRX_FRAME",
-                        "name": "IEEE802154_RECORD_TXRX_FRAME",
-                        "range": null,
-                        "title": "Enable record txrx packets for debugging",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "IEEE802154_DEBUG",
-                        "help": "Enabling this option to record the tx and rx",
-                        "id": "IEEE802154_TXRX_STATISTIC",
-                        "name": "IEEE802154_TXRX_STATISTIC",
-                        "range": null,
-                        "title": "Enable record tx/rx packets information for debugging",
                         "type": "bool"
                     }
                 ],
@@ -13964,7 +13867,7 @@
                             {
                                 "children": [],
                                 "depends_on": null,
-                                "help": "Enable ANSI terminal color codes.\nIn order to view these, your terminal program must support ANSI color codes.\n\nThis is disabled by default, as colors are added in IDF Monitor. If you want to use new lines\nin the messages or you are using a different terminal program, you may want to enable this option.",
+                                "help": "Enable ANSI terminal color codes.\nIn order to view these, your terminal program must support ANSI color codes.",
                                 "id": "LOG_COLORS",
                                 "name": "LOG_COLORS",
                                 "range": null,
@@ -16944,16 +16847,6 @@
                     {
                         "children": [],
                         "depends_on": null,
-                        "help": "Enabling MBEDTLS_SHA1_C adds support for SHA-1.\nSHA-1 is considered a weak message digest and its use constitutes\na security risk.\nDisabling this configuration option could impact TLS 1.2 / Wi-Fi Enterprise compatibility\nwith certain older certificates that rely on SHA-1 for digital signatures.\nBefore proceeding, ensure that all your certificates are using stronger hash algorithms,\nsuch as SHA-256 (part of the SHA-2 family).\nIf you're using older certificates or if you're unsure about the impact on your product,\nplease consider testing the changes in a controlled environment for individual features\nlike OTA updates, cloud connectivity, secure local control, etc.",
-                        "id": "MBEDTLS_SHA1_C",
-                        "name": "MBEDTLS_SHA1_C",
-                        "range": null,
-                        "title": "Enable the SHA-1 cryptographic hash algorithm",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
                         "help": "Enable MBEDTLS_SHA512_C adds support for SHA-384 and SHA-512.",
                         "id": "MBEDTLS_SHA512_C",
                         "name": "MBEDTLS_SHA512_C",
@@ -17721,16 +17614,6 @@
                         "range": null,
                         "title": "Enable functions that use the filesystem",
                         "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "This options allows weak certificate verification by skipping the hostname verification.\nIt is not recommended to use this option.",
-                        "id": "MBEDTLS_ALLOW_WEAK_CERTIFICATE_VERIFICATION",
-                        "name": "MBEDTLS_ALLOW_WEAK_CERTIFICATE_VERIFICATION",
-                        "range": null,
-                        "title": "Allow weak certificate verification",
-                        "type": "bool"
                     }
                 ],
                 "depends_on": null,
@@ -18419,16 +18302,6 @@
                                     {
                                         "children": [],
                                         "depends_on": "OPENTHREAD_ENABLED",
-                                        "help": "Select this option to enable border agent feature",
-                                        "id": "OPENTHREAD_BORDER_AGENT_ENABLE",
-                                        "name": "OPENTHREAD_BORDER_AGENT_ENABLE",
-                                        "range": null,
-                                        "title": "Enable border agent feature",
-                                        "type": "bool"
-                                    },
-                                    {
-                                        "children": [],
-                                        "depends_on": "OPENTHREAD_ENABLED",
                                         "help": "Select this option to enable mac filter feature",
                                         "id": "OPENTHREAD_MACFILTER_ENABLE",
                                         "name": "OPENTHREAD_MACFILTER_ENABLE",
@@ -18437,7 +18310,46 @@
                                         "type": "bool"
                                     },
                                     {
-                                        "children": [],
+                                        "children": [
+                                            {
+                                                "children": [
+                                                    {
+                                                        "children": [],
+                                                        "depends_on": "OPENTHREAD_CSL_ENABLE && OPENTHREAD_ENABLED",
+                                                        "help": "The current accuracy of the clock used for scheduling CSL operations",
+                                                        "id": "OPENTHREAD_CSL_ACCURACY",
+                                                        "name": "OPENTHREAD_CSL_ACCURACY",
+                                                        "range": null,
+                                                        "title": "The current CSL rx/tx scheduling drift, in units of \u00b1 ppm",
+                                                        "type": "int"
+                                                    },
+                                                    {
+                                                        "children": [],
+                                                        "depends_on": "OPENTHREAD_CSL_ENABLE && OPENTHREAD_ENABLED",
+                                                        "help": "The fixed uncertainty of the Device for scheduling CSL Transmissions in units of 10 microseconds.",
+                                                        "id": "OPENTHREAD_CSL_UNCERTAIN",
+                                                        "name": "OPENTHREAD_CSL_UNCERTAIN",
+                                                        "range": null,
+                                                        "title": "The CSL Uncertainty in units of 10 us.",
+                                                        "type": "int"
+                                                    },
+                                                    {
+                                                        "children": [],
+                                                        "depends_on": "OPENTHREAD_CSL_ENABLE && OPENTHREAD_ENABLED",
+                                                        "help": "Select this option to set rx on when sleep in CSL feature, only for debug",
+                                                        "id": "OPENTHREAD_CSL_DEBUG_ENABLE",
+                                                        "name": "OPENTHREAD_CSL_DEBUG_ENABLE",
+                                                        "range": null,
+                                                        "title": "Enable CSL debug",
+                                                        "type": "bool"
+                                                    }
+                                                ],
+                                                "depends_on": "OPENTHREAD_CSL_ENABLE && OPENTHREAD_ENABLED",
+                                                "id": "component-config-openthread-openthread-thread-core-features-enable-csl-feature-csl-configurations",
+                                                "title": "CSL Configurations",
+                                                "type": "menu"
+                                            }
+                                        ],
                                         "depends_on": "OPENTHREAD_ENABLED",
                                         "help": "Select this option to enable CSL feature",
                                         "id": "OPENTHREAD_CSL_ENABLE",
@@ -18445,44 +18357,6 @@
                                         "range": null,
                                         "title": "Enable CSL feature",
                                         "type": "bool"
-                                    },
-                                    {
-                                        "children": [
-                                            {
-                                                "children": [],
-                                                "depends_on": "OPENTHREAD_ENABLED",
-                                                "help": "The current accuracy of the clock used for scheduling CSL operations",
-                                                "id": "OPENTHREAD_CSL_ACCURACY",
-                                                "name": "OPENTHREAD_CSL_ACCURACY",
-                                                "range": null,
-                                                "title": "The current CSL rx/tx scheduling drift, in units of \u00b1 ppm",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "children": [],
-                                                "depends_on": "OPENTHREAD_ENABLED",
-                                                "help": "The fixed uncertainty of the Device for scheduling CSL Transmissions in units of 10 microseconds.",
-                                                "id": "OPENTHREAD_CSL_UNCERTAIN",
-                                                "name": "OPENTHREAD_CSL_UNCERTAIN",
-                                                "range": null,
-                                                "title": "The CSL Uncertainty in units of 10 us.",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "children": [],
-                                                "depends_on": "OPENTHREAD_ENABLED",
-                                                "help": "Select this option to set rx on when sleep in CSL feature, only for debug",
-                                                "id": "OPENTHREAD_CSL_DEBUG_ENABLE",
-                                                "name": "OPENTHREAD_CSL_DEBUG_ENABLE",
-                                                "range": null,
-                                                "title": "Enable CSL debug",
-                                                "type": "bool"
-                                            }
-                                        ],
-                                        "depends_on": "OPENTHREAD_ENABLED",
-                                        "id": "component-config-openthread-openthread-thread-core-features-csl-configurations",
-                                        "title": "CSL Configurations",
-                                        "type": "menu"
                                     },
                                     {
                                         "children": [],
@@ -18522,55 +18396,6 @@
                                         "name": "OPENTHREAD_DIAG",
                                         "range": null,
                                         "title": "Enable diag",
-                                        "type": "bool"
-                                    },
-                                    {
-                                        "children": [
-                                            {
-                                                "children": [
-                                                    {
-                                                        "children": [],
-                                                        "depends_on": "OPENTHREAD_PARENT_SEARCH_MTD && OPENTHREAD_ENABLED",
-                                                        "help": null,
-                                                        "id": "OPENTHREAD_PARENT_SEARCH_CHECK_INTERVAL_MINS",
-                                                        "name": "OPENTHREAD_PARENT_SEARCH_CHECK_INTERVAL_MINS",
-                                                        "range": null,
-                                                        "title": "The interval in minutes for a child to check the trigger condition to perform a parent search",
-                                                        "type": "int"
-                                                    },
-                                                    {
-                                                        "children": [],
-                                                        "depends_on": "OPENTHREAD_PARENT_SEARCH_MTD && OPENTHREAD_ENABLED",
-                                                        "help": null,
-                                                        "id": "OPENTHREAD_PARENT_SEARCH_BACKOFF_INTERVAL_MINS",
-                                                        "name": "OPENTHREAD_PARENT_SEARCH_BACKOFF_INTERVAL_MINS",
-                                                        "range": null,
-                                                        "title": "The backoff interval in minutes for a child to not perform a parent search after triggering one",
-                                                        "type": "int"
-                                                    },
-                                                    {
-                                                        "children": [],
-                                                        "depends_on": "OPENTHREAD_PARENT_SEARCH_MTD && OPENTHREAD_ENABLED",
-                                                        "help": null,
-                                                        "id": "OPENTHREAD_PARENT_SEARCH_RSS_THRESHOLD",
-                                                        "name": "OPENTHREAD_PARENT_SEARCH_RSS_THRESHOLD",
-                                                        "range": null,
-                                                        "title": "The RSS threshold used to trigger a parent search",
-                                                        "type": "int"
-                                                    }
-                                                ],
-                                                "depends_on": "OPENTHREAD_PARENT_SEARCH_MTD && OPENTHREAD_ENABLED",
-                                                "id": "component-config-openthread-openthread-thread-core-features-enable-parent-search-parent-search-configurations",
-                                                "title": "Parent Search Configurations",
-                                                "type": "menu"
-                                            }
-                                        ],
-                                        "depends_on": "OPENTHREAD_MTD && OPENTHREAD_ENABLED",
-                                        "help": "Select this option to enable \"Periodic Parent Search\" function for MTD. This checks the average\nRSS to its current parent every periodically and starts a parent search process if the average\nRSS is below OPENTHREAD_PARENT_SEARCH_RSS_THRESHOLD. This feature is always enabled for FTDs.",
-                                        "id": "OPENTHREAD_PARENT_SEARCH_MTD",
-                                        "name": "OPENTHREAD_PARENT_SEARCH_MTD",
-                                        "range": null,
-                                        "title": "Enable Parent Search",
                                         "type": "bool"
                                     },
                                     {
@@ -18679,16 +18504,6 @@
                                                 "name": "OPENTHREAD_XTAL_ACCURACY",
                                                 "range": null,
                                                 "title": "The accuracy of the XTAL",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "children": [],
-                                                "depends_on": "OPENTHREAD_ENABLED",
-                                                "help": "The device's bus latency, in us.",
-                                                "id": "OPENTHREAD_BUS_LATENCY",
-                                                "name": "OPENTHREAD_BUS_LATENCY",
-                                                "range": null,
-                                                "title": "The bus latency between host and radio chip",
                                                 "type": "int"
                                             },
                                             {
@@ -19285,16 +19100,6 @@
                             },
                             {
                                 "children": [],
-                                "depends_on": "!APP_BUILD_TYPE_PURE_RAM_APP",
-                                "help": "Flash suspend has defect on ESP32C6 until v0.2 and ESP32H2 until v1.2. If you already use suspend\nfeature for massive protection, you can enable this for bypassing check after knowing the risk.\nBut if you are new users, or developing new applications, or producing a new batch,\nplease DO NOT enable this config option.\n\nFor more information, please refer to errata or connect to Espressif business support team.",
-                                "id": "SPI_FLASH_FORCE_ENABLE_C6_H2_SUSPEND",
-                                "name": "SPI_FLASH_FORCE_ENABLE_C6_H2_SUSPEND",
-                                "range": null,
-                                "title": "Enable chip suspend feature on c6 or h2 anyway (DO NOT ENABLE FOR NEW USERS OR APPLICATIONS)",
-                                "type": "bool"
-                            },
-                            {
-                                "children": [],
                                 "depends_on": "SPI_FLASH_AUTO_SUSPEND && FREERTOS_UNICORE && IDF_EXPERIMENTAL_FEATURES && !APP_BUILD_TYPE_PURE_RAM_APP",
                                 "help": "Enable this config will disable auto-resume from hardware. Thus the software will resume the chip\nafter any higher priority task/interrupt which suspend the chip. The benefit is that the suspend-resume\nwill not disturb the higher priority task and interrupt.\n\nThis currently is only valid on single core chip.",
                                 "id": "SPI_FLASH_SOFTWARE_RESUME",
@@ -19361,7 +19166,7 @@
                             }
                         ],
                         "depends_on": "!SPI_FLASH_ROM_IMPL && !APP_BUILD_TYPE_PURE_RAM_APP",
-                        "help": "If this option is enabled, any time SPI flash is written then the data will be read\nback and verified. This can catch hardware problems with SPI flash, or flash which\nwas not erased before verification.\n\nThis will slightly influence the write performance.",
+                        "help": "If this option is enabled, any time SPI flash is written then the data will be read\nback and verified. This can catch hardware problems with SPI flash, or flash which\nwas not erased before verification.",
                         "id": "SPI_FLASH_VERIFY_WRITE",
                         "name": "SPI_FLASH_VERIFY_WRITE",
                         "range": null,
@@ -19960,6 +19765,16 @@
                                             {
                                                 "children": [],
                                                 "depends_on": "IDF_EXPERIMENTAL_FEATURES && USB_HOST_HUBS_SUPPORTED && SOC_USB_OTG_SUPPORTED",
+                                                "help": "Enables support of Low-speed devices, connected through the external Hub.",
+                                                "id": "USB_HOST_EXT_PORT_SUPPORT_LS",
+                                                "name": "USB_HOST_EXT_PORT_SUPPORT_LS",
+                                                "range": null,
+                                                "title": "Support LS",
+                                                "type": "bool"
+                                            },
+                                            {
+                                                "children": [],
+                                                "depends_on": "IDF_EXPERIMENTAL_FEATURES && USB_HOST_HUBS_SUPPORTED && SOC_USB_OTG_SUPPORTED",
                                                 "help": "Amount of attempts to reset the device.\n\nThe default value is 1.",
                                                 "id": "USB_HOST_EXT_PORT_RESET_ATTEMPTS",
                                                 "name": "USB_HOST_EXT_PORT_RESET_ATTEMPTS",
@@ -20027,16 +19842,6 @@
                         "name": "USB_HOST_ENABLE_ENUM_FILTER_CALLBACK",
                         "range": null,
                         "title": "Enable enumeration filter callback",
-                        "type": "bool"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": "IDF_TARGET_ESP32P4 && SPIRAM && SOC_USB_OTG_SUPPORTED",
-                        "help": "In the ESP32P4, the USB-DWC internal DMA can access external RAM. Enabling this configuration can save\ninternal RAM by allocating the memory buffers used by the USB-DWC peripheral's DMA to external RAM.\nHowever, it introduces minor performance degradation due to the overhead of accessing external RAM.",
-                        "id": "USB_HOST_DWC_DMA_CAP_MEMORY_IN_PSRAM",
-                        "name": "USB_HOST_DWC_DMA_CAP_MEMORY_IN_PSRAM",
-                        "range": null,
-                        "title": "Allocate USB_DWC DMA capable memory in PSRAM",
                         "type": "bool"
                     },
                     {
@@ -20175,7 +19980,7 @@
     {
         "children": [],
         "depends_on": null,
-        "help": "By enabling this option, ESP-IDF experimental feature options will be visible.\n\nNote you should still enable a certain experimental feature option to use it, and you\nshould read the corresponding risk warning and known issue list carefully.\n\nCurrent experimental feature list:\n\n- CONFIG_ESPTOOLPY_FLASHFREQ_120M && CONFIG_ESPTOOLPY_FLASH_SAMPLE_MODE_DTR\n- CONFIG_SPIRAM_SPEED_120M && CONFIG_SPIRAM_MODE_OCT\n- CONFIG_BOOTLOADER_CACHE_32BIT_ADDR_QUAD_FLASH\n- CONFIG_ESP_WIFI_EAP_TLS1_3\n- CONFIG_ESP_WIFI_ENABLE_ROAMING_APP\n- CONFIG_USB_HOST_EXT_PORT_RESET_ATTEMPTS",
+        "help": "By enabling this option, ESP-IDF experimental feature options will be visible.\n\nNote you should still enable a certain experimental feature option to use it, and you\nshould read the corresponding risk warning and known issue list carefully.\n\nCurrent experimental feature list:\n\n- CONFIG_ESPTOOLPY_FLASHFREQ_120M && CONFIG_ESPTOOLPY_FLASH_SAMPLE_MODE_DTR\n- CONFIG_SPIRAM_SPEED_120M && CONFIG_SPIRAM_MODE_OCT\n- CONFIG_BOOTLOADER_CACHE_32BIT_ADDR_QUAD_FLASH\n- CONFIG_ESP_WIFI_EAP_TLS1_3\n- CONFIG_ESP_WIFI_ENABLE_ROAMING_APP\n- CONFIG_USB_HOST_EXT_PORT_SUPPORT_LS\n- CONFIG_USB_HOST_EXT_PORT_RESET_ATTEMPTS",
         "id": "IDF_EXPERIMENTAL_FEATURES",
         "name": "IDF_EXPERIMENTAL_FEATURES",
         "range": null,

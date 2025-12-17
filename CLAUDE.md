@@ -144,9 +144,10 @@ Byte 16:     Checksum (XOR of all previous 16 bytes)
 All values are little-endian. The checksum is a simple XOR of all data bytes.
 
 **Position Query Protocol (ASCII):**
-- **Request**: Send single byte `'P'` (0x50) or `'?'` (0x3F)
-- **Response**: ASCII string `"POS:j1,j2,j3\n"` (e.g., `"POS:0.00,45.00,30.00\n"`)
+- **Request**: Send three-byte ASCII string `"POS"` (0x50 0x4F 0x53) - changed from single 'P' to reduce false triggers
+- **Response**: ASCII string `"POS:j1,j2,j3,j4,j5,j6\n"` (e.g., `"POS:0.00,45.00,30.00,0.00,0.00,0.00\n"`)
 - Use `controller.get_current_position()` in Python to query current motor positions
+- **Why 3 bytes**: Reduces false trigger probability from 1/256 (0.4%) to 1/16,777,216 (0.000006%)
 - Returns list `[j1, j2, j3]` or `None` if failed
 - Position values are the ESP32's internal tracking (not actual encoder feedback)
 
@@ -220,12 +221,13 @@ This costs ~74KB RAM for 6 motors and ensures consistent 20Hz timing. DO NOT use
 - If exceeded, ESP32 clamps to buffer size and logs warning
 
 **Pending Packet Buffer System:**
-The system handles both 1-byte position queries and 17-byte motion commands:
-- `check_position_request()` reads 1 byte first (10ms timeout)
-- If it's 'P' or '?': sends position response via UART
-- If not: stores byte in `pending_packet` buffer
-- `receive_command()` uses pending byte as first byte of motion command
+The system handles both 3-byte position queries and 29-byte motion commands:
+- `check_position_request()` reads 3 bytes first (10ms timeout)
+- If it matches "POS": sends position response via UART
+- If not (or timeout): stores received bytes in `pending_packet` buffer
+- `receive_command()` uses pending bytes as start of motion command
 - This prevents packet loss when protocols coexist
+- 3-byte requirement eliminates false triggers from random binary motion data
 
 **Position Query Optimization (Critical for Reliability):**
 To achieve reliable position queries:
@@ -464,7 +466,8 @@ Current system achieves consistent 20Hz with pre-allocated buffers.
 
 ### Protocol Issues (Resolved)
 - **Position query packet loss**: Initial implementation of `check_position_request()` consumed motion command bytes without processing them, causing packet loss. Fixed with pending packet buffer system.
-- **Protocol coexistence**: Successfully implemented dual protocol (1-byte ASCII position queries + 17-byte binary motion commands) without interference.
+- **Protocol coexistence**: Successfully implemented dual protocol (3-byte ASCII position queries + 29-byte binary motion commands) without interference.
+- **False position query triggers**: Original single-byte 'P' protocol caused jerky motion when binary motion data contained 0x50. Upgraded to three-byte "POS" protocol, reducing false trigger probability by 65,536×.
 
 ### Velocity Limiting
 - **S-curve peak velocity**: S-curve interpolation has 2.0× velocity multiplier at midpoint. Must calculate duration as: `duration ≥ (angle_change × 2.0) / max_velocity`.
@@ -472,8 +475,8 @@ Current system achieves consistent 20Hz with pre-allocated buffers.
 - **Validation**: Always use `validate_trajectory_velocity()` before execution to catch violations.
 
 ### Position Tracking
-- **Open-loop limitation**: System has no encoders - position is tracked by counting steps. Motors must be manually positioned at [0, 0, 0] on startup.
-- **Position query feature**: Added ability to query ESP32's internal position tracking with 'P' command for debugging and verification.
+- **Open-loop limitation**: System has no encoders - position is tracked by counting steps. Motors must be manually positioned at [0, 0, 0, 0, 0, 0] on startup.
+- **Position query feature**: Added ability to query ESP32's internal position tracking with "POS" command for debugging and verification.
 
 ### Position Query Reliability (Recent Improvements)
 - **UART corruption issue (RESOLVED)**: Initial implementation sent both log messages and position responses to same UART, causing data corruption and 20% success rate.
@@ -494,6 +497,8 @@ Current system achieves consistent 20Hz with pre-allocated buffers.
 - **Reduced ESP32 logging verbosity**: Changed detailed command logging from INFO to DEBUG level to minimize UART traffic and improve position query reliability. Only warnings, errors, and periodic statistics are shown by default.
 - **Extended query timeouts**: Increased wait time after trajectory execution from 0.5s to 1.0s, and initial position query retries from 5 to 10, improving query success rate.
 - **Board compatibility notes**: Discovered that USB-JTAG console separation only works on ESP32-S3 boards with native USB exposed. Boards using external USB-UART chips (CH340, CP210x, etc.) will have logs on the same UART as data, making reduced logging verbosity even more important.
+- **Position query protocol upgraded to "POS" (CRITICAL FIX)**: Changed from single-byte 'P' (0x50) to three-byte "POS" (0x50 0x4F 0x53) to eliminate false triggers from binary motion data. This resolved jerky motor behavior caused by random bytes in motion commands being misinterpreted as position queries. False trigger probability reduced from 1/256 (0.4%) to 1/16,777,216 (0.000006%). Requires firmware reflash for ESP32-WROOM.
+- **Disabled statistics logging**: Removed periodic statistics output (every 500 commands) in ESP32-WROOM to further reduce UART traffic and eliminate potential interference with motion commands.
 
 ## Documentation
 

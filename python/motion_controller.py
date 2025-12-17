@@ -8,8 +8,10 @@ Architecture:
     - USB-JTAG: ESP32 logs (monitored separately with idf.py monitor)
 
 Position Query:
-    - Robust retry mechanism (5 attempts) for 99.97% reliability
-    - Filters response lines to find "POS:j1,j2,j3" among any stray data
+    - Request: Sends "POS" (3-byte string) to reduce false triggers from binary data
+    - Response: "POS:j1,j2,j3,j4,j5,j6\n" ASCII format
+    - Robust retry mechanism (5 attempts) for high reliability
+    - Filters response lines to find "POS:" among any stray data
     - Works seamlessly with ESP32's optimized ~60 Hz main loop
 
 Trajectory Generation:
@@ -144,8 +146,8 @@ class MotionController:
             # Clear any pending data in input buffer
             self.ser.reset_input_buffer()
 
-            # Send position request
-            self.ser.write(b'P')
+            # Send position request (changed to "POS" to reduce false triggers from binary data)
+            self.ser.write(b'POS')
             time.sleep(0.15)  # Give ESP32 time to respond
 
             # Read all available lines (might include log messages)

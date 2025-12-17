@@ -1,6 +1,6 @@
 /*
  * Automatically generated file. DO NOT EDIT.
- * Espressif IoT Development Framework (ESP-IDF) 5.4.2 Configuration Header
+ * Espressif IoT Development Framework (ESP-IDF) 5.4.1 Configuration Header
  */
 #pragma once
 #define CONFIG_SOC_BROWNOUT_RESET_SUPPORTED "Not determined"
@@ -338,6 +338,7 @@
 #define CONFIG_ESP_SLEEP_GPIO_ENABLE_INTERNAL_RESISTORS 1
 #define CONFIG_RTC_CLK_SRC_INT_RC 1
 #define CONFIG_RTC_CLK_CAL_CYCLES 1024
+#define CONFIG_PERIPH_CTRL_FUNC_IN_IRAM 1
 #define CONFIG_XTAL_FREQ_40 1
 #define CONFIG_XTAL_FREQ 40
 #define CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ_160 1

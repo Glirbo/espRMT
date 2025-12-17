@@ -1,2 +1,2 @@
-source /home/mog/git/espRMT/esp32-idf-wroom/build/gdbinit/symbols
-source /home/mog/git/espRMT/esp32-idf-wroom/build/gdbinit/connect
+source /home/mikkel/git/espRMT/esp32-idf-wroom/build/gdbinit/symbols
+source /home/mikkel/git/espRMT/esp32-idf-wroom/build/gdbinit/connect
