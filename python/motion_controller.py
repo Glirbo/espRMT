@@ -38,12 +38,12 @@ class SimulatedSerial:
     def write(self, data):
         """Simulate writing data - print hex representation"""
         # Decode the binary packet
-        if len(data) == 17:
+        if len(data) == 29:
             timestamp = struct.unpack('<I', data[0:4])[0]
-            angles = struct.unpack('<fff', data[4:16])
-            checksum = data[16]
+            angles = struct.unpack('<ffffff', data[4:28])
+            checksum = data[28]
 
-            print(f"[SIM TX] t={timestamp:5d}ms  angles=[{angles[0]:6.2f}°, {angles[1]:6.2f}°, {angles[2]:6.2f}°]  cksum=0x{checksum:02X}")
+            print(f"[SIM TX] t={timestamp:5d}ms  angles=[{angles[0]:6.2f}°, {angles[1]:6.2f}°, {angles[2]:6.2f}°, {angles[3]:6.2f}°, {angles[4]:6.2f}°, {angles[5]:6.2f}°]  cksum=0x{checksum:02X}")
         else:
             print(f"[SIM TX] {len(data)} bytes: {data.hex()}")
         return len(data)
@@ -56,27 +56,53 @@ class SimulatedSerial:
 class MotionController:
     """Controls robot arm motion via serial communication with ESP32"""
 
-    def __init__(self, port='/dev/ttyUSB0', baudrate=115200, simulate_if_unavailable=True):
+    def __init__(self, port='/dev/ttyACM0', baudrate=115200, simulate_if_unavailable=True):
         """
         Initialize motion controller
 
         Args:
-            port: Serial port (e.g., '/dev/ttyUSB0' on Linux, 'COM3' on Windows)
+            port: Serial port (e.g., '/dev/ttyACM0' for ESP32-S3, '/dev/ttyUSB0' for WROOM)
+                  If None, will auto-detect by trying common ports
             baudrate: Serial baud rate (115200 or 921600 recommended)
             simulate_if_unavailable: If True, use simulation mode when port unavailable
         """
         self.simulation_mode = False
 
-        try:
-            self.ser = serial.Serial(port, baudrate, timeout=1)
-            time.sleep(2)  # Wait for ESP32 to reset after serial connection
-            print(f"Connected to {port} at {baudrate} baud")
-        except (serial.SerialException, FileNotFoundError) as e:
+        # Auto-detect port - try common ESP32 ports
+        # Priority: specified port first, then common alternatives
+        if port is None:
+            ports_to_try = ['/dev/ttyACM0', '/dev/ttyUSB0', 'COM3', 'COM4']
+        elif port in ['/dev/ttyACM0', '/dev/ttyUSB0']:
+            # For common ESP32 ports, try both (helps when switching between S3 and WROOM)
+            ports_to_try = [port, '/dev/ttyUSB0' if port == '/dev/ttyACM0' else '/dev/ttyACM0']
+        else:
+            # For other ports, only try the specified one
+            ports_to_try = [port]
+
+        # Try ports in order
+        connected = False
+        last_error = None
+
+        for try_port in ports_to_try:
+            try:
+                self.ser = serial.Serial(try_port, baudrate, timeout=1)
+                time.sleep(2)  # Wait for ESP32 to reset after serial connection
+                print(f"✓ Connected to {try_port} at {baudrate} baud")
+                connected = True
+                break
+            except (serial.SerialException, FileNotFoundError) as e:
+                last_error = e
+                if len(ports_to_try) > 1:
+                    print(f"  {try_port} not available, trying next port...")
+                # Try next port
+                continue
+
+        if not connected:
             if simulate_if_unavailable:
                 self.simulation_mode = True
-                self.ser = SimulatedSerial(port, baudrate)
+                self.ser = SimulatedSerial(ports_to_try[0], baudrate)
             else:
-                raise
+                raise last_error if last_error else Exception("No serial ports available")
 
     def send_position(self, timestamp_ms, angles):
         """
@@ -84,17 +110,19 @@ class MotionController:
 
         Args:
             timestamp_ms: Timestamp in milliseconds (uint32)
-            angles: List of 3 joint angles in degrees [J1, J2, J3]
+            angles: List of 6 joint angles in degrees [J1, J2, J3, J4, J5, J6]
         """
-        # Pack data: little-endian uint32 + 3 floats
-        data = struct.pack('<I fff', timestamp_ms, angles[0], angles[1], angles[2])
+        # Pack data: little-endian uint32 + 6 floats
+        data = struct.pack('<I ffffff', timestamp_ms,
+                          angles[0], angles[1], angles[2],
+                          angles[3], angles[4], angles[5])
 
         # Calculate checksum (XOR of all bytes)
         checksum = 0
         for byte in data:
             checksum ^= byte
 
-        # Send data + checksum (17 bytes total)
+        # Send data + checksum (29 bytes total)
         packet = data + bytes([checksum])
         self.ser.write(packet)
 
@@ -106,7 +134,7 @@ class MotionController:
             max_retries: Number of times to retry the query (default: 5)
 
         Returns:
-            List of 3 joint angles [J1, J2, J3] or None if failed
+            List of 6 joint angles [J1, J2, J3, J4, J5, J6] or None if failed
         """
         if self.simulation_mode:
             print("[SIM] Position query not available in simulation mode")
@@ -132,7 +160,7 @@ class MotionController:
                         if line.startswith('POS:'):
                             angles_str = line[4:]  # Remove "POS:" prefix
                             angles = [float(x) for x in angles_str.split(',')]
-                            if len(angles) == 3:
+                            if len(angles) == 6:
                                 return angles
                     else:
                         time.sleep(0.01)  # Small delay before checking again
@@ -250,9 +278,9 @@ def generate_test_trajectory(start_angle=0.0, end_angle=45.0):
             # Deceleration phase
             progress = 1 - 2 * (1 - t_norm) * (1 - t_norm)
 
-        # Interpolate angle - same for all motors
+        # Interpolate angle - same for all 6 motors
         angle = start_angle + progress * (end_angle - start_angle)
-        angles = [angle, angle, angle]
+        angles = [angle, angle, angle, angle, angle, angle]
 
         trajectory.append((t, angles))
 
@@ -280,9 +308,9 @@ def generate_circular_trajectory(center_angle, radius_deg, duration_ms=5000, upd
         t = i * update_period_ms
         phase = 2 * math.pi * (t / duration_ms)  # 0 to 2π
 
-        # Sinusoidal motion - all motors move the same
+        # Sinusoidal motion - all 6 motors move the same
         angle = center_angle + radius_deg * math.sin(phase)
-        angles = [angle, angle, angle]
+        angles = [angle, angle, angle, angle, angle, angle]
 
         trajectory.append((t, angles))
 
@@ -293,11 +321,13 @@ def main():
     """Main function - demonstrates usage"""
 
     # Configuration
-    PORT = '/dev/ttyACM0'  # ESP32-S3 native USB (use /dev/ttyUSB0 for UART adapter)
+    PORT = '/dev/ttyACM0'  # Auto-tries: ESP32-S3 (/dev/ttyACM0) then WROOM (/dev/ttyUSB0)
+                           # Set to None for full auto-detection
     BAUDRATE = 115200
 
     try:
         # Connect to ESP32 (or simulate if not available)
+        # Will automatically try /dev/ttyUSB0 if /dev/ttyACM0 fails
         controller = MotionController(PORT, BAUDRATE, simulate_if_unavailable=True)
 
         # Query initial position
@@ -307,7 +337,7 @@ def main():
             time.sleep(1.0)  # Wait for ESP32 to be ready
             current_pos = controller.get_current_position(max_retries=10)  # More retries
             if current_pos:
-                print(f"Motors currently at: [{current_pos[0]:.2f}°, {current_pos[1]:.2f}°, {current_pos[2]:.2f}°]")
+                print(f"Motors currently at: [{current_pos[0]:.2f}°, {current_pos[1]:.2f}°, {current_pos[2]:.2f}°, {current_pos[3]:.2f}°, {current_pos[4]:.2f}°, {current_pos[5]:.2f}°]")
                 current_angle = current_pos[0]  # All motors at same angle
             else:
                 print("WARNING: Could not query position, assuming 0°")
@@ -335,10 +365,10 @@ def main():
             time.sleep(1.0)  # Longer pause for motion to complete
             pos = controller.get_current_position()
             if pos:
-                print(f"Position after move: [{pos[0]:.2f}°, {pos[1]:.2f}°, {pos[2]:.2f}°]")
+                print(f"Position after move: [{pos[0]:.2f}°, {pos[1]:.2f}°, {pos[2]:.2f}°, {pos[3]:.2f}°, {pos[4]:.2f}°, {pos[5]:.2f}°]")
                 current_angle = pos[0]  # Use actual position if query succeeds
             else:
-                print(f"Position query failed, assuming trajectory end: [{current_angle:.2f}°, {current_angle:.2f}°, {current_angle:.2f}°]")
+                print(f"Position query failed, assuming trajectory end: [{current_angle:.2f}°, {current_angle:.2f}°, {current_angle:.2f}°, {current_angle:.2f}°, {current_angle:.2f}°, {current_angle:.2f}°]")
 
         # Wait between moves
         print("\nWaiting 5 seconds before next test...")
@@ -365,10 +395,10 @@ def main():
             time.sleep(1.0)  # Longer pause for motion to complete
             pos = controller.get_current_position()
             if pos:
-                print(f"Position after sinusoidal motion: [{pos[0]:.2f}°, {pos[1]:.2f}°, {pos[2]:.2f}°]")
+                print(f"Position after sinusoidal motion: [{pos[0]:.2f}°, {pos[1]:.2f}°, {pos[2]:.2f}°, {pos[3]:.2f}°, {pos[4]:.2f}°, {pos[5]:.2f}°]")
                 current_angle = pos[0]  # Use actual position if query succeeds
             else:
-                print(f"Position query failed, assuming trajectory end: [{current_angle:.2f}°, {current_angle:.2f}°, {current_angle:.2f}°]")
+                print(f"Position query failed, assuming trajectory end: [{current_angle:.2f}°, {current_angle:.2f}°, {current_angle:.2f}°, {current_angle:.2f}°, {current_angle:.2f}°, {current_angle:.2f}°]")
 
         # Return to home position
         print("\n=== Returning to Home Position ===")
@@ -385,7 +415,7 @@ def main():
             time.sleep(0.5)
             pos = controller.get_current_position()
             if pos:
-                print(f"Final position: [{pos[0]:.2f}°, {pos[1]:.2f}°, {pos[2]:.2f}°]")
+                print(f"Final position: [{pos[0]:.2f}°, {pos[1]:.2f}°, {pos[2]:.2f}°, {pos[3]:.2f}°, {pos[4]:.2f}°, {pos[5]:.2f}°]")
 
         # Close connection
         controller.close()

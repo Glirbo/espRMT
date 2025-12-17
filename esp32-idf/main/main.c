@@ -63,19 +63,19 @@ static const char *TAG = "RMTArm";
 #define RMT_CLK_DIV     80      // 80MHz / 80 = 1MHz (1 tick = 1μs)
 #define PULSE_WIDTH_US  5       // Pulse width in microseconds
 
-// GPIO Pin Definitions (ESP32-S3 compatible)
+// GPIO Pin Definitions (ESP32-WROOM compatible)
 // Note: Adjust these based on your hardware
-// ESP32-S3 safe pins: GPIO 1-18, 21, 38-48 (avoid 0, 19-20 if using USB)
-#define STEP_PIN_0      GPIO_NUM_1
-#define STEP_PIN_1      GPIO_NUM_2
-#define STEP_PIN_2      GPIO_NUM_3
-#define DIR_PIN_0       GPIO_NUM_4
-#define DIR_PIN_1       GPIO_NUM_5
-#define DIR_PIN_2       GPIO_NUM_6
+// ESP32-WROOM safe output pins: GPIO 12-19, 21-23, 25-27, 32-33
+#define STEP_PIN_0      GPIO_NUM_25
+#define STEP_PIN_1      GPIO_NUM_26
+#define STEP_PIN_2      GPIO_NUM_27
+#define DIR_PIN_0       GPIO_NUM_32
+#define DIR_PIN_1       GPIO_NUM_33
+#define DIR_PIN_2       GPIO_NUM_14
 
-// Alternative pins (if above conflict with your board):
-// STEP pins: GPIO 8, 9, 10
-// DIR pins:  GPIO 11, 12, 13
+// Alternative ESP32-S3 pins (if using S3 instead):
+// STEP pins: GPIO 1, 2, 3
+// DIR pins:  GPIO 4, 5, 6
 
 // ============================================================================
 // Data Structures

@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+/home/mog/git/espRMT/esp32-idf-wroom/build/CMakeFiles/bootloader
+/home/mog/git/espRMT/esp32-idf-wroom/build/CMakeFiles/bootloader.rule
+/home/mog/git/espRMT/esp32-idf-wroom/build/CMakeFiles/bootloader-complete.rule
+/home/mog/git/espRMT/esp32-idf-wroom/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+/home/mog/git/espRMT/esp32-idf-wroom/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/home/mog/git/espRMT/esp32-idf-wroom/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/home/mog/git/espRMT/esp32-idf-wroom/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/home/mog/git/espRMT/esp32-idf-wroom/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/home/mog/git/espRMT/esp32-idf-wroom/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/home/mog/git/espRMT/esp32-idf-wroom/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

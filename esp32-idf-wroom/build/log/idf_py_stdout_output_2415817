@@ -1,0 +1,259 @@
+[0;32mI (220) main_task: Calling app_main()[0m
+[0;32mI (223) RMTArm: [0m
+[0;32mI (226) R�ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:4068
+load:0x40078000,len:14732
+load:0x40080400,len:4
+load:0x40080404,len:3328
+entry 0x400805ac
+[0;32mI (92) cpu_start: Multicore app[0m
+[0;32mI (100) cpu_start: Pro cpu start user code[0m
+[0;32mI (100) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (100) app_init: Application information:[0m
+[0;32mI (103) app_init: Project name:     rmtarm[0m
+[0;32mI (108) app_init: App version:      f679334-dirty[0m
+[0;32mI (113) app_init: Compile time:     Dec 17 2025 07:57:57[0m
+[0;32mI (119) app_init: ELF file SHA256:  db3876bc6...[0m
+[0;32mI (125) app_init: ESP-IDF:          v5.4.2-dirty[0m
+[0;32mI (130) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (135) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (140) efuse_init: Chip rev:         v1.0[0m
+[0;32mI (145) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (152) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (158) heap_init: At 3FFBB800 len 00024800 (146 KiB): DRAM[0m
+[0;32mI (164) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (170) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (177) heap_init: At 4008B07C len 00014F84 (83 KiB): IRAM[0m
+[0;32mI (184) spi_flash: detected chip: generic[0m
+[0;32mI (188) spi_flash: flash io: dio[0m
+[0;33mW (191) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;33mW (205) rmt(legacy): legacy driver is deprecated, please migrate to `driver/rmt_tx.h` and/or `driver/rmt_rx.h`[0m
+[0;32mI (216) main_task: Started on CPU0[0m
+[0;32mI (220) main_task: Calling app_main()[0m
+[0;32mI (223) RMTArm: [0m
+[0;32mI (226) RMTArm: ╔════════════════════════════════════════════════════════╗[0m
+[0;32mI (244) RMTArm: ║                                                        ║[0m
+[0;32mI (251) RMTArm: ║   ESP32-WROOM ROBOTIC ARM CONTROLLER v1.0              ║[0m
+[0;32mI (259) RMTArm: ║                                                        ║[0m
+[0;32mI (267) RMTArm: ╚════════════════════════════════════════════════════════╝[0m
+[0;32mI (285) RMTArm: [0m
+[0;32mI (287) RMTArm: Motor Configuration:[0m
+[0;32mI (292) RMTArm:   Steps per revolution: 4000 (no microstepping)[0m
+[0;32mI (298) RMTArm:   Gear ratio:           50:1[0m
+[0;32mI (303) RMTArm:   Steps per degree:     555.56[0m
+[0;32mI (308) RMTArm: [0m
+[0;32mI (311) RMTArm: Motion Limits:[0m
+[0;32mI (315) RMTArm:   Max angular velocity: 30.0°/sec[0m
+[0;32mI (320) RMTArm:   Max step rate:        16667 steps/sec[0m
+[0;32mI (326) RMTArm:   Min pulse period:     60μs[0m
+[0;32mI (331) RMTArm:   Buffer size:          3072 items (5.5° max in 50ms @ 30°/s)[0m
+[0;32mI (339) RMTArm: [0m
+[0;32mI (341) RMTArm: ╔════════════════════════════════════════════════════════╗[0m
+[0;32mI (359) RMTArm: ║           GPIO CONFIGURATION                           ║[0m
+[0;32mI (367) RMTArm: ╚════════════════════════════════════════════════════════╝[0;32mI (395) RMTArm: UART setup complete (baud: 115200)[0m
+[0;32mI (395) RMTArm: ╔════════════════════════════════════════════════════════╗[0m
+[0;32mI (407) RMTArm: ║           RMT CONFIGURATION                            ║[0m
+[0;32mI (415) RMTArm: ╚════════════════════════════════════════════════════════╝[0m
+[0;32mI (433) RMTArm: Number of motors: 3[0m
+[0;32mI (437) RMTArm: RMT clock divider: 80 (tick = 1μs)[0m
+[0;32mI (443) RMTArm: Pulse width: 5μs[0m
+[0;32mI (447) RMTArm: [0m
+[0;32mI (450) RMTArm: ✓ Motor 0 configured:[0m
+[0;32mI (454) RMTArm:   STEP pin: GPIO25  │  DIR pin: GPIO32  │  RMT: CH0[0m
+[0;32mI (461) RMTArm: ✓ Motor 1 configured:[0m
+[0;32mI (465) RMTArm:   STEP pin: GPIO26  │  DIR pin: GPIO33  │  RMT: CH1[0m
+[0;32mI (473) RMTArm: ✓ Motor 2 configured:[0m
+[0;32mI (477) RMTArm:   STEP pin: GPIO27  │  DIR pin: GPIO14  │  RMT: CH2[0m
+[0;32mI (485) RMTArm: [0m
+[0;32mI (487) RMTArm: RMT setup complete - ready for motion control[0m
+[0;32mI (493) RMTArm: [0m
+[0;32mI (496) RMTArm: ╔════════════════════════════════════════════════════════╗[0m
+[0;32mI (514) RMTArm: ║      MOTION CONTROL TASK STARTED                       ║[0m
+[0;32mI (522) RMTArm: ╚════════════════════════════════════════════════════════╝[0m
+[0;32mI (539) RMTArm: RMT buffer size: 3072 items per motor[0m
+[0;32mI (545) RMTArm: Max steps per command: 3072[0m
+[0;32mI (550) RMTArm: Waiting for commands...[0m
+[0;32mI (554) RMTArm: Send 'P' or '?' to query current position[0m
+[0;32mI (560) RMTArm: [0m
+[0;32mI (563) RMTArm: ╔════════════════════════════════════════════════════════╗[0m
+[0;32mI (580) RMTArm: ║           SYSTEM READY                                 ║[0m
+[0;32mI (588) RMTArm: ╚════════════════════════════════════════════════════════╝[0m
+[0;32mI (606) RMTArm: [0m
+[0;32mI (609) main_task: Returned from app_main()[0m
+POS:0.00,0.00,0.00
+[0;32mI (457178) RMTArm: Position query: sent [0.00°, 0.00°, 0.00°][0m
+POS:0.00,0.00,0.00
+[0;32mI (458286) RMTArm: Position query: sent [0.00°, 0.00°, 0.00°][0m
+POS:0.00,0.00,0.00
+[0;32mI (458838) RMTArm: Position query: sent [0.00°, 0.00°, 0.00°][0m
+POS:0.00,0.00,0.00
+[0;32mI (459392) RMTArm: Position query: sent [0.00°, 0.00°, 0.00°][0m
+POS:0.00,0.00,0.00
+[0;32mI (460501) RMTArm: Position query: sent [0.00°, 0.00°, 0.00°][0m
+POS:0.00,0.00,0.00
+[0;32mI (461611) RMTArm: Position query: sent [0.00°, 0.00°, 0.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (469067) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (469620) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (470173) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (471288) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (482745) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (483854) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (484406) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (484958) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:0.02,0.02,0.02
+[0;32mI (488861) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (489969) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (491077) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (499029) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (500137) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (501246) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (502357) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (503469) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (504023) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:45.00,45.00,45.00
+[0;32mI (512034) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (513143) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (525153) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (526261) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (527370) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:0.02,0.02,0.02
+[0;32mI (531277) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (532387) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (533497) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (542451) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (543561) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (544114) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (545224) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (546334) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+[0;32mI (553098) RMTArm: [0m
+[0;32mI (553099) RMTArm: STATS: Cmds=500 Errs=0 Uptime=552.6s Rate=0.9/s | Pos: M0=24657 M1=24657 M2=24657[0m
+[0;32mI (553100) RMTArm: [0m
+POS:45.00,45.00,45.00
+[0;32mI (554899) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (556009) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (568017) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (568571) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (569681) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (570235) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:0.02,0.02,0.02
+[0;32mI (574142) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (575252) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (575806) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (743576) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (744684) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (745237) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (745790) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (746898) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (747452) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (748561) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:45.00,45.00,45.00
+[0;32mI (756017) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (757127) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (758238) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (769692) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (770800) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (771355) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (771908) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:0.02,0.02,0.02
+[0;32mI (775812) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (776925) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (778033) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (782362) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (783470) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (784023) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (785130) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (785683) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (786237) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (786790) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (787343) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:45.00,45.00,45.00
+[0;32mI (794798) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (795350) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (796459) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+[0;32mI (804920) RMTArm: [0m
+[0;32mI (804920) RMTArm: STATS: Cmds=1000 Errs=0 Uptime=804.4s Rate=1.2/s | Pos: M0=25008 M1=25008 M2=25008[0m
+[0;32mI (804921) RMTArm: [0m
+[0;32mI (804940) RMTArm: [0m
+[0;32mI (804940) RMTArm: STATS: Cmds=1000 Errs=0 Uptime=804.4s Rate=1.2/s | Pos: M0=25008 M1=25008 M2=25008[0m
+[0;32mI (804941) RMTArm: [0m
+[0;32mI (804960) RMTArm: [0m
+[0;32mI (804960) RMTArm: STATS: Cmds=1000 Errs=0 Uptime=804.5s Rate=1.2/s | Pos: M0=25008 M1=25008 M2=25008[0m
+[0;32mI (804961) RMTArm: [0m
+POS:45.00,45.00,45.00
+[0;32mI (808468) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (809020) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (809574) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:45.00,45.00,45.00
+[0;32mI (810682) RMTArm: Position query: sent [45.00°, 45.00°, 45.00°][0m
+POS:0.02,0.02,0.02
+[0;32mI (814588) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (815141) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
+POS:0.02,0.02,0.02
+[0;32mI (816252) RMTArm: Position query: sent [0.02°, 0.02°, 0.02°][0m
