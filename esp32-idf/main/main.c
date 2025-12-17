@@ -110,9 +110,9 @@ static int pending_packet_len = 0;
 // Pre-allocated RMT buffers (avoid malloc in real-time path)
 // With 555.56 steps/degree and 1:50 gearing:
 //   10° move = 5,556 steps
-//   20° move = 11,111 steps
-// Buffer sized for reasonable moves (costs ~192KB RAM)
-#define MAX_RMT_ITEMS 16384  // Supports up to ~29.5° moves in 50ms
+//   3,072 steps = ~5.5° move (sufficient for 30°/sec = 1.5° per 50ms)
+// Buffer sized to fit in ESP32-S3's SRAM (6 motors × 3,072 × 4 = ~74KB)
+#define MAX_RMT_ITEMS 3072  // Supports up to ~5.5° moves in 50ms (3.6× safety margin)
 static rmt_item32_t rmt_items_buffer[NUM_MOTORS][MAX_RMT_ITEMS];
 
 // ============================================================================

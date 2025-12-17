@@ -11,6 +11,9 @@
 /home/mog/git/espRMT/esp32-idf/build/bootloader/CMakeFiles/size.dir
 /home/mog/git/espRMT/esp32-idf/build/bootloader/CMakeFiles/size-files.dir
 /home/mog/git/espRMT/esp32-idf/build/bootloader/CMakeFiles/size-components.dir
+/home/mog/git/espRMT/esp32-idf/build/bootloader/CMakeFiles/dfu.dir
+/home/mog/git/espRMT/esp32-idf/build/bootloader/CMakeFiles/dfu-list.dir
+/home/mog/git/espRMT/esp32-idf/build/bootloader/CMakeFiles/dfu-flash.dir
 /home/mog/git/espRMT/esp32-idf/build/bootloader/CMakeFiles/uf2.dir
 /home/mog/git/espRMT/esp32-idf/build/bootloader/CMakeFiles/uf2-app.dir
 /home/mog/git/espRMT/esp32-idf/build/bootloader/CMakeFiles/edit_cache.dir
@@ -60,8 +63,8 @@
 /home/mog/git/espRMT/esp32-idf/build/bootloader/esp-idf/esp_hw_support/CMakeFiles/__idf_esp_hw_support.dir
 /home/mog/git/espRMT/esp32-idf/build/bootloader/esp-idf/esp_hw_support/CMakeFiles/edit_cache.dir
 /home/mog/git/espRMT/esp32-idf/build/bootloader/esp-idf/esp_hw_support/CMakeFiles/rebuild_cache.dir
-/home/mog/git/espRMT/esp32-idf/build/bootloader/esp-idf/esp_hw_support/port/esp32/CMakeFiles/edit_cache.dir
-/home/mog/git/espRMT/esp32-idf/build/bootloader/esp-idf/esp_hw_support/port/esp32/CMakeFiles/rebuild_cache.dir
+/home/mog/git/espRMT/esp32-idf/build/bootloader/esp-idf/esp_hw_support/port/esp32s3/CMakeFiles/edit_cache.dir
+/home/mog/git/espRMT/esp32-idf/build/bootloader/esp-idf/esp_hw_support/port/esp32s3/CMakeFiles/rebuild_cache.dir
 /home/mog/git/espRMT/esp32-idf/build/bootloader/esp-idf/esp_hw_support/lowpower/CMakeFiles/edit_cache.dir
 /home/mog/git/espRMT/esp32-idf/build/bootloader/esp-idf/esp_hw_support/lowpower/CMakeFiles/rebuild_cache.dir
 /home/mog/git/espRMT/esp32-idf/build/bootloader/esp-idf/esp_common/CMakeFiles/__idf_esp_common.dir

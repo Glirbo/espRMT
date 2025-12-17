@@ -52,7 +52,7 @@ POS:j1,j2,j3,j4,j5,j6\n
 
 **Configuration:**
 - Buffer size per motor: 3,072 items (reduced from 16,384 for ESP32-WROOM)
-- Buffer capacity: ~5.5° per 50ms update
+- **Buffer capacity**: ~5.5° maximum move per 50ms update
 - Total motors: 6
 
 **Memory calculation:**
@@ -64,6 +64,28 @@ POS:j1,j2,j3,j4,j5,j6\n
 - Total available: 520KB
 - RMT buffers: ~74KB
 - Remaining: ~446KB (for system, stack, heap, networking disabled)
+
+**What the 5.5° buffer limit means:**
+- **Maximum move per update**: You cannot move a single motor more than ~5.5° in one 50ms command
+- **Safety margin**: 3.6× (max needed is 1.5° per update at 30°/sec max velocity)
+- **Why it's sufficient**: At 30°/sec, each 50ms update only moves 1.5° maximum
+- **Protection**: Python trajectory validator and ESP32 buffer clamp prevent overflows
+
+**Example operation at max velocity:**
+```
+t=0ms:   Motor at 0°
+t=50ms:  Motor at 1.5°   ✅ Fits in buffer (3.6× safety margin)
+t=100ms: Motor at 3.0°   ✅ Smooth motion continues
+t=150ms: Motor at 4.5°   ✅ No buffer overflow
+```
+
+**Edge case (prevented by system):**
+```
+t=0ms:   Motor at 0°
+t=50ms:  Motor at 10°   ❌ Would require 200°/sec (exceeds 30°/sec limit)
+                        → Python validator rejects trajectory
+                        → ESP32 clamps to 5.5° if received
+```
 
 ### Comparison to 3-Motor Version
 
@@ -238,14 +260,28 @@ Then enable DEBUG level logging via `idf.py menuconfig`
 ## Performance Notes
 
 **Maximum Movement per Update:**
-- Buffer capacity: 5.5° per motor per 50ms update
-- Velocity limit: 30°/sec = 1.5° per 50ms
-- Safety margin: 3.6× (plenty of headroom)
+- **Buffer capacity**: 5.5° per motor per 50ms update
+- **Velocity limit**: 30°/sec = 1.5° per 50ms
+- **Safety margin**: 3.6× (plenty of headroom)
 
-**If you need larger moves:**
-- Increase `MAX_RMT_ITEMS` (uses more RAM)
-- Or split large moves into multiple trajectory points
-- Current configuration is optimized for ESP32-WROOM's limited SRAM
+**What happens if you exceed the buffer limit:**
+1. Python trajectory validator checks all moves before sending
+2. If a move >5.5° per 50ms is detected, trajectory is rejected
+3. If somehow sent to ESP32, firmware clamps to 5.5° and logs warning:
+   ```
+   W (12345) RMTArm: Motor 0: Requested 5556 steps, clamped to 3072 (buffer limit)
+   ```
+4. Motor will move 5.5° instead of requested amount
+
+**If you need larger instantaneous moves:**
+- **Option 1**: Increase `MAX_RMT_ITEMS` in main.c (uses more RAM)
+  - Example: 6,144 items = ~11° moves (requires ~148KB for 6 motors)
+- **Option 2**: Split large moves into multiple trajectory points at 50ms intervals
+  - Example: 20° move = 4 points × 5° each over 200ms
+- **Option 3**: Reduce update rate from 20Hz to 10Hz (100ms updates)
+  - Allows 3° moves at 30°/sec, but less smooth
+
+**Recommendation**: Current configuration (3,072 items) is optimized for smooth 30°/sec motion on ESP32-WROOM's limited SRAM. Only increase if you specifically need instantaneous moves >5.5°.
 
 ## Files Modified
 

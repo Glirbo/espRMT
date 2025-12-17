@@ -30,18 +30,35 @@ ESP_LOGI(TAG, "Position query: sent [%.2f°, ...]", ...);
 ```
 This is **enabled** on S3 (safe due to separate console) but **disabled** on WROOM.
 
-### More Memory Available
+### Memory Configuration
 
 **RMT Buffer Configuration:**
-- Can use larger buffers than WROOM
-- Currently: 16,384 items per motor (same as original 3-motor config)
-- Total: 6 motors × 16,384 items × 4 bytes = **393KB**
-- ESP32-S3 has more SRAM available, so this is fine
+- Buffer size per motor: 3,072 items (reduced to fit in SRAM with networking stack)
+- Total: 6 motors × 3,072 items × 4 bytes = **~74KB**
+- ESP32-S3 has 512KB SRAM (similar to WROOM's 520KB)
 
 **Buffer capacity:**
-- ~29.5° per motor per 50ms update
-- Much larger than needed (max 1.5° per update at 30°/s)
-- Provides plenty of headroom for large moves
+- **Maximum move per update**: ~5.5° in 50ms
+- **Safety margin**: 3.6× (max needed is 1.5° per update at 30°/s)
+- **What this means**: You cannot move a single motor more than 5.5° in one 50ms command
+- **Why it's sufficient**: At 30°/sec max velocity, you only need 1.5° per update
+- **Protection**: Python validator and ESP32 buffer clamp prevent overflows
+
+**Example operation at max velocity:**
+```
+t=0ms:   Motor at 0°
+t=50ms:  Motor at 1.5°   ✅ Fits in buffer (3.6× safety margin)
+t=100ms: Motor at 3.0°   ✅ Smooth motion continues
+t=150ms: Motor at 4.5°   ✅ No buffer overflow
+```
+
+**Edge case (prevented by system):**
+```
+t=0ms:   Motor at 0°
+t=50ms:  Motor at 10°   ❌ Would require 200°/sec (exceeds limits)
+                        → Python validator rejects trajectory
+                        → ESP32 clamps to 5.5° if received
+```
 
 ## Communication Protocol
 
@@ -120,10 +137,10 @@ controller = MotionController('/dev/ttyACM0', 115200)
 | DIR pins | GPIO8-13 | GPIO14,16-18,32-33 |
 | UART channels | UART0 + USB-JTAG | UART0 only |
 | Position logging | Enabled (safe) | Disabled (interference) |
-| RMT buffer/motor | 16,384 items | 3,072 items |
-| Total RMT memory | ~393KB | ~74KB |
-| Buffer capacity | ~29.5° | ~5.5° |
-| SRAM available | 512KB + 8MB PSRAM | 520KB |
+| RMT buffer/motor | 3,072 items | 3,072 items |
+| Total RMT memory | ~74KB | ~74KB |
+| Buffer capacity | ~5.5° | ~5.5° |
+| SRAM available | 512KB | 520KB |
 | Debug logging | Safe anytime | Causes interference |
 | Monitor + Python | Simultaneous | Sequential only |
 | Port | /dev/ttyACM0 | /dev/ttyUSB0 |

@@ -1,10 +1,16 @@
-# ESP32 RMT Arm Default Configuration
+# ESP32-S3 RMT Arm Default Configuration
+
+# Target ESP32-S3
+CONFIG_IDF_TARGET="esp32s3"
+CONFIG_IDF_TARGET_ESP32S3=y
 
 # Enable FreeRTOS
 CONFIG_FREERTOS_HZ=1000
 
-# UART configuration
+# UART configuration (data on UART0, logs on USB-JTAG)
 CONFIG_ESP_CONSOLE_UART_BAUDRATE=115200
+CONFIG_ESP_CONSOLE_UART_NUM=0
+CONFIG_ESP_CONSOLE_UART=y
 
 # RMT configuration
 CONFIG_RMT_ISR_IRAM_SAFE=y
@@ -15,3 +21,17 @@ CONFIG_LOG_MAXIMUM_LEVEL_DEBUG=y
 
 # Enable color in logs
 CONFIG_LOG_COLORS=y
+
+# ==============================================================================
+# Disable Networking Stack to save DRAM
+# (6 motors use ~393KB for RMT buffers)
+# ==============================================================================
+
+# Disable Wi-Fi completely
+CONFIG_ESP_WIFI_ENABLED=n
+
+# Disable Bluetooth
+CONFIG_BT_ENABLED=n
+
+# Disable Ethernet
+CONFIG_ETH_ENABLED=n

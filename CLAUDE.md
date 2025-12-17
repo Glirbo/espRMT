@@ -35,9 +35,25 @@ Min pulse period:    60μs
 - ALWAYS validate that trajectories respect the 30°/sec velocity limit
 - Use `validate_trajectory_velocity()` function in Python before executing
 - At 50ms updates (20Hz), max angular change is 1.5° per update
-- Buffer size (16,384 items) supports ~29.5° moves in 50ms
+- Buffer size (3,072 items) supports ~5.5° moves in 50ms (3.6× safety margin at 30°/sec)
 - **S-curve interpolation has 2.0× velocity multiplier at peak** - account for this when calculating durations
 - For S-curve: `peak_velocity = angle_change × 2.0 / duration` must be ≤ 30°/sec
+
+**Buffer Capacity Explained:**
+The 5.5° buffer limit means you cannot move a single motor more than 5.5° in one 50ms command. This is enforced by:
+1. **Python validator**: Rejects trajectories with moves >5.5° per 50ms
+2. **ESP32 clamp**: If exceeded, motor moves only 5.5° and logs warning
+
+**Why 5.5° is sufficient:**
+```
+Max velocity:       30°/sec
+Update rate:        20Hz (50ms)
+Required per update: 30° ÷ 20 = 1.5°
+Buffer capacity:    5.5°
+Safety margin:      5.5° ÷ 1.5° = 3.6×
+```
+
+At maximum velocity, you only need 1.5° per update. The 5.5° buffer provides 3.6× safety margin for acceleration and deceleration phases.
 
 ## Build Commands
 
@@ -188,14 +204,20 @@ The RMT (Remote Control Transceiver) is a hardware peripheral that generates pre
 **Pre-allocated Buffers (CRITICAL):**
 The system uses static buffers to eliminate malloc() overhead:
 ```c
-#define MAX_RMT_ITEMS 16384
+#define MAX_RMT_ITEMS 3072  // Supports ~5.5° moves (3.6× safety margin at 30°/sec)
 static rmt_item32_t rmt_items_buffer[NUM_MOTORS][MAX_RMT_ITEMS];
 
 // Pending packet buffer (for protocol coexistence)
 static uint8_t pending_packet[PACKET_SIZE];
 static int pending_packet_len = 0;
 ```
-This costs ~192KB RAM but ensures consistent 20Hz timing. DO NOT use malloc/free in the motion control path.
+This costs ~74KB RAM for 6 motors and ensures consistent 20Hz timing. DO NOT use malloc/free in the motion control path.
+
+**Buffer Capacity:**
+- **Maximum move per update**: ~5.5° in 50ms (3,072 items)
+- **Max velocity**: 30°/sec = 1.5° per 50ms update
+- **Safety margin**: 3.6× (plenty of headroom for acceleration)
+- If exceeded, ESP32 clamps to buffer size and logs warning
 
 **Pending Packet Buffer System:**
 The system handles both 1-byte position queries and 17-byte motion commands:
@@ -394,7 +416,8 @@ If you need to change motor parameters (steps/rev, gear ratio, etc.):
 
 2. Recalculate derived values:
    - `MIN_PERIOD_US` = 1,000,000 / (MAX_VELOCITY × STEPS_PER_DEGREE)
-   - `MAX_RMT_ITEMS` buffer size (current: 16,384 items ≈ 29.5° at current config)
+   - `MAX_RMT_ITEMS` buffer size (current: 3,072 items ≈ 5.5° at current config)
+   - Note: Buffer size is limited by available SRAM (6 motors × 3,072 items × 4 bytes = ~74KB)
 
 3. Rebuild and reflash ESP32
 
@@ -433,7 +456,7 @@ Current system achieves consistent 20Hz with pre-allocated buffers.
 ### Performance Issues (Resolved)
 - **malloc() overhead**: Original code used malloc/free for RMT items, causing 18ms delays. Switched to pre-allocated static buffers for consistent 20Hz timing.
 - **Statistics overhead**: Large log boxes (17 lines) caused 202ms delays. Reduced to single-line compact stats every 500 commands.
-- **Buffer sizing**: Started at 512 items (insufficient), increased to 16,384 to handle large moves without clamping.
+- **Buffer sizing**: Started at 512 items (insufficient), increased to 16,384 for 3 motors, then optimized to 3,072 for 6 motors to fit in SRAM. The 3,072 item buffer supports ~5.5° moves per 50ms, providing 3.6× safety margin at 30°/sec max velocity.
 
 ### Configuration Changes
 - **Microstepping removed**: Changed from calculated microstepping (200 × 16) to direct steps/rev (4000) for clarity and accuracy.
