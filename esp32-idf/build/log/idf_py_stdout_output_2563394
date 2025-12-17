@@ -25,7 +25,7 @@ Loading defaults file /home/mog/git/espRMT/esp32-idf/sdkconfig.defaults...
 -- Performing Test C_COMPILER_SUPPORTS_WFORMAT_SIGNEDNESS
 -- Performing Test C_COMPILER_SUPPORTS_WFORMAT_SIGNEDNESS - Success
 -- USING O3
--- App "rmtarm" version: f679334-dirty
+-- App "rmtarm" version: 16f0b08-dirty
 -- Adding linker script /home/mog/git/espRMT/esp32-idf/build/esp-idf/esp_system/ld/memory.ld
 -- Adding linker script /home/mog/git/espRMT/esp32-idf/build/esp-idf/esp_system/ld/sections.ld.in
 -- Adding linker script /home/mog/esp/esp-idf/components/esp_rom/esp32/ld/esp32.rom.ld

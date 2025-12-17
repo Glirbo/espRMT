@@ -1,15 +1,15 @@
 /*
- * ESP32 Robotic Arm Controller
+ * ESP32 Robotic Arm Controller - ESP32-S3 Edition (6 Motors)
  * Receives binary position commands via UART and controls stepper motors via RMT
  *
  * Architecture (ESP32-S3):
- *   - UART0: Clean data channel for motion commands (17-byte binary) and position queries ('P')
+ *   - UART0: Clean data channel for motion commands (29-byte binary) and position queries ('P')
  *   - USB-JTAG: Logging channel for ESP_LOGI() output (via CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG)
- *   - RMT: Hardware-timed pulse generation on GPIO1-3 (STEP) and GPIO4-6 (DIR)
+ *   - RMT: Hardware-timed pulse generation on 6 motors (GPIO1-3,5-7 STEP, GPIO8-13 DIR)
  *
  * Position Query Protocol:
  *   - Request: Single byte 'P' or '?' sent to UART0
- *   - Response: ASCII string "POS:j1,j2,j3\n" (e.g., "POS:0.00,45.00,30.00\n")
+ *   - Response: ASCII string "POS:j1,j2,j3,j4,j5,j6\n" (e.g., "POS:0.00,45.00,30.00,0.00,0.00,0.00\n")
  *   - Main loop optimized for ~60 Hz cycling to catch queries reliably (90-100% success)
  *
  * Key Performance Optimizations:
@@ -45,10 +45,10 @@ static const char *TAG = "RMTArm";
 #define UART_BUF_SIZE   1024
 
 // Packet Configuration
-#define PACKET_SIZE     17
+#define PACKET_SIZE     29  // 4 (timestamp) + 24 (6 floats) + 1 (checksum)
 
 // Motor Configuration
-#define NUM_MOTORS      3
+#define NUM_MOTORS      6
 #define STEPS_PER_REV   4000.0f  // Direct step count (no microstepping)
 #define GEAR_RATIO      50.0f    // All motors have 1:50 gearing
 #define STEPS_PER_DEGREE ((STEPS_PER_REV * GEAR_RATIO) / 360.0f)
@@ -63,19 +63,21 @@ static const char *TAG = "RMTArm";
 #define RMT_CLK_DIV     80      // 80MHz / 80 = 1MHz (1 tick = 1μs)
 #define PULSE_WIDTH_US  5       // Pulse width in microseconds
 
-// GPIO Pin Definitions (ESP32-WROOM compatible)
-// Note: Adjust these based on your hardware
-// ESP32-WROOM safe output pins: GPIO 12-19, 21-23, 25-27, 32-33
-#define STEP_PIN_0      GPIO_NUM_25
-#define STEP_PIN_1      GPIO_NUM_26
-#define STEP_PIN_2      GPIO_NUM_27
-#define DIR_PIN_0       GPIO_NUM_32
-#define DIR_PIN_1       GPIO_NUM_33
-#define DIR_PIN_2       GPIO_NUM_14
+// GPIO Pin Definitions for ESP32-S3
+// 6 Motors configuration
+#define STEP_PIN_0      GPIO_NUM_1
+#define STEP_PIN_1      GPIO_NUM_2
+#define STEP_PIN_2      GPIO_NUM_3
+#define STEP_PIN_3      GPIO_NUM_5
+#define STEP_PIN_4      GPIO_NUM_6
+#define STEP_PIN_5      GPIO_NUM_7
 
-// Alternative ESP32-S3 pins (if using S3 instead):
-// STEP pins: GPIO 1, 2, 3
-// DIR pins:  GPIO 4, 5, 6
+#define DIR_PIN_0       GPIO_NUM_8
+#define DIR_PIN_1       GPIO_NUM_9
+#define DIR_PIN_2       GPIO_NUM_10
+#define DIR_PIN_3       GPIO_NUM_11
+#define DIR_PIN_4       GPIO_NUM_12
+#define DIR_PIN_5       GPIO_NUM_13
 
 // ============================================================================
 // Data Structures
@@ -88,12 +90,18 @@ typedef struct {
 } __attribute__((packed)) MotionCommand;
 
 // Motor state
-static float current_angles[NUM_MOTORS] = {0.0f, 0.0f, 0.0f};
-static int32_t current_steps[NUM_MOTORS] = {0, 0, 0};
+static float current_angles[NUM_MOTORS] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
+static int32_t current_steps[NUM_MOTORS] = {0, 0, 0, 0, 0, 0};
 
 // Pin arrays
-static const gpio_num_t step_pins[NUM_MOTORS] = {STEP_PIN_0, STEP_PIN_1, STEP_PIN_2};
-static const gpio_num_t dir_pins[NUM_MOTORS] = {DIR_PIN_0, DIR_PIN_1, DIR_PIN_2};
+static const gpio_num_t step_pins[NUM_MOTORS] = {
+    STEP_PIN_0, STEP_PIN_1, STEP_PIN_2,
+    STEP_PIN_3, STEP_PIN_4, STEP_PIN_5
+};
+static const gpio_num_t dir_pins[NUM_MOTORS] = {
+    DIR_PIN_0, DIR_PIN_1, DIR_PIN_2,
+    DIR_PIN_3, DIR_PIN_4, DIR_PIN_5
+};
 
 // Pending packet buffer (for when check_position_request reads first byte of motion command)
 static uint8_t pending_packet[PACKET_SIZE];
@@ -241,16 +249,20 @@ void setup_uart(void)
 
 void send_current_position(void)
 {
-    char response[64];
+    char response[128];
     int len = snprintf(response, sizeof(response),
-                      "POS:%.2f,%.2f,%.2f\n",
+                      "POS:%.2f,%.2f,%.2f,%.2f,%.2f,%.2f\n",
                       current_angles[0],
                       current_angles[1],
-                      current_angles[2]);
+                      current_angles[2],
+                      current_angles[3],
+                      current_angles[4],
+                      current_angles[5]);
 
     uart_write_bytes(UART_NUM, response, len);
-    ESP_LOGI(TAG, "Position query: sent [%.2f°, %.2f°, %.2f°]",
-             current_angles[0], current_angles[1], current_angles[2]);
+    ESP_LOGI(TAG, "Position query: sent [%.2f°, %.2f°, %.2f°, %.2f°, %.2f°, %.2f°]",
+             current_angles[0], current_angles[1], current_angles[2],
+             current_angles[3], current_angles[4], current_angles[5]);
 }
 
 bool check_position_request(void)
@@ -330,11 +342,14 @@ void process_command(MotionCommand *cmd)
     cmd_count++;
 
     ESP_LOGD(TAG, "─────────────────────────────────────────────────────────");
-    ESP_LOGD(TAG, "CMD #%" PRIu32 " @ %" PRIu32 "ms │ Target: [%.2f°, %.2f°, %.2f°]",
+    ESP_LOGD(TAG, "CMD #%" PRIu32 " @ %" PRIu32 "ms │ Target: [%.2f°, %.2f°, %.2f°, %.2f°, %.2f°, %.2f°]",
              cmd_count, cmd->timestamp_ms,
              cmd->joint_angles[0],
              cmd->joint_angles[1],
-             cmd->joint_angles[2]);
+             cmd->joint_angles[2],
+             cmd->joint_angles[3],
+             cmd->joint_angles[4],
+             cmd->joint_angles[5]);
 
     // Track total steps for this move
     uint32_t total_steps = 0;
@@ -472,10 +487,12 @@ void motion_control_task(void *pvParameters)
             float uptime_sec = (now - task_start) / (float)configTICK_RATE_HZ;
 
             ESP_LOGI(TAG, "");
-            ESP_LOGI(TAG, "STATS: Cmds=%"PRIu32" Errs=%"PRIu32" Uptime=%.1fs Rate=%.1f/s | Pos: M0=%"PRId32" M1=%"PRId32" M2=%"PRId32,
+            ESP_LOGI(TAG, "STATS: Cmds=%"PRIu32" Errs=%"PRIu32" Uptime=%.1fs Rate=%.1f/s",
                      commands_received, checksum_errors, uptime_sec,
-                     commands_received / uptime_sec,
-                     current_steps[0], current_steps[1], current_steps[2]);
+                     commands_received / uptime_sec);
+            ESP_LOGI(TAG, "  Pos: M0=%"PRId32" M1=%"PRId32" M2=%"PRId32" M3=%"PRId32" M4=%"PRId32" M5=%"PRId32,
+                     current_steps[0], current_steps[1], current_steps[2],
+                     current_steps[3], current_steps[4], current_steps[5]);
             ESP_LOGI(TAG, "");
         }
     }

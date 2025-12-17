@@ -1,7 +1,7 @@
 {
     "version":            "1.2",
     "project_name":       "rmtarm",
-    "project_version":    "f679334-dirty",
+    "project_version":    "16f0b08-dirty",
     "project_path":       "/home/mog/git/espRMT/esp32-idf",
     "idf_path":           "/home/mog/esp/esp-idf",
     "build_dir":          "/home/mog/git/espRMT/esp32-idf/build",
