@@ -1,6 +1,6 @@
 /*
  * Automatically generated file. DO NOT EDIT.
- * Espressif IoT Development Framework (ESP-IDF) 5.4.1 Configuration Header
+ * Espressif IoT Development Framework (ESP-IDF) 5.4.2 Configuration Header
  */
 #pragma once
 #define CONFIG_SOC_BROWNOUT_RESET_SUPPORTED "Not determined"
@@ -336,6 +336,7 @@
 #define CONFIG_ESP_ERR_TO_NAME_LOOKUP 1
 #define CONFIG_DAC_DMA_AUTO_16BIT_ALIGN 1
 #define CONFIG_GPTIMER_ISR_HANDLER_IN_IRAM 1
+#define CONFIG_GPTIMER_OBJ_CACHE_SAFE 1
 #define CONFIG_RMT_ISR_IRAM_SAFE 1
 #define CONFIG_SPI_MASTER_ISR_IN_IRAM 1
 #define CONFIG_SPI_SLAVE_ISR_IN_IRAM 1
@@ -590,6 +591,7 @@
 #define CONFIG_MBEDTLS_ROM_MD5 1
 #define CONFIG_MBEDTLS_HAVE_TIME 1
 #define CONFIG_MBEDTLS_ECDSA_DETERMINISTIC 1
+#define CONFIG_MBEDTLS_SHA1_C 1
 #define CONFIG_MBEDTLS_SHA512_C 1
 #define CONFIG_MBEDTLS_TLS_SERVER_AND_CLIENT 1
 #define CONFIG_MBEDTLS_TLS_SERVER 1

@@ -873,23 +873,34 @@ This repository includes complete working implementations:
 
 ### Python Motion Controller
 
-Located in `python/motion_controller.py`
+Located in `python/` directory
 
-**Features:**
-- Binary protocol implementation with checksums
-- Trajectory generation and execution
-- Example test trajectories (linear moves, circular motion)
-- Easy-to-use API for sending position commands
+**Main Scripts:**
+- **`motor_test_sequences.py`** - Interactive menu with 4 test patterns
+  - Select individual tests or run all
+  - Safety checks and velocity validation
+  - Easy repeat testing for development
+
+- **`motion_controller.py`** - Core controller library
+  - Binary protocol implementation with checksums
+  - Trajectory generation and execution
+  - Position query functionality
+  - Easy-to-use API for sending position commands
+
+- **`simple_example.py`** - Minimal example (~70 lines)
+  - Good starting point for learning
 
 **Usage:**
 ```bash
 cd python
 pip install -r requirements.txt
-python motion_controller.py
+python motor_test_sequences.py  # Interactive menu (recommended)
+python motion_controller.py     # Run predefined trajectories
+python simple_example.py        # Minimal example
 ```
 
 **Configuration:**
-Edit the `PORT` and `BAUDRATE` variables in `main()` to match your setup.
+Edit the `PORT` and `BAUDRATE` variables to match your setup (default: `/dev/ttyACM0` @ 115200).
 
 ### ESP32-IDF Firmware
 
@@ -944,10 +955,24 @@ idf.py -p /dev/ttyUSB0 flash monitor
 In a new terminal:
 ```bash
 cd python
-python motion_controller.py
+python motor_test_sequences.py
 ```
 
-You should see the motors move through the test trajectories!
+An interactive menu appears - select individual tests or run all:
+```
+1. Test 1 - All Motors to 45° (S-curve)
+2. Test 2 - Sinusoidal Motion (±15°)
+3. Test 3 - Sequential Motor Test
+4. Test 4 - Slow Precision Test
+5. Run ALL Tests (sequential)
+0. Exit
+```
+
+**Or run the basic motion controller:**
+```bash
+python motion_controller.py  # Runs predefined trajectories
+python simple_example.py     # Minimal example
+```
 
 ---
 

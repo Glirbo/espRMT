@@ -305,8 +305,139 @@ def generate_test4_trajectory(speed_multiplier=1.0):
     return trajectory
 
 
+def display_menu():
+    """Display the test selection menu"""
+    print(f"\n{'='*60}")
+    print("Motor Test Sequences - Menu")
+    print(f"{'='*60}")
+    print("1. Test 1 - All Motors to 45° (S-curve)")
+    print(f"   Speed: {SPEED_MULTIPLIER_TEST1:.1f}× ({MAX_VELOCITY_BASE * SPEED_MULTIPLIER_TEST1:.1f}°/sec max)")
+    print("\n2. Test 2 - Sinusoidal Motion (±15°)")
+    print(f"   Speed: {SPEED_MULTIPLIER_TEST2:.1f}× ({MAX_VELOCITY_BASE * SPEED_MULTIPLIER_TEST2:.1f}°/sec max)")
+    print("\n3. Test 3 - Sequential Motor Test")
+    print(f"   Speed: {SPEED_MULTIPLIER_TEST3:.1f}× ({MAX_VELOCITY_BASE * SPEED_MULTIPLIER_TEST3:.1f}°/sec max)")
+    print("\n4. Test 4 - Slow Precision Test")
+    print(f"   Speed: {SPEED_MULTIPLIER_TEST4:.1f}× ({MAX_VELOCITY_BASE * SPEED_MULTIPLIER_TEST4:.1f}°/sec max)")
+    print("\n5. Run ALL Tests (sequential)")
+    print("\n0. Exit")
+    print(f"{'='*60}")
+
+
+def run_single_test(controller, test_number):
+    """Run a single test by number"""
+
+    test_map = {
+        1: (generate_test1_trajectory, SPEED_MULTIPLIER_TEST1, "Test 1 - All Motors to 45°"),
+        2: (generate_test2_trajectory, SPEED_MULTIPLIER_TEST2, "Test 2 - Sinusoidal Motion"),
+        3: (generate_test3_trajectory, SPEED_MULTIPLIER_TEST3, "Test 3 - Sequential Motors"),
+        4: (generate_test4_trajectory, SPEED_MULTIPLIER_TEST4, "Test 4 - Slow Precision"),
+    }
+
+    if test_number not in test_map:
+        print(f"Invalid test number: {test_number}")
+        return False
+
+    generator_func, speed_mult, test_name = test_map[test_number]
+
+    print(f"\n{'='*60}")
+    print(f"Starting {test_name}")
+    print(f"{'='*60}")
+
+    # Generate trajectory
+    trajectory = generator_func(speed_multiplier=speed_mult)
+
+    # Validate
+    expected_max_vel = MAX_VELOCITY_BASE * speed_mult
+    print(f"\nValidating velocity limits (max {expected_max_vel:.1f}°/sec)...")
+    valid = validate_trajectory_velocity(trajectory, max_velocity_deg_per_sec=expected_max_vel)
+
+    if valid:
+        print("✓ Trajectory is within velocity limits")
+    else:
+        print("⚠ WARNING: Trajectory has velocity violations!")
+
+    # Execute
+    print(f"\nExecuting {test_name}...")
+    controller.execute_trajectory(trajectory)
+    print(f"✓ {test_name} complete")
+
+    # Summary
+    duration_sec = trajectory[-1][0] / 1000.0
+    print(f"\nTest Summary:")
+    print(f"  Duration: {duration_sec:.1f}s")
+    print(f"  Status: {'✓ PASS' if valid else '✗ VELOCITY VIOLATIONS'}")
+
+    return valid
+
+
+def run_all_tests(controller):
+    """Run all tests sequentially"""
+
+    print(f"\n{'='*60}")
+    print("Running ALL Tests")
+    print(f"{'='*60}")
+
+    results = {}
+
+    for test_num in [1, 2, 3, 4]:
+        if test_num > 1:
+            print(f"\nWaiting 2 seconds before next test...")
+            time.sleep(2)
+
+        results[test_num] = run_single_test(controller, test_num)
+
+    # Final summary
+    print(f"\n\n{'='*60}")
+    print("ALL TESTS SUMMARY")
+    print(f"{'='*60}")
+    print(f"Test 1 (speed {SPEED_MULTIPLIER_TEST1:.2f}×): {'✓ PASS' if results[1] else '✗ VELOCITY VIOLATIONS'}")
+    print(f"Test 2 (speed {SPEED_MULTIPLIER_TEST2:.2f}×): {'✓ PASS' if results[2] else '✗ VELOCITY VIOLATIONS'}")
+    print(f"Test 3 (speed {SPEED_MULTIPLIER_TEST3:.2f}×): {'✓ PASS' if results[3] else '✗ VELOCITY VIOLATIONS'}")
+    print(f"Test 4 (speed {SPEED_MULTIPLIER_TEST4:.2f}×): {'✓ PASS' if results[4] else '✗ VELOCITY VIOLATIONS'}")
+    print(f"{'='*60}")
+
+
+def check_home_position(controller):
+    """Check if motors are at home position"""
+
+    if controller.simulation_mode:
+        return True
+
+    # Query current position
+    print("\nQuerying current motor position...")
+    time.sleep(1.0)
+    current_angles = controller.get_current_position(max_retries=10)
+
+    if current_angles:
+        print(f"Current angles: {[f'{a:.2f}°' for a in current_angles]}")
+
+        # Check if already at home position
+        max_deviation = max(abs(a) for a in current_angles)
+        if max_deviation > 5.0:
+            print(f"\n⚠ WARNING: Motors not at home position!")
+            print(f"  Maximum deviation: {max_deviation:.1f}°")
+            print(f"  These tests assume starting from [0, 0, 0, 0, 0, 0]")
+            print(f"  Please return motors to home position first")
+
+            response = input("\nContinue anyway? (yes/no): ")
+            if response.lower() != 'yes':
+                print("Aborting tests")
+                return False
+    else:
+        print("Warning: Could not query position, assuming home [0, 0, 0, 0, 0, 0]")
+
+    # Safety warning
+    print("\n" + "="*60)
+    print("Test will start in 3 seconds")
+    print("Press Ctrl+C now to abort if motors are in unsafe position")
+    print("="*60)
+    time.sleep(3)
+
+    return True
+
+
 def main():
-    """Main test sequence execution"""
+    """Main test sequence execution with menu"""
 
     print(f"\n{'='*60}")
     print("Motor Test Sequences")
@@ -317,143 +448,67 @@ def main():
     print("\nConnecting to ESP32...")
     controller = MotionController('/dev/ttyACM0', 115200, simulate_if_unavailable=True)
 
-    if not controller.simulation_mode:
-        # Query current position
-        print("\nQuerying current motor position...")
-        time.sleep(1.0)
-        current_angles = controller.get_current_position(max_retries=10)
+    # Main menu loop
+    while True:
+        display_menu()
 
-        if current_angles:
-            print(f"Current angles: {[f'{a:.2f}°' for a in current_angles]}")
+        try:
+            choice = input("\nEnter your choice (0-5): ").strip()
 
-            # Check if already at home position
-            max_deviation = max(abs(a) for a in current_angles)
-            if max_deviation > 5.0:
-                print(f"\n⚠ WARNING: Motors not at home position!")
-                print(f"  Maximum deviation: {max_deviation:.1f}°")
-                print(f"  These tests assume starting from [0, 0, 0, 0, 0, 0]")
-                print(f"  Please return motors to home position first")
+            if choice == '0':
+                print("\nExiting...")
+                break
 
-                response = input("\nContinue anyway? (yes/no): ")
-                if response.lower() != 'yes':
-                    print("Aborting tests")
+            elif choice == '5':
+                # Run all tests
+                if not check_home_position(controller):
                     controller.close()
                     return
-        else:
-            print("Warning: Could not query position, assuming home [0, 0, 0, 0, 0, 0]")
 
-        # Safety warning
-        print("\n" + "="*60)
-        print("Tests will start in 3 seconds")
-        print("Press Ctrl+C now to abort if motors are in unsafe position")
-        print("="*60)
-        time.sleep(3)
+                run_all_tests(controller)
 
-    # Test 1: Auto-timed sequence
-    print("\n\n" + "="*60)
-    print("Starting TEST 1")
-    print("="*60)
-    trajectory1 = generate_test1_trajectory(speed_multiplier=SPEED_MULTIPLIER_TEST1)
+                # Ask if user wants to continue
+                response = input("\n\nRun another test? (yes/no): ").strip().lower()
+                if response != 'yes':
+                    break
 
-    expected_max_vel_1 = MAX_VELOCITY_BASE * SPEED_MULTIPLIER_TEST1
-    print("\nValidating velocity limits...")
-    valid1 = validate_trajectory_velocity(trajectory1, max_velocity_deg_per_sec=expected_max_vel_1)
-    if valid1:
-        print("✓ Test 1 trajectory is within velocity limits")
-    else:
-        print("⚠ WARNING: Test 1 has velocity violations!")
+            elif choice in ['1', '2', '3', '4']:
+                test_num = int(choice)
 
-    print("\nExecuting Test 1...")
-    controller.execute_trajectory(trajectory1)
-    print("✓ Test 1 complete")
+                # Check home position before running test
+                if not check_home_position(controller):
+                    controller.close()
+                    return
 
-    # Wait between tests
-    print("\nWaiting 2 seconds before Test 2...")
-    time.sleep(2)
+                run_single_test(controller, test_num)
 
-    # Test 2: Auto-timed sequence
-    print("\n\n" + "="*60)
-    print("Starting TEST 2")
-    print("="*60)
-    trajectory2 = generate_test2_trajectory(speed_multiplier=SPEED_MULTIPLIER_TEST2)
+                # Ask if user wants to continue
+                response = input("\n\nRun another test? (yes/no): ").strip().lower()
+                if response != 'yes':
+                    break
 
-    expected_max_vel_2 = MAX_VELOCITY_BASE * SPEED_MULTIPLIER_TEST2
-    print("\nValidating velocity limits...")
-    valid2 = validate_trajectory_velocity(trajectory2, max_velocity_deg_per_sec=expected_max_vel_2)
-    if valid2:
-        print("✓ Test 2 trajectory is within velocity limits")
-    else:
-        print("⚠ WARNING: Test 2 has velocity violations!")
-        print("  This test is designed to be aggressive and may exceed limits")
+            else:
+                print("Invalid choice. Please enter a number between 0 and 5.")
 
-    print("\nExecuting Test 2...")
-    controller.execute_trajectory(trajectory2)
-    print("✓ Test 2 complete")
-
-    # Wait between tests
-    print("\nWaiting 2 seconds before Test 3...")
-    time.sleep(2)
-
-    # Test 3: Auto-timed sequence (slower speed)
-    print("\n\n" + "="*60)
-    print("Starting TEST 3")
-    print("="*60)
-    trajectory3 = generate_test3_trajectory(speed_multiplier=SPEED_MULTIPLIER_TEST3)
-
-    expected_max_vel_3 = MAX_VELOCITY_BASE * SPEED_MULTIPLIER_TEST3
-    print("\nValidating velocity limits...")
-    valid3 = validate_trajectory_velocity(trajectory3, max_velocity_deg_per_sec=expected_max_vel_3)
-    if valid3:
-        print("✓ Test 3 trajectory is within velocity limits")
-    else:
-        print("⚠ WARNING: Test 3 has velocity violations!")
-
-    print("\nExecuting Test 3...")
-    controller.execute_trajectory(trajectory3)
-    print("✓ Test 3 complete")
-
-    # Wait between tests
-    print("\nWaiting 2 seconds before Test 4...")
-    time.sleep(2)
-
-    # Test 4: Very slow auto-timed sequence
-    print("\n\n" + "="*60)
-    print("Starting TEST 4")
-    print("="*60)
-    trajectory4 = generate_test4_trajectory(speed_multiplier=SPEED_MULTIPLIER_TEST4)
-
-    expected_max_vel_4 = MAX_VELOCITY_BASE * SPEED_MULTIPLIER_TEST4
-    print("\nValidating velocity limits...")
-    valid4 = validate_trajectory_velocity(trajectory4, max_velocity_deg_per_sec=expected_max_vel_4)
-    if valid4:
-        print("✓ Test 4 trajectory is within velocity limits")
-    else:
-        print("⚠ WARNING: Test 4 has velocity violations!")
-
-    print("\nExecuting Test 4...")
-    controller.execute_trajectory(trajectory4)
-    print("✓ Test 4 complete")
-
-    # Summary
-    print("\n\n" + "="*60)
-    print("TEST SUMMARY")
-    print("="*60)
-    print(f"Test 1 (speed {SPEED_MULTIPLIER_TEST1:.2f}×, {trajectory1[-1][0]/1000:.1f}s):  {'✓ PASS' if valid1 else '✗ VELOCITY VIOLATIONS'}")
-    print(f"Test 2 (speed {SPEED_MULTIPLIER_TEST2:.2f}×, {trajectory2[-1][0]/1000:.1f}s):  {'✓ PASS' if valid2 else '✗ VELOCITY VIOLATIONS'}")
-    print(f"Test 3 (speed {SPEED_MULTIPLIER_TEST3:.2f}×, {trajectory3[-1][0]/1000:.1f}s):  {'✓ PASS' if valid3 else '✗ VELOCITY VIOLATIONS'}")
-    print(f"Test 4 (speed {SPEED_MULTIPLIER_TEST4:.2f}×, {trajectory4[-1][0]/1000:.1f}s):  {'✓ PASS' if valid4 else '✗ VELOCITY VIOLATIONS'}")
-    print("="*60)
-    print("\nSpeed Configuration:")
-    print(f"  Base max velocity: {MAX_VELOCITY_BASE:.1f}°/sec")
-    print(f"  Test 1 max velocity: {MAX_VELOCITY_BASE * SPEED_MULTIPLIER_TEST1:.1f}°/sec")
-    print(f"  Test 2 max velocity: {MAX_VELOCITY_BASE * SPEED_MULTIPLIER_TEST2:.1f}°/sec")
-    print(f"  Test 3 max velocity: {MAX_VELOCITY_BASE * SPEED_MULTIPLIER_TEST3:.1f}°/sec")
-    print(f"  Test 4 max velocity: {MAX_VELOCITY_BASE * SPEED_MULTIPLIER_TEST4:.1f}°/sec")
-    print("="*60)
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+        except KeyboardInterrupt:
+            print("\n\nInterrupted by user")
+            break
 
     # Close connection
     controller.close()
-    print("\nAll tests complete!")
+    print("\nGoodbye!")
+
+
+# Legacy function kept for backward compatibility (removed, now using menu)
+def main_old():
+    """Old main function - kept for reference"""
+    # This function has been replaced with the menu-based main()
+    # Run main() instead
+    pass
+
+
 
 
 if __name__ == '__main__':

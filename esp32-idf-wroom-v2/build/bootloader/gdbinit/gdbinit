@@ -1,0 +1,2 @@
+source /home/mog/git/espRMT/esp32-idf-wroom-v2/build/bootloader/gdbinit/symbols
+source /home/mog/git/espRMT/esp32-idf-wroom-v2/build/bootloader/gdbinit/connect

@@ -1,0 +1,57 @@
+# ESP32-WROOM RMT Arm Default Configuration
+
+# Target ESP32 (WROOM module)
+CONFIG_IDF_TARGET="esp32"
+CONFIG_IDF_TARGET_ESP32=y
+
+# Enable FreeRTOS
+CONFIG_FREERTOS_HZ=1000
+
+# UART configuration (logging and data on same UART0)
+CONFIG_ESP_CONSOLE_UART_BAUDRATE=115200
+CONFIG_ESP_CONSOLE_UART_NUM=0
+CONFIG_ESP_CONSOLE_UART=y
+
+# RMT configuration
+CONFIG_RMT_ISR_IRAM_SAFE=y
+
+# Logging
+CONFIG_LOG_DEFAULT_LEVEL_INFO=y
+CONFIG_LOG_MAXIMUM_LEVEL_DEBUG=y
+
+# Enable color in logs
+CONFIG_LOG_COLORS=y
+
+# ==============================================================================
+# Binary Size Optimizations for ESP32-WROOM (limited flash/RAM)
+# ==============================================================================
+
+# Compiler optimizations for size
+CONFIG_COMPILER_OPTIMIZATION_SIZE=y
+CONFIG_COMPILER_OPTIMIZATION_ASSERTIONS_DISABLE=y
+
+# Reduce binary size by disabling unused features
+CONFIG_BOOTLOADER_LOG_LEVEL_WARN=y
+
+# Partition table - use smaller single app partition
+CONFIG_PARTITION_TABLE_SINGLE_APP=y
+CONFIG_PARTITION_TABLE_CUSTOM=n
+
+# Optimization for smaller code size
+CONFIG_NEWLIB_NANO_FORMAT=y
+
+# ==============================================================================
+# Disable Networking Stack (saves ~150KB DRAM + flash)
+# ==============================================================================
+
+# Disable Wi-Fi completely
+CONFIG_ESP_WIFI_ENABLED=n
+
+# Disable Bluetooth
+CONFIG_BT_ENABLED=n
+
+# Disable Ethernet
+CONFIG_ETH_ENABLED=n
+
+# Keep LWIP enabled but minimal (some components depend on it)
+# The tcp_transport component is being pulled in - we'll need to handle this differently

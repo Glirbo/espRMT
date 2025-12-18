@@ -41,6 +41,50 @@ python3 simple_example.py
 - Good for learning the protocol
 - Shows basic packet structure
 
+### Motor Test Sequences (Interactive Menu)
+
+```bash
+python3 motor_test_sequences.py
+```
+
+**Interactive menu for testing motor sequences:**
+
+```
+============================================================
+Motor Test Sequences - Menu
+============================================================
+1. Test 1 - All Motors to 45° (S-curve)
+   Speed: 1.0× (30°/sec max)
+
+2. Test 2 - Sinusoidal Motion (±15°)
+   Speed: 1.0× (30°/sec max)
+
+3. Test 3 - Sequential Motor Test
+   Speed: 0.5× (15°/sec max)
+
+4. Test 4 - Slow Precision Test
+   Speed: 0.1× (3°/sec max)
+
+5. Run ALL Tests (sequential)
+
+0. Exit
+============================================================
+```
+
+**Features:**
+- Interactive menu - select individual tests or run all
+- 4 different test patterns with speed multipliers
+- Safety checks (home position verification)
+- 3-second countdown before motion starts
+- Option to repeat tests or exit after completion
+- Velocity validation for each test
+- Test summary with pass/fail status
+
+**Menu Options:**
+- **1-4**: Run individual tests independently
+- **5**: Run all 4 tests sequentially
+- **0**: Exit cleanly
+
 ## Simulation Mode
 
 Both scripts automatically enter simulation mode when:
