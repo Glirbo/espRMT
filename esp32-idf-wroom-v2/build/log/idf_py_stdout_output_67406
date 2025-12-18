@@ -636,3 +636,454 @@ entry 0x400805ac
 [0;32mI (389) RMTArm:   Max step rate:        6,667 steps/sec (motors 0,5)[0m
 [0;32mI (396) RMTArm:   Min pulse period:     30μs (based on highest step rate)[0m
 [0;32mI (404) RMTArm:   Buffer size:          3072 items per motor[0m
+[0;32mI (410) RMTArm:     Motors 1-4 (1:50): 5.5° max in 50ms[0m
+[0;32mI (416) RMTArm:     Motors 0,5 (1:10): 27.6° max in 50ms[0m
+[0;32mI (422) RMTArm: [0m
+[0;32mI (425) RMTArm: ╔════════════════════════════════════════════════════════╗[0m
+[0;32mI (442) RMTArm: ║           GPIO CONFIGURATION                           ║[0m
+[0;32mI (450) RMTArm: ╚════════════════════════════════════════════════════════╝[0;32mI (478) RMTArm: UART setup complete (baud: 115200)[0m
+[0;32mI (479) RMTArm: ╔════════════════════════════════════════════════════════╗[0m
+[0;32mI (490) RMTArm: ║           RMT CONFIGURATION                            ║[0m
+[0;32mI (498) RMTArm: ╚════════════════════════════════════════════════════════╝[0m
+[0;32mI (516) RMTArm: Number of motors: 6[0m
+[0;32mI (520) RMTArm: RMT clock divider: 80 (tick = 1μs)[0m
+[0;32mI (526) RMTArm: Pulse width: 5μs[0m
+[0;32mI (530) RMTArm: [0m
+[0;32mI (533) RMTArm: ✓ Motor 0 configured:[0m
+[0;32mI (537) RMTArm:   STEP pin: GPIO25  │  DIR pin: GPIO32  │  RMT: CH0[0m
+[0;32mI (544) RMTArm: ✓ Motor 1 configured:[0m
+[0;32mI (549) RMTArm:   STEP pin: GPIO26  │  DIR pin: GPIO33  │  RMT: CH1[0m
+[0;32mI (556) RMTArm: ✓ Motor 2 configured:[0m
+[0;32mI (560) RMTArm:   STEP pin: GPIO27  │  DIR pin: GPIO14  │  RMT: CH2[0m
+[0;32mI (568) RMTArm: ✓ Motor 3 configured:[0m
+[0;32mI (572) RMTArm:   STEP pin: GPIO12  │  DIR pin: GPIO16  │  RMT: CH3[0m
+[0;32mI (580) RMTArm: ✓ Motor 4 configured:[0m
+[0;32mI (584) RMTArm:   STEP pin: GPIO13  │  DIR pin: GPIO17  │  RMT: CH4[0m
+[0;32mI (591) RMTArm: ✓ Motor 5 configured:[0m
+[0;32mI (596) RMTArm:   STEP pin: GPIO15  │  DIR pin: GPIO18  │  RMT: CH5[0m
+[0;32mI (603) RMTArm: [0m
+[0;32mI (606) RMTArm: RMT setup complete - ready for motion control[0m
+[0;32mI (612) RMTArm: [0m
+[0;32mI (615) RMTArm: ╔════════════════════════════════════════════════════════╗[0m
+[0;32mI (632) RMTArm: ║      MOTION CONTROL TASK STARTED                       ║[0m
+[0;32mI (640) RMTArm: ╚════════════════════════════════════════════════════════╝[0m
+[0;32mI (658) RMTArm: RMT buffer size: 3072 items per motor[0m
+[0;32mI (663) RMTArm: Max steps per command: 3072[0m
+[0;32mI (668) RMTArm: Waiting for commands...[0m
+[0;32mI (673) RMTArm: Send 'P' or '?' to query current position[0m
+[0;32mI (679) RMTArm: [0m
+[0;32mI (681) RMTArm: ╔════════════════════════════════════════════════════════╗[0m
+[0;32mI (699) RMTArm: ║           SYSTEM READY                                 ║[0m
+[0;32mI (707) RMTArm: ╚════════════════════════════════════════════════════════╝[0m
+[0;32mI (725) RMTArm: [0m
+[0;32mI (727) main_task: Returned from app_main()[0m
+POS:0.00,0.00,0.00,0.00,0.00,0.00
+POS:18.00,0.00,0.00,0.00,0.00,0.00
+POS:18.00,0.00,0.00,0.00,0.00,0.00
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:4068
+load:0x40078000,len:14732
+load:0x40080400,len:4
+load:0x40080404,len:3328
+entry 0x400805ac
+[0;32mI (92) cpu_start: Multicore app[0m
+[0;32mI (100) cpu_start: Pro cpu start user code[0m
+[0;32mI (100) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (101) app_init: Application information:[0m
+[0;32mI (103) app_init: Project name:     rmtarm[0m
+[0;32mI (108) app_init: App version:      dd83948-dirty[0m
+[0;32mI (114) app_init: Compile time:     Dec 18 2025 14:45:02[0m
+[0;32mI (120) app_init: ELF file SHA256:  16a35b28b...[0m
+[0;32mI (125) app_init: ESP-IDF:          v5.4.2-dirty[0m
+[0;32mI (130) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (135) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (140) efuse_init: Chip rev:         v1.0[0m
+[0;32mI (145) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (152) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (158) heap_init: At 3FFC4820 len 0001B7E0 (109 KiB): DRAM[0m
+[0;32mI (164) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (171) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (177) heap_init: At 4008B07C len 00014F84 (83 KiB): IRAM[0m
+[0;32mI (184) spi_flash: detected chip: generic[0m
+[0;32mI (188) spi_flash: flash io: dio[0m
+[0;33mW (192) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;33mW (205) rmt(legacy): legacy driver is deprecated, please migrate to `driver/rmt_tx.h` and/or `driver/rmt_rx.h`[0m
+[0;32mI (216) main_task: Started on CPU0[0m
+[0;32mI (219) main_task: Calling app_main()[0m
+[0;32mI (223) RMTArm: [0m
+[0;32mI (226) RMTArm: ╔════════════════════════════════════════════════════════╗[0m
+[0;32mI (244) RMTArm: ║                                                        ║[0m
+[0;32mI (251) RMTArm: ║   ESP32-WROOM ROBOTIC ARM CONTROLLER v2.0              ║[0m
+[0;32mI (259) RMTArm: ║   Per-Motor Gearing │ 60°/sec Max Velocity            ║[0m
+[0;32mI (267) RMTArm: ║                                                        ║[0m
+[0;32mI (275) RMTArm: ╚════════════════════════════════════════════════════════╝[0m
+[0;32mI (293) RMTArm: [0m
+[0;32mI (295) RMTArm: Motor Configuration (V2 - Per-Motor Gearing):[0m
+[0;32mI (302) RMTArm:   Steps per revolution: 4000 (no microstepping)[0m
+[0;32mI (309) RMTArm:   Per-motor gear ratios and steps/degree:[0m
+[0;32mI (315) RMTArm:     Motor 0: 1:10 gearing │ 111.11 steps/° │ max 6667 steps/s @ 60°/s[0m
+[0;32mI (324) RMTArm:     Motor 1: 1:50 gearing │ 555.56 steps/° │ max 33334 steps/s @ 60°/s[0m
+[0;32mI (333) RMTArm:     Motor 2: 1:50 gearing │ 555.56 steps/° │ max 33334 steps/s @ 60°/s[0m
+[0;32mI (342) RMTArm:     Motor 3: 1:50 gearing │ 555.56 steps/° │ max 33334 steps/s @ 60°/s[0m
+[0;32mI (351) RMTArm:     Motor 4: 1:50 gearing │ 555.56 steps/° │ max 33334 steps/s @ 60°/s[0m
+[0;32mI (360) RMTArm:     Motor 5: 1:10 gearing │ 111.11 steps/° │ max 6667 steps/s @ 60°/s[0m
+[0;32mI (369) RMTArm: [0m
+[0;32mI (372) RMTArm: Motion Limits:[0m
+[0;32mI (375) RMTArm:   Max angular velocity: 60.0°/sec (all motors)[0m
+[0;32mI (382) RMTArm:   Max step rate:        33,333 steps/sec (motors 1-4)[0m
+[0;32mI (389) RMTArm:   Max step rate:        6,667 steps/sec (motors 0,5)[0m
+[0;32mI (396) RMTArm:   Min pulse period:     30μs (based on highest step rate)[0m
+[0;32mI (404) RMTArm:   Buffer size:          3072 items per motor[0m
+[0;32mI (410) RMTArm:     Motors 1-4 (1:50): 5.5° max in 50ms[0m
+[0;32mI (416) RMTArm:     Motors 0,5 (1:10): 27.6° max in 50ms[0m
+[0;32mI (422) RMTArm: [0m
+[0;32mI (425) RMTArm: ╔════════════════════════════════════════════════════════╗[0m
+[0;32mI (442) RMTArm: ║           GPIO CONFIGURATION                           ║[0m
+[0;32mI (450) RMTArm: ╚════════════════════════════════════════════════════════╝[0;32mI (478) RMTArm: UART setup complete (baud: 115200)[0m
+[0;32mI (479) RMTArm: ╔════════════════════════════════════════════════════════╗[0m
+[0;32mI (490) RMTArm: ║           RMT CONFIGURATION                            ║[0m
+[0;32mI (498) RMTArm: ╚════════════════════════════════════════════════════════╝[0m
+[0;32mI (516) RMTArm: Number of motors: 6[0m
+[0;32mI (520) RMTArm: RMT clock divider: 80 (tick = 1μs)[0m
+[0;32mI (526) RMTArm: Pulse width: 5μs[0m
+[0;32mI (530) RMTArm: [0m
+[0;32mI (533) RMTArm: ✓ Motor 0 configured:[0m
+[0;32mI (537) RMTArm:   STEP pin: GPIO25  │  DIR pin: GPIO32  │  RMT: CH0[0m
+[0;32mI (544) RMTArm: ✓ Motor 1 configured:[0m
+[0;32mI (549) RMTArm:   STEP pin: GPIO26  │  DIR pin: GPIO33  │  RMT: CH1[0m
+[0;32mI (556) RMTArm: ✓ Motor 2 configured:[0m
+[0;32mI (560) RMTArm:   STEP pin: GPIO27  │  DIR pin: GPIO14  │  RMT: CH2[0m
+[0;32mI (568) RMTArm: ✓ Motor 3 configured:[0m
+[0;32mI (572) RMTArm:   STEP pin: GPIO12  │  DIR pin: GPIO16  │  RMT: CH3[0m
+[0;32mI (580) RMTArm: ✓ Motor 4 configured:[0m
+[0;32mI (584) RMTArm:   STEP pin: GPIO13  │  DIR pin: GPIO17  │  RMT: CH4[0m
+[0;32mI (591) RMTArm: ✓ Motor 5 configured:[0m
+[0;32mI (596) RMTArm:   STEP pin: GPIO15  │  DIR pin: GPIO18  │  RMT: CH5[0m
+[0;32mI (603) RMTArm: [0m
+[0;32mI (606) RMTArm: RMT setup complete - ready for motion control[0m
+[0;32mI (612) RMTArm: [0m
+[0;32mI (615) RMTArm: ╔════════════════════════════════════════════════════════╗[0m
+[0;32mI (632) RMTArm: ║      MOTION CONTROL TASK STARTED                       ║[0m
+[0;32mI (640) RMTArm: ╚════════════════════════════════════════════════════════╝[0m
+[0;32mI (658) RMTArm: RMT buffer size: 3072 items per motor[0m
+[0;32mI (663) RMTArm: Max steps per command: 3072[0m
+[0;32mI (668) RMTArm: Waiting for commands...[0m
+[0;32mI (673) RMTArm: Send 'P' or '?' to query current position[0m
+[0;32mI (679) RMTArm: [0m
+[0;32mI (681) RMTArm: ╔════════════════════════════════════════════════════════╗[0m
+[0;32mI (699) RMTArm: ║           SYSTEM READY                                 ║[0m
+[0;32mI (707) RMTArm: ╚════════════════════════════════════════════════════════╝[0m
+[0;32mI (725) RMTArm: [0m
+[0;32mI (727) main_task: Returned from app_main()[0m
+POS:0.00,0.00,0.00,0.00,0.00,0.00
+[0;33mW (28008) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (28058) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (28108) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (28158) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (28208) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (28258) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (28308) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (28358) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (28408) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (28458) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (28458) RMTArm: Total velocity warnings: 10[0m
+[0;33mW (28508) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (28558) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (28608) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (28658) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (28708) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (28758) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (28808) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (28859) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (28908) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (28958) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (28959) RMTArm: Total velocity warnings: 20[0m
+[0;33mW (29008) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (29058) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (29108) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (29158) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (29208) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (29258) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (29308) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (29358) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (29408) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (29458) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (29459) RMTArm: Total velocity warnings: 30[0m
+[0;33mW (29508) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (29558) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (29608) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (29658) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (29708) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (29758) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (29808) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (29858) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (29908) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (29958) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (29959) RMTArm: Total velocity warnings: 40[0m
+[0;33mW (30008) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (30058) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (30108) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (30158) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (30208) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (30258) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (30308) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (30358) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (30408) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (30458) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (30459) RMTArm: Total velocity warnings: 50[0m
+[0;33mW (30509) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (30558) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (30608) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (30659) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (30708) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (30758) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (30808) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (30858) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (30908) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (30958) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (30959) RMTArm: Total velocity warnings: 60[0m
+[0;33mW (31008) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (31058) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (31108) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (31158) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (31208) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (31258) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (31308) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (31358) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (31408) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (31458) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (31459) RMTArm: Total velocity warnings: 70[0m
+[0;33mW (31508) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (31558) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (31608) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (31658) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (31708) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (31758) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (31808) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (31859) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (31908) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (31958) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (31959) RMTArm: Total velocity warnings: 80[0m
+[0;33mW (32008) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (32058) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (32108) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (32158) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (32208) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (32258) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (32309) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (32358) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (32458) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (32508) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (32509) RMTArm: Total velocity warnings: 90[0m
+[0;33mW (32558) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (32609) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (32658) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (32708) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (32759) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (32808) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (32858) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (32908) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (32958) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (33008) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (33009) RMTArm: Total velocity warnings: 100[0m
+[0;33mW (33058) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (33108) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (33158) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (33208) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (33258) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (33308) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (33358) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (33408) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (33458) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (33509) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (33509) RMTArm: Total velocity warnings: 110[0m
+[0;33mW (33558) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (33608) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (33658) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (33708) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (33758) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (33808) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (33858) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (33908) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+[0;33mW (33958) RMTArm: Motor 0: Requested 60.0°/s exceeds max 60.0°/s![0m
+POS:360.00,0.00,0.00,0.00,0.00,0.00
+[0;33mW (198931) RMTArm: Motor 0: Requested 7200.1°/s exceeds max 60.0°/s![0m
+[0;33mW (198931) RMTArm: Motor 0: 40000 steps exceeds buffer (max 3072)[0m
+[0;33mW (198934) RMTArm:   Large moves should be split by trajectory planner![0m
+[0;33mW (198941) RMTArm:   Clamping to buffer size - target will NOT be reached[0m
+[0;33mW (198948) RMTArm: Motor 0 velocity limited to 310.3°/s (max 60.0°/s)[0m
+[0;31mE (198956) RMTArm: ⚠ TRAJECTORY ISSUE: Move exceeds buffer! Use smaller interpolation steps![0m
+[0;33mW (198965) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (199006) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (199056) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (199106) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (199156) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (199206) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (199256) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (199306) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (199356) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (199406) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (199456) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (199506) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (199556) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (199606) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (199656) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (199706) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (199756) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (199806) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (199856) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (199906) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (199956) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (200006) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (200056) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (200106) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (200156) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (200206) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (200256) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (200306) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (200356) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (200406) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (200456) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (200506) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (200556) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (200606) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (200656) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (200706) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (200756) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (200806) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (200856) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (200906) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (200956) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (201006) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (201056) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (201106) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (201156) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (201206) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (201256) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (201306) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (201356) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (201406) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (201456) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (201506) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (201556) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (201606) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (201656) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (201706) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (201756) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (201806) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (201856) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (201906) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (201956) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (202006) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (202056) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (202106) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (202156) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (202206) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (202256) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (202306) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (202356) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (202406) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (202456) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (202506) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (202556) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (202606) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (202656) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (202706) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (202756) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (202806) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (202856) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (202906) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (202956) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (203006) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (203056) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (203106) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (203156) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (203206) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (203256) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (203306) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (203356) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (203406) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (203456) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (203506) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (203556) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (203606) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (203656) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (203706) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (203756) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (203806) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (203856) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (203906) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (203956) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (204006) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (204056) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (204106) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (204156) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (204206) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (204256) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (204306) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (204356) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (204406) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (204456) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (204506) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (204556) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (204606) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (204656) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (204706) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (204756) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (204806) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (204856) RMTArm: Total velocity warnings: 120[0m
+[0;33mW (204906) RMTArm: Total velocity warnings: 120[0m
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:4068
+load:0x40078000,len:14732
+load:0x40080400,len:4
+load:0x40080404,len:3328
+entry 0x400805ac
+[0;32mI (92) cpu_start: Multicore app[0m
+[0;32mI (100) cpu_start: Pro cpu start user code[0m
+[0;32mI (100) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (101) app_init: Application information:[0m
+[0;32mI (103) app_init: Project name:     rmtarm[0m
+[0;32mI (108) app_init: App version:      dd83948-dirty[0m
+[0;32mI (114) app_init: Compile time:     Dec 18 2025 14:45:02[0m
+[0;32mI (120) app_init: ELF file SHA256:  16a35b28b...[0m
+[0;32mI (125) app_init: ESP-IDF:          v5.4.2-dirty[0m
+[0;32mI (130) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (135) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (140) efuse_init: Chip rev:         v1.0[0m
+[0;32mI (145) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (152) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (158) heap_init: At 3FFC4820 len 0001B7E0 (109 KiB): DRAM[0m
+[0;32mI (164) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (171) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (177) heap_init: At 4008B07C len 00014F84 (83 KiB): IRAM[0m
+[0;32mI (184) spi_flash: detected chip: generic[0m
+[0;32mI (188) spi_flash: flash io: dio[0m
+[0;33mW (192) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;33mW (205) rmt(legacy): legacy driver is deprecated, please migrate to `driver/rmt_tx.h` and/or `driver/rmt_rx.h`[0m
+[0;32mI (216) main_task: Started on CPU0[0m
+[0;32mI (219) main_task: Calling app_main()[0m
+[0;32mI (223) RMTArm: [0m
+[0;32mI (226) RMTArm: ╔════════════════════════════════════════════════════════╗[0m
+[0;32mI (244) RMTArm: ║                                                        ║[0m
+[0;32mI (251) RMTArm: ║   ESP32-WROOM ROBOTIC ARM CONTROLLER v2.0              ║[0m
+[0;32mI (259) RMTArm: ║   Per-Motor Gearing │ 60°/sec Max Velocity            ║[0m
+[0;32mI (267) RMTArm: ║                                                        ║[0m
+[0;32mI (275) RMTArm: ╚════════════════════════════════════════════════════════╝[0m
+[0;32mI (293) RMTArm: [0m
+[0;32mI (295) RMTArm: Motor Configuration (V2 - Per-Motor Gearing):[0m
+[0;32mI (302) RMTArm:   Steps per revolution: 4000 (no microstepping)[0m
+[0;32mI (309) RMTArm:   Per-motor gear ratios and steps/degree:[0m
+[0;32mI (315) RMTArm:     Motor 0: 1:10 gearing │ 111.11 steps/° │ max 6667 steps/s @ 60°/s[0m
+[0;32mI (324) RMTArm:     Motor 1: 1:50 gearing │ 555.56 steps/° │ max 33334 steps/s @ 60°/s[0m
+[0;32mI (333) RMTArm:     Motor 2: 1:50 ge
