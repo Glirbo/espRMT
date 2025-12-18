@@ -1,7 +1,7 @@
 {
     "version":            "1.2",
     "project_name":       "rmtarm",
-    "project_version":    "39a390b-dirty",
+    "project_version":    "dd83948-dirty",
     "project_path":       "/home/mog/git/espRMT/esp32-idf-wroom-v2",
     "idf_path":           "/home/mog/esp/esp-idf",
     "build_dir":          "/home/mog/git/espRMT/esp32-idf-wroom-v2/build",

@@ -890,6 +890,11 @@ Located in `python/` directory
 - **`simple_example.py`** - Minimal example (~70 lines)
   - Good starting point for learning
 
+- **`send_pulses.py`** - Direct step/pulse control
+  - Send fixed number of pulses to any motor
+  - Interactive prompts for easy testing
+  - Perfect for hardware testing and calibration
+
 **Usage:**
 ```bash
 cd python
@@ -968,8 +973,9 @@ An interactive menu appears - select individual tests or run all:
 0. Exit
 ```
 
-**Or run the basic motion controller:**
+**Or run other scripts:**
 ```bash
+python send_pulses.py        # Send fixed pulses to specific motor (great for testing)
 python motion_controller.py  # Runs predefined trajectories
 python simple_example.py     # Minimal example
 ```

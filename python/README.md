@@ -41,6 +41,30 @@ python3 simple_example.py
 - Good for learning the protocol
 - Shows basic packet structure
 
+### Send Pulses (Direct Step Control)
+
+```bash
+python3 send_pulses.py
+```
+
+**Interactive script for sending fixed pulses to a specific motor:**
+- Prompts for motor number (0-5)
+- Prompts for number of steps/pulses
+- Prompts for direction (forward/backward)
+- Perfect for testing individual motors
+- Great for calibration and debugging
+- Shows current position before and after movement
+- Auto-detects port (tries /dev/ttyACM0, /dev/ttyUSB0, COM3)
+
+**Example:**
+```
+Motor number (0-5): 1
+Number of pulses/steps: 40000
+Direction (f=forward, b=backward) [f]: f
+
+Result: Motor 1 moves 71.99° (40000 steps with 1:50 gearing)
+```
+
 ### Motor Test Sequences (Interactive Menu)
 
 ```bash

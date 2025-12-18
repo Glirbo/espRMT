@@ -1,0 +1,7 @@
+[1/4] cd /home/mog/git/espRMT/esp32-idf-wroom-v2/build/esp-idf/esptool_py && /home/mog/.espressif/python_env/idf5.4_py3.12_env/bin/python /home/mog/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app /home/mog/git/espRMT/esp32-idf-wroom-v2/build/partition_table/partition-table.bin /home/mog/git/espRMT/esp32-idf-wroom-v2/build/rmtarm.bin
+rmtarm.bin binary size 0x24d80 bytes. Smallest app partition is 0x100000 bytes. 0xdb280 bytes (86%) free.
+[2/4] Performing build step for 'bootloader'
+[1/1] cd /home/mog/git/espRMT/esp32-idf-wroom-v2/build/bootloader/esp-idf/esptool_py && /home/mog/.espressif/python_env/idf5.4_py3.12_env/bin/python /home/mog/esp/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 /home/mog/git/espRMT/esp32-idf-wroom-v2/build/bootloader/bootloader.bin
+Bootloader binary size 0x56d0 bytes. 0x1930 bytes (22%) free.
+[3/4] No install step for 'bootloader'
+[4/4] Completed 'bootloader'

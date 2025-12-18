@@ -39,6 +39,13 @@ The V2 firmware supports different gear ratios per motor:
 - **simple_example.py** - Minimal example (~70 lines)
   - Good starting point for learning the API
 
+- **send_pulses.py** - Direct step/pulse control
+  - Send a fixed number of pulses to a specific motor
+  - Interactive prompts for motor, steps, and direction
+  - Perfect for testing individual motors and calibration
+  - Automatically converts steps to angles based on gear ratios
+  - Auto-detects port (tries /dev/ttyACM0, /dev/ttyUSB0, COM3)
+
 ### Inverse Kinematics
 - **inverse_kinematics_controller.py** - Full IK system
   - 6-DOF robot kinematics
@@ -100,6 +107,9 @@ Enter your choice (0-5):
 
 **Other Scripts:**
 ```bash
+# Send fixed pulses to a specific motor (great for testing/calibration)
+python send_pulses.py
+
 # Simple example (minimal code)
 python simple_example.py
 
